@@ -1,0 +1,39 @@
+# hades.models.Design file
+#  
+[name] unnamed
+[components]
+hades.models.io.HexSwitch HexSwitch 4800 5700 @N 1001 0 null
+hades.models.io.Opin y 35400 8400 @N 1001 5.0E-9
+hades.models.gates.And2 i9 23400 12300 @N 1001 1.0E-8
+hades.models.gates.And2 i8 19500 11400 @N 1001 1.0E-8
+hades.models.gates.And2 i7 23400 8700 @N 1001 1.0E-8
+hades.models.gates.And2 i6 19500 7800 @N 1001 1.0E-8
+hades.models.gates.InvSmall i5 10500 1800 @N 1001 5.0E-9
+hades.models.gates.And2 i4 23400 5400 @N 1001 1.0E-8
+hades.models.gates.Or2 i14 31200 7200 @N 1001 1.0E-8
+hades.models.gates.And2 i3 19500 4500 @N 1001 1.0E-8
+hades.models.gates.InvSmall i13 10500 12000 @N 1001 5.0E-9
+hades.models.gates.And2 i2 23400 2400 @N 1001 1.0E-8
+hades.models.gates.InvSmall i12 10500 8400 @N 1001 5.0E-9
+hades.models.gates.And2 i1 19500 1200 @N 1001 1.0E-8
+hades.models.gates.InvSmall i0 10500 5400 @N 1001 5.0E-9
+hades.models.gates.Or2 i11 27300 10500 @N 1001 1.0E-8
+hades.models.gates.Or2 i10 27300 3900 @N 1001 1.0E-8
+[end components]
+[signals]
+hades.signals.SignalStdLogic1164 n8 2 HexSwitch Y1 i12 A 3 2 7800 7500 9600 7500 2 9600 7500 9600 9000 2 9600 9000 10500 9000 0 
+hades.signals.SignalStdLogic1164 n7 2 i10 Y i14 A 2 2 30900 5100 30900 7800 2 30900 7800 31200 7800 0 
+hades.signals.SignalStdLogic1164 n6 2 HexSwitch Y2 i0 A 3 2 7800 6900 9600 6900 2 9600 6900 9600 6000 2 9600 6000 10500 6000 0 
+hades.signals.SignalStdLogic1164 n5 2 HexSwitch Y3 i5 A 2 2 7800 6300 7800 2400 2 7800 2400 10500 2400 0 
+hades.signals.SignalStdLogic1164 n4 2 i14 Y y A 1 2 34800 8400 35400 8400 0 
+hades.signals.SignalStdLogic1164 n3 2 i8 Y i9 A 2 2 23100 12600 23400 12600 2 23400 12600 23400 12900 0 
+hades.signals.SignalStdLogic1164 n2 2 i6 Y i7 A 2 2 23100 9000 23400 9000 2 23400 9000 23400 9300 0 
+hades.signals.SignalStdLogic1164 n16 2 i4 Y i10 B 2 2 27300 5700 27000 5700 2 27000 5700 27000 6600 0 
+hades.signals.SignalStdLogic1164 n1 2 i3 Y i4 A 2 2 23100 5700 23400 5700 2 23400 5700 23400 6000 0 
+hades.signals.SignalStdLogic1164 n15 2 i2 Y i10 A 2 2 27300 4500 27000 4500 2 27000 4500 27000 3600 0 
+hades.signals.SignalStdLogic1164 n0 2 i1 Y i2 A 2 2 23100 2400 23400 2400 2 23400 2400 23400 3000 0 
+hades.signals.SignalStdLogic1164 n14 2 i9 Y i11 B 2 2 27300 12300 27000 12300 2 27000 12300 27000 13500 0 
+hades.signals.SignalStdLogic1164 n13 2 i7 Y i11 A 2 2 27300 11100 27000 11100 2 27000 11100 27000 9900 0 
+hades.signals.SignalStdLogic1164 n12 2 i11 Y i14 B 2 2 31200 9000 30900 9000 2 30900 9000 30900 11700 0 
+[end signals]
+[end]
