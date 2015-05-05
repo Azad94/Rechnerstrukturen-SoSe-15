@@ -1,0 +1,70 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{ucs}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{ngerman}
+\usepackage{amsmath,amssymb,amstext}
+\title{Rechnerstrukturen Blatt 1}
+\author{Sven Marquardt}
+\date{\today}
+
+\begin{document}
+
+
+1-1 e)
+\\
+\begin{tabular}{c | c | c | c | c}
+$x_0$ & $x_1$ & $x_2$& $x_3$ & y \\ \hline
+0&0&0&0&0\\
+0&0&0&1&0\\ \hline
+0&0&1&0&0\\ \hline
+0&0&1&1&1\\ \hline
+0&1&0&0&0\\
+0&1&0&1&0\\
+0&1&1&0&0\\
+0&1&1&1&1\\ \hline
+0&0&0&0&0\\
+0&0&0&1&0\\
+1&0&1&0&0\\
+1&0&1&1&1\\ \hline
+1&1&0&0&0\\
+1&1&0&1&1\\
+1&1&1&0&0\\
+1&1&1&1&0\\
+\end{tabular}
+\\
+\\
+Das Schaltnetz soll uns alle Primzahlen im 4 Bit Bereich anzeigen. Der Fehler ist, das die 2 (O(f)={0100}) nicht als Primzahl erkannt wird. \\ \\
+1-2\\
+c.i)\\
+Durch das Assoziativgesetz  können wir die Klammern bei gleichem booleschem Ausdruck weglassen.
+\begin{equation}
+\label{Assoziativ1}
+( a \wedge b) \wedge (c \wedge d) = (a \wedge b \wedge c) \wedge d=a \wedge b \wedge c \wedge d 
+\end{equation}
+\begin{equation}
+( a \vee b)\vee (c \vee d)= (a \vee b \vee c) \vee d= a \vee b \vee c \vee d
+\end{equation}
+\\
+c.ii)\\
+
+\begin{equation}
+\label{boolescher Ausdruck}
+(( x_2 \wedge x_1 ) \wedge x_0 ) \vee x_2~Tiefe~3
+\end{equation}
+\begin{equation}
+\label{boolesche Funktion}
+((AND3(x_2,x_1,x_0))\vee x_2~Tiefe~2
+\end{equation}
+Einen booleschen Ausdruck ( \ref{boolescher Ausdruck} ) kann man nicht mit einem erweiterten booleschen Ausdruck  ( \ref{boolesche Funktion} ) vergleichen. \\ \\
+d)\\
+$
+y=( \neg x_3 \wedge \neg x_2 \wedge x_1 \wedge x_0) \vee  ( \neg x_3 \wedge x_2 \wedge \neg x_1 \wedge x_0 ) \vee  ( \neg x_3 \wedge x_2 \wedge x_1 \wedge x_0  ) \vee \\
+( x_3 \wedge \neg x_2 \wedge x_1 \wedge x_0 ) \vee ( x_3 \wedge \neg x_2 \wedge \neg x_1 \wedge x_0 )
+$
+\\ \\
+e)\\
+$
+y=( \neg x_3 \wedge \neg x_2 \wedge x_1 \wedge \neg x_0 ) \vee ( \neg x_3 \wedge \neg x_2 \wedge x_1 \wedge x_0) \vee ( \neg x_3 \wedge x_2 \wedge \neg x_1 \wedge x_0) \vee \\ ( \neg x_3 \wedge x_2 \wedge x_1 \wedge x_0) \vee ( x_3 \wedge \neg x_2 \wedge x_1 \wedge x_0) \vee (x_3 \wedge x_2 \wedge \neg x_1 \wedge x_0)$
+
+\end{document}
