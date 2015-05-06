@@ -4,10 +4,11 @@
 \usepackage[T1]{fontenc}
 \usepackage{ngerman}
 \usepackage{amsmath,amssymb,amstext}
+\usepackage{tikz}
 \title{Rechnerstrukturen Blatt 1}
 \author{Sven Marquardt}
 \date{\today}
-
+\input{kvmacros}
 \begin{document}
 
 
@@ -34,10 +35,12 @@ $x_0$ & $x_1$ & $x_2$& $x_3$ & y \\ \hline
 \end{tabular}
 \\
 \\
-Das Schaltnetz soll uns alle Primzahlen im 4 Bit Bereich anzeigen. Der Fehler ist, das die 2 (O(f)={0100}) nicht als Primzahl erkannt wird. \\ \\
+Das Schaltnetz soll uns alle Primzahlen im 4 Bit Bereich anzeigen. Der Fehler ist, das die 2 (ON(f)=
+$\lbrace 0100 \rbrace$
+nicht als Primzahl erkannt wird. \\ \\
 1-2\\
 c.i)\\
-Durch das Assoziativgesetz  können wir die Klammern bei gleichem booleschem Ausdruck weglassen.
+Durch das Assoziativgesetz  koennen wir die Klammern bei gleichem booleschem Ausdruck weglassen.
 \begin{equation}
 \label{Assoziativ1}
 ( a \wedge b) \wedge (c \wedge d) = (a \wedge b \wedge c) \wedge d=a \wedge b \wedge c \wedge d 
@@ -65,6 +68,41 @@ $
 \\ \\
 e)\\
 $
-y=( \neg x_3 \wedge \neg x_2 \wedge x_1 \wedge \neg x_0 ) \vee ( \neg x_3 \wedge \neg x_2 \wedge x_1 \wedge x_0) \vee ( \neg x_3 \wedge x_2 \wedge \neg x_1 \wedge x_0) \vee \\ ( \neg x_3 \wedge x_2 \wedge x_1 \wedge x_0) \vee ( x_3 \wedge \neg x_2 \wedge x_1 \wedge x_0) \vee (x_3 \wedge x_2 \wedge \neg x_1 \wedge x_0)$
-
+y=( \neg x_3 \wedge \neg x_2 \wedge x_1 \wedge \neg x_0 ) \vee ( \neg x_3 \wedge \neg x_2 \wedge x_1 \wedge x_0) \vee ( \neg x_3 \wedge x_2 \wedge \neg x_1 \wedge x_0) \vee \\ ( \neg x_3 \wedge x_2 \wedge x_1 \wedge x_0) \vee ( x_3 \wedge \neg x_2 \wedge x_1 \wedge x_0) \vee (x_3 \wedge x_2 \wedge \neg x_1 \wedge x_0)$\\
+\\
+1-4\\
+a)\\
+\begin{tabular}{c | c | c | c | c}
+$x_3$&$x_2$&$x_1$&$x_0$&y\\ \hline
+0&0&0&0&0\\
+0&0&0&1&0\\
+0&0&1&0&0\\
+0&0&1&1&1\\ \hline
+0&1&0&0&0\\
+0&1&0&1&1\\
+0&1&1&0&1\\
+0&1&1&1&0\\ \hline
+1&0&0&0&0\\
+1&0&0&1&1\\
+1&0&1&0&1\\
+1&0&1&1&0\\ \hline
+1&1&0&0&1\\
+1&1&0&1&0\\
+1&1&1&0&0\\
+1&1&1&1&0\\
+\end{tabular}\\ \\
+KDNF \\
+$\label{KDNF:KDNF}
+y=(\neg x_3 \wedge \neg x_2 \wedge x_1 \wedge x_0)\vee ( \neg x_3 \wedge x_2 \wedge \neg x_1 \wedge  x_0) \vee ( \neg x_3 \wedge x_2 \wedge x_1 \wedge \neg x_0) \vee \\ ( x_3 \wedge \neg x_2 \wedge \neg x_1 \wedge x_0) \vee (x_3 \wedge \neg x_2 \wedge x_1 \wedge \neg x_0) \vee ( x_3 \wedge x_2 \wedge \neg x_1 \wedge \neg x_0) $\\
+\begin{displaymath}
+ON(f)=\lbrace0011,0101,0110,1001,1010,1100\rbrace\\
+\end{displaymath}
+\karnaughmap{4}{}{{$x_3$}{$x_2$}{$x_1$}{$x_0$}}{0001011001101000}{}\\
+Nicht weiter zu vereinfachen gleich wie KDNF\\
+\begin{tikzpicture}
+\node[circle,draw](z){$30$}
+ child[missing]{}
+  child{
+    node[circle,draw]{40} child{node[circle,draw] {20}} child[missing] };
+\end{tikzpicture}
 \end{document}
