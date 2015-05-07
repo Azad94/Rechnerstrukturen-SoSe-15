@@ -100,9 +100,9 @@ ON(f)=\lbrace0011,0101,0110,1001,1010,1100\rbrace\\
 \karnaughmap{4}{}{{$x_3$}{$x_2$}{$x_1$}{$x_0$}}{0001011001101000}{}\\
 Nicht weiter zu vereinfachen gleich wie KDNF\\
 \begin{tikzpicture}
-\node[circle,draw](z){$30$}
- child[missing]{}
-  child{
-    node[circle,draw]{40} child{node[circle,draw] {20}} child[missing] };
+\node[](z){$\vee$}
+ child{
+ node(1)[]{$\vee$}
+ child{node(2)[]{$\vee$}child{node(3)[]{$\wedge$}child{node(4)[]{$\wedge$}child{node(6)[]{$x_0$}}child{node(7)[]{$x_1$}}}child{node(5)[]{$\wedge$}child{node(8)[right of=7]{$\neg$}child{node(10){$x_2$}}}child{node(9)[]{$\neg$}child{node(11)[]{$x_3$}}}}}child{node(12)[]{$\wedge$}child{node(13)[right of=5]{$\wedge$}}child{node(14)[right of=13]{$\wedge$}}}}};
 \end{tikzpicture}
 \end{document}

@@ -1,5 +1,7 @@
-This is LuaTeX, Version beta-0.76.0-2014101508 (rev 4627)  (format=lualatex 2015.5.6)  6 MAY 2015 16:04
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/TeX Live for SUSE Linux) (format=pdflatex 2015.4.25)  7 MAY 2015 11:01
+entering extended mode
  restricted \write18 enabled.
+ %&-line parsing enabled.
 **Rechnerstrukturen1.tex
 (./Rechnerstrukturen1.tex
 LaTeX2e <2011/06/27>
@@ -165,28 +167,6 @@ Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
 (/usr/share/texmf/tex/generic/oberdiek/ltxcmds.sty
 Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
 )
-(/usr/share/texmf/tex/generic/oberdiek/pdftexcmds.sty
-Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO)
-
-
-(/usr/share/texmf/tex/generic/oberdiek/ifluatex.sty
-Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
-Package ifluatex Info: LuaTeX detected.
-)
-(/usr/share/texmf/tex/generic/oberdiek/ifpdf.sty
-Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
-Package ifpdf Info: pdfTeX in PDF mode is detected.
-)
-Package pdftexcmds Info: \pdf@primitive is available.
-Package pdftexcmds Info: \pdf@ifprimitive is available.
-Package pdftexcmds Info: \pdfdraftmode found.
-
-(/usr/share/texmf/tex/generic/oberdiek/luatex-loader.sty
-Package: luatex-loader 2010/03/09 v0.4 Lua module loader (HO)
-
-(/usr/share/texmf/scripts/oberdiek/oberdiek.luatex.lua))
-\pdftexcmds@toks=\toks26
-)
 \Gread@gobject=\count100
 ))
 \Gin@req@height=\dimen113
@@ -197,11 +177,11 @@ Package: luatex-loader 2010/03/09 v0.4 Lua module loader (HO)
 Package: pgfsys 2010/06/30 v2.10 (rcs-revision 1.37)
 
 (/usr/share/texmf/tex/generic/pgf/utilities/pgfkeys.code.tex
-\pgfkeys@pathtoks=\toks27
-\pgfkeys@temptoks=\toks28
+\pgfkeys@pathtoks=\toks26
+\pgfkeys@temptoks=\toks27
 
 (/usr/share/texmf/tex/generic/pgf/utilities/pgfkeysfiltered.code.tex
-\pgfkeys@tmptoks=\toks29
+\pgfkeys@tmptoks=\toks28
 ))
 \pgf@x=\dimen115
 \pgf@y=\dimen116
@@ -264,9 +244,9 @@ Package: pgfcore 2010/04/11 v2.10 (rcs-revision 1.7)
 \pgfmath@dimen=\dimen123
 \pgfmath@count=\count107
 \pgfmath@box=\box29
-\pgfmath@toks=\toks30
-\pgfmath@stack@operand=\toks31
-\pgfmath@stack@operation=\toks32
+\pgfmath@toks=\toks29
+\pgfmath@stack@operand=\toks30
+\pgfmath@stack@operation=\toks31
 )
 (/usr/share/texmf/tex/generic/pgf/math/pgfmathfunctions.code.tex
 (/usr/share/texmf/tex/generic/pgf/math/pgfmathfunctions.basic.code.tex)
@@ -378,8 +358,8 @@ Package: pgfcomp-version-1-18 2007/07/23 v2.10 (rcs-revision 1.1)
 Package: pgffor 2010/03/23 v2.10 (rcs-revision 1.18)
 \pgffor@iter=\dimen149
 \pgffor@skip=\dimen150
-\pgffor@stack=\toks33
-\pgffor@toks=\toks34
+\pgffor@stack=\toks32
+\pgffor@toks=\toks33
 ))
 (/usr/share/texmf/tex/generic/pgf/frontendlayer/tikz/tikz.code.tex
 Package: tikz 2010/10/13 v2.10 (rcs-revision 1.76)
@@ -433,6 +413,8 @@ by Andreas W. Wieland, awwieland@gmx.de
 \kvmarkmove=\count130
 \kvsavebox=\box37
 ) (./Rechnerstrukturen1.aux)
+\openout1 = `Rechnerstrukturen1.aux'.
+
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 12.
 LaTeX Font Info:    ... okay on input line 12.
 LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 12.
@@ -456,13 +438,30 @@ ABD: EveryShipout initializing macros
 \scratchbox=\box38
 \nofMPsegments=\count132
 \nofMParguments=\count133
-\everyMPshowfont=\toks35
+\everyMPshowfont=\toks34
 \MPscratchCnt=\count134
 \MPscratchDim=\dimen160
 \MPnumerator=\count135
 \makeMPintoPDFobject=\count136
-\everyMPtoPDFconversion=\toks36
-) (/usr/share/texmf/tex/latex/oberdiek/epstopdf-base.sty
+\everyMPtoPDFconversion=\toks35
+) (/usr/share/texmf/tex/generic/oberdiek/pdftexcmds.sty
+Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
+)
+
+(/usr/share/texmf/tex/generic/oberdiek/ifluatex.sty
+Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+)
+(/usr/share/texmf/tex/generic/oberdiek/ifpdf.sty
+Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
+Package ifpdf Info: pdfTeX in PDF mode is detected.
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)
+(/usr/share/texmf/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
 
 (/usr/share/texmf/tex/latex/oberdiek/grfext.sty
@@ -479,15 +478,19 @@ Package: kvsetkeys 2012/04/25 v1.16 Key value parser (HO)
 
 (/usr/share/texmf/tex/generic/oberdiek/etexcmds.sty
 Package: etexcmds 2011/02/16 v1.5 Avoid name clashes with e-TeX commands (HO)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
 )))
 Package grfext Info: Graphics extension search list:
-(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPEG
-,.JBIG2,.JB2,.eps]
+(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
 (grfext)             \AppendGraphicsExtensions on input line 452.
 
 (/usr/share/texmf/tex/latex/latexconfig/epstopdf-sys.cfg
-File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
-
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
 ))
 LaTeX Font Info:    Try loading font information for U+msa on input line 17.
 
@@ -506,12 +509,6 @@ Underfull \hbox (badness 10000) in paragraph at lines 15--44
 
 Underfull \hbox (badness 10000) in paragraph at lines 15--44
 
- []
-
-
-Overfull \hbox (11.26436pt too wide) in paragraph at lines 15--44
-\T1/cmr/m/n/10.95 Durch das Assoziativgesetz koennen wir die Klammern bei gleic
-hem booleschem
  []
 
 
@@ -547,27 +544,25 @@ Underfull \hbox (badness 10000) in paragraph at lines 61--97
 [1
 
 {/usr/share/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] [3]
-(./Rechnerstrukturen1.aux) )
-
-Here is how much of LuaTeX's memory you used:
- 11884 strings out of 494718
- 100000,319454 words of node,token memory allocated
- 341 words of node memory still in use:
-   5 hlist, 2 vlist, 2 rule, 2 glue, 5 kern, 42 glue_spec, 1 write nodes
-   avail lists: 2:27,3:213,4:2403,5:141,6:915,7:205,9:495,10:2
- 15035 multiletter control sequences out of 65536+600000
- 34 fonts using 1348579 bytes
- 56i,15n,55p,440b,869s stack positions out of 5000i,500n,10000p,200000b,100000s
-{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr/share/texmf/fon
-ts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf/fonts/type1/public/amsf
-onts/cm/cmr10.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmr8.pfb></us
-r/share/texmf/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf/fonts/
-type1/public/cm-super/sfrm0600.pfb></usr/share/texmf/fonts/type1/public/cm-super
-/sfrm1095.pfb>
-Output written on Rechnerstrukturen1.pdf (3 pages, 81489 bytes).
-
-PDF statistics: 42 PDF objects out of 1000 (max. 8388607)
+(./Rechnerstrukturen1.aux) ) 
+Here is how much of TeX's memory you used:
+ 11422 strings out of 493315
+ 205195 string characters out of 6145893
+ 274278 words of memory out of 5000000
+ 14630 multiletter control sequences out of 15000+600000
+ 9823 words of font info for 34 fonts, out of 8000000 for 9000
+ 957 hyphenation exceptions out of 8191
+ 56i,19n,55p,441b,1709s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super
+-t1.enc}</usr/share/texmf/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share
+/texmf/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf/fonts/type1/p
+ublic/amsfonts/cm/cmr8.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cms
+y10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm0600.pfb></usr/share/
+texmf/fonts/type1/public/cm-super/sfrm1095.pfb>
+Output written on Rechnerstrukturen1.pdf (3 pages, 80442 bytes).
+PDF statistics:
+ 42 PDF objects out of 1000 (max. 8388607)
  30 compressed objects within 1 object stream
- 0 named destinations out of 1000 (max. 131072)
- 16 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 0 named destinations out of 1000 (max. 500000)
+ 13 words of extra memory for PDF output out of 10000 (max. 10000000)
 
