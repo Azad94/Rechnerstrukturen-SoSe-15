@@ -36,7 +36,7 @@ $x_0$ & $x_1$ & $x_2$& $x_3$ & y \\ \hline
 \\
 \\
 Das Schaltnetz soll uns alle Primzahlen im 4 Bit Bereich anzeigen. Der Fehler ist, das die 2 (ON(f)=
-$\lbrace 0100 \rbrace$
+$\lbrace 0100 \rbrace$)
 nicht als Primzahl erkannt wird. \\ \\
 1-2\\
 c.i)\\
@@ -61,12 +61,14 @@ c.ii)\\
 \end{equation}
 Einen booleschen Ausdruck ( \ref{boolescher Ausdruck} ) kann man nicht mit einem erweiterten booleschen Ausdruck  ( \ref{boolesche Funktion} ) vergleichen. \\ \\
 d)\\
+Der boolesche Ausdruck der Tabelle ausgeschrieben\\
 $
 y=( \neg x_3 \wedge \neg x_2 \wedge x_1 \wedge x_0) \vee  ( \neg x_3 \wedge x_2 \wedge \neg x_1 \wedge x_0 ) \vee  ( \neg x_3 \wedge x_2 \wedge x_1 \wedge x_0  ) \vee \\
 ( x_3 \wedge \neg x_2 \wedge x_1 \wedge x_0 ) \vee ( x_3 \wedge \neg x_2 \wedge \neg x_1 \wedge x_0 )
 $
 \\ \\
 e)\\
+Die korrekte boolesche Funktion \\
 $
 y=( \neg x_3 \wedge \neg x_2 \wedge x_1 \wedge \neg x_0 ) \vee ( \neg x_3 \wedge \neg x_2 \wedge x_1 \wedge x_0) \vee ( \neg x_3 \wedge x_2 \wedge \neg x_1 \wedge x_0) \vee \\ ( \neg x_3 \wedge x_2 \wedge x_1 \wedge x_0) \vee ( x_3 \wedge \neg x_2 \wedge x_1 \wedge x_0) \vee (x_3 \wedge x_2 \wedge \neg x_1 \wedge x_0)$\\
 \\
@@ -91,18 +93,18 @@ $x_3$&$x_2$&$x_1$&$x_0$&y\\ \hline
 1&1&1&0&0\\
 1&1&1&1&0\\
 \end{tabular}\\ \\
+Die Tabelle zeigt wie in der Aufgabe beschrieben eine totale boolesche Funktion mit dem Hamminggewicht von zwei\\ \\
 KDNF \\
 $\label{KDNF:KDNF}
 y=(\neg x_3 \wedge \neg x_2 \wedge x_1 \wedge x_0)\vee ( \neg x_3 \wedge x_2 \wedge \neg x_1 \wedge  x_0) \vee ( \neg x_3 \wedge x_2 \wedge x_1 \wedge \neg x_0) \vee \\ ( x_3 \wedge \neg x_2 \wedge \neg x_1 \wedge x_0) \vee (x_3 \wedge \neg x_2 \wedge x_1 \wedge \neg x_0) \vee ( x_3 \wedge x_2 \wedge \neg x_1 \wedge \neg x_0) $\\
+\\
+Die Erfüllbarkeitsmenge der booleschen Funktion. 
 \begin{displaymath}
 ON(f)=\lbrace0011,0101,0110,1001,1010,1100\rbrace\\
 \end{displaymath}
 \karnaughmap{4}{}{{$x_3$}{$x_2$}{$x_1$}{$x_0$}}{0001011001101000}{}\\
-Nicht weiter zu vereinfachen gleich wie KDNF\\
-\begin{tikzpicture}
-\node[](z){$\vee$}
- child{
- node(1)[]{$\vee$}
- child{node(2)[]{$\vee$}child{node(3)[]{$\wedge$}child{node(4)[]{$\wedge$}child{node(6)[]{$x_0$}}child{node(7)[]{$x_1$}}}child{node(5)[]{$\wedge$}child{node(8)[right of=7]{$\neg$}child{node(10){$x_2$}}}child{node(9)[]{$\neg$}child{node(11)[]{$x_3$}}}}}child{node(12)[]{$\wedge$}child{node(13)[right of=5]{$\wedge$}}child{node(14)[right of=13]{$\wedge$}}}}};
-\end{tikzpicture}
+Dadurch das wir in unserem KV-Diagramm keine gruppen bilden können, kann man diese Schaltung nicht weiter vereinfachen. Somit ist die minimalste Darstellung dieser Schaltung gleich der DNF.\\
+\\ \\
+d)
+Vereinfacht wird die Schaltung durch das zusammenführen gleicher ausdrücke wie schon in (\ref{Assoziativ1}) gezeigt.
 \end{document}
