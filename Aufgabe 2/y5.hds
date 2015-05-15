@@ -1,0 +1,19 @@
+# hades.models.Design file
+#  
+[name] unnamed
+[components]
+hades.models.io.Ipin x3 3600 10800 @N 1001 null U
+hades.models.io.Ipin x2 3600 12300 @N 1001 null U
+hades.models.io.Ipin x1 3600 13800 @N 1001 null U
+hades.models.io.Ipin x0 3600 15300 @N 1001 null U
+hades.models.gates.And4 i0 8400 12000 @N 1001 1.0E-8
+hades.models.io.Opin y5 19500 13200 @N 1001 5.0E-9
+[end components]
+[signals]
+hades.signals.SignalStdLogic1164 n4 2 i0 Y y5 A 1 2 12000 13200 19500 13200 0 
+hades.signals.SignalStdLogic1164 n3 2 x0 Y i0 D 3 2 3600 15300 7800 15300 2 7800 15300 7800 14100 2 7800 14100 8400 14100 0 
+hades.signals.SignalStdLogic1164 n2 2 x1 Y i0 C 3 2 3600 13800 7200 13800 2 7200 13800 7200 13500 2 7200 13500 8400 13500 0 
+hades.signals.SignalStdLogic1164 n1 2 x2 Y i0 B 3 2 3600 12300 7200 12300 2 7200 12300 7200 12900 2 7200 12900 8400 12900 0 
+hades.signals.SignalStdLogic1164 n0 2 x3 Y i0 A 3 2 3600 10800 7800 10800 2 7800 10800 7800 12300 2 7800 12300 8400 12300 0 
+[end signals]
+[end]

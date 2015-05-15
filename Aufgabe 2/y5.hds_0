@@ -1,0 +1,16 @@
+# hades.models.Design file
+#  
+[name] unnamed
+[components]
+hades.models.io.Opin i6 19500 13200 @N 1001 5.0E-9
+hades.models.io.HexSwitch HexSwitch 1800 11700 @N 1001 0 
+hades.models.gates.And4 i0 8400 12000 @N 1001 1.0E-8
+[end components]
+[signals]
+hades.signals.SignalStdLogic1164 n4 2 i0 Y i6 A 1 2 12000 13200 19500 13200 0 
+hades.signals.SignalStdLogic1164 n3 2 HexSwitch Y0 i0 D 1 2 4800 14100 8400 14100 0 
+hades.signals.SignalStdLogic1164 n2 2 HexSwitch Y1 i0 C 1 2 4800 13500 8400 13500 0 
+hades.signals.SignalStdLogic1164 n1 2 HexSwitch Y2 i0 B 1 2 4800 12900 8400 12900 0 
+hades.signals.SignalStdLogic1164 n0 2 HexSwitch Y3 i0 A 1 2 4800 12300 8400 12300 0 
+[end signals]
+[end]
