@@ -1,0 +1,12 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{ucs}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{ngerman}
+\usepackage{amsmath,amssymb,amstext}
+\usepackage{tikz}
+\title{Rechnerstrukturen Blatt 1}
+\author{Sven Marquardt}
+\date{\today}
+\input{kvmacros}
+\begin{document}

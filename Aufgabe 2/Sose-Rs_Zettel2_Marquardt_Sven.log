@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/TeX Live for SUSE Linux) (format=pdflatex 2015.4.25)  22 MAY 2015 19:45
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/TeX Live for SUSE Linux) (format=pdflatex 2015.4.25)  22 MAY 2015 23:42
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**Rechnerstrukturen1.tex
-(./Rechnerstrukturen1.tex
+**Sose-Rs_Zettel2_Marquardt_Sven.tex
+(./Sose-Rs_Zettel2_Marquardt_Sven.tex
 LaTeX2e <2011/06/27>
 Babel <3.9f> and hyphenation patterns for 78 languages loaded.
 (/usr/share/texmf/tex/latex/base/article.cls
@@ -412,8 +412,8 @@ by Andreas W. Wieland, awwieland@gmx.de
 \kvmarknum=\count129
 \kvmarkmove=\count130
 \kvsavebox=\box37
-) (./Rechnerstrukturen1.aux)
-\openout1 = `Rechnerstrukturen1.aux'.
+) (./Sose-Rs_Zettel2_Marquardt_Sven.aux)
+\openout1 = `Sose-Rs_Zettel2_Marquardt_Sven.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 12.
 LaTeX Font Info:    ... okay on input line 12.
@@ -427,7 +427,8 @@ LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 12.
 LaTeX Font Info:    ... okay on input line 12.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 12.
 LaTeX Font Info:    ... okay on input line 12.
- (/usr/share/texmf/tex/latex/ucs/ucsencs.def
+
+(/usr/share/texmf/tex/latex/ucs/ucsencs.def
 File: ucsencs.def 2011/01/21 Fixes to fontencodings LGR, T3
 )
 ABD: EveryShipout initializing macros
@@ -502,83 +503,231 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 17.
 (/usr/share/texmf/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-Underfull \hbox (badness 10000) in paragraph at lines 15--44
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 15--44
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 50--53
-
- []
-
 (/usr/share/texmf/tex/latex/ucs/data/uni-0.def
 File: uni-0.def 2013/05/13 UCS: Unicode data U+0000..U+00FF
 )
-Underfull \hbox (badness 10000) in paragraph at lines 61--102
+Underfull \hbox (badness 10000) in paragraph at lines 14--182
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 61--102
+Overfull \hbox (7.9045pt too wide) in paragraph at lines 14--182
+\T1/cmr/m/n/10.95 ON($\OML/cmm/m/it/10.95 f[]$\T1/cmr/m/n/10.95 )= $\OMS/cmsy/m
+/n/10.95 f\OT1/cmr/m/n/10.95 0001\OML/cmm/m/it/10.95 ; \OT1/cmr/m/n/10.95 0010\
+OML/cmm/m/it/10.95 ; \OT1/cmr/m/n/10.95 0011\OML/cmm/m/it/10.95 ; \OT1/cmr/m/n/
+10.95 0100\OML/cmm/m/it/10.95 ; \OT1/cmr/m/n/10.95 0101\OML/cmm/m/it/10.95 ; \O
+T1/cmr/m/n/10.95 0110\OML/cmm/m/it/10.95 ; \OT1/cmr/m/n/10.95 0111\OML/cmm/m/it
+/10.95 ; \OT1/cmr/m/n/10.95 1000\OML/cmm/m/it/10.95 ; \OT1/cmr/m/n/10.95 1001\O
+ML/cmm/m/it/10.95 ; \OT1/cmr/m/n/10.95 1010\OML/cmm/m/it/10.95 ; \OT1/cmr/m/n/1
+0.95 1011\OML/cmm/m/it/10.95 ; \OT1/cmr/m/n/10.95 1100[] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 14--182
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 61--102
+Underfull \hbox (badness 10000) in paragraph at lines 14--182
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 61--102
+Underfull \hbox (badness 10000) in paragraph at lines 14--182
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 61--102
+Underfull \hbox (badness 10000) in paragraph at lines 14--182
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 61--102
+Underfull \hbox (badness 10000) in paragraph at lines 14--182
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 14--182
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 14--182
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 14--182
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 14--182
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 14--182
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 14--182
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 14--182
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 14--182
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 14--182
+
+ []
+
+
+Overfull \hbox (47.11563pt too wide) in paragraph at lines 14--182
+[] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 14--182
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 14--182
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 14--182
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 14--182
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 14--182
+
+ []
+
+
+Overfull \hbox (13.33987pt too wide) in paragraph at lines 14--182
+[] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 14--182
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 14--182
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 14--182
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 14--182
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 14--182
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 14--182
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 14--182
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 14--182
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 14--182
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 14--182
 
  []
 
 [1
 
-{/usr/share/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-Underfull \hbox (badness 10000) in paragraph at lines 104--110
+{/usr/share/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] [3]
+Underfull \hbox (badness 10000) in paragraph at lines 183--207
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 104--110
+Underfull \hbox (badness 10000) in paragraph at lines 183--207
 
  []
 
-[2] [3] (./Rechnerstrukturen1.aux) ) 
+
+Underfull \hbox (badness 10000) in paragraph at lines 183--207
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 183--207
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 183--207
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 183--207
+
+ []
+
+[4] [5] (./Sose-Rs_Zettel2_Marquardt_Sven.aux) ) 
 Here is how much of TeX's memory you used:
- 11786 strings out of 493315
- 208105 string characters out of 6145893
- 271278 words of memory out of 5000000
- 14991 multiletter control sequences out of 15000+600000
+ 11782 strings out of 493315
+ 208148 string characters out of 6145893
+ 293247 words of memory out of 5000000
+ 14987 multiletter control sequences out of 15000+600000
  9823 words of font info for 34 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 56i,15n,55p,441b,481s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texmf/fonts/enc/dvips/cm-super/
-cm-super-t1.enc}</usr/share/texmf/fonts/type1/public/amsfonts/cm/cmmi10.pfb></u
-sr/share/texmf/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf/fonts
-/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf/fonts/type1/public/amsfont
-s/cm/cmsy10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm0600.pfb></us
-r/share/texmf/fonts/type1/public/cm-super/sfrm1095.pfb>
-Output written on Rechnerstrukturen1.pdf (3 pages, 81878 bytes).
+ 56i,15n,55p,605b,481s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texmf/fonts/enc/dvi
+ps/cm-super/cm-super-t1.enc}</usr/share/texmf/fonts/type1/public/amsfonts/cm/cm
+mi10.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share
+/texmf/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf/fonts/type1/pu
+blic/amsfonts/cm/cmsy10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm0
+600.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1095.pfb>
+Output written on Sose-Rs_Zettel2_Marquardt_Sven.pdf (5 pages, 87297 bytes).
 PDF statistics:
- 42 PDF objects out of 1000 (max. 8388607)
- 30 compressed objects within 1 object stream
+ 48 PDF objects out of 1000 (max. 8388607)
+ 34 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 

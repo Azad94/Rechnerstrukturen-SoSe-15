@@ -1,0 +1,208 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{ucs}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{ngerman}
+\usepackage{amsmath,amssymb,amstext}
+\usepackage{tikz}
+\title{Rechnerstrukturen Blatt 1}
+\author{Sven Marquardt}
+\date{\today}
+\input{kvmacros}
+\begin{document}
+
+Aufgabe 2\\
+2.1)\\
+Boolesche Funktion
+f: $B^4$->$B^6$ \\
+f($x_3,x_2,x_1,x_0$)=($y_5,y_4,y_3,y_2,y_1,y_0$),mit\\
+$y_5 = x_3 \wedge x_2 \wedge x_1 \wedge x_0$\\
+$y_4=(x_3 \wedge x_1) \vee(x_3 \wedge x_2)$\\
+$y_3=(x_3 \wedge x_0) \vee (x_3 \wedge x_1) \vee (x_3 \wedge x_2)$\\
+$y_2=(x_2 \wedge x_1 \wedge x_0 ) \vee x_3$\\
+$y_1 = \lbrace x_3 \vee x_2 \wedge x_1 \rbrace $\\
+$y_0=x_3 \vee x_2 \vee x_1 \vee x_0$\\ \\
+2.2)\\
+Die Gültigkeitsbereiche für alle fi von yi \\
+ON($f_0$)= $\lbrace 0001,0010,0011,0100,0101,0110,0111,1000,1001,1010,1011,1100 \\
+           1101,1110,1111 \rbrace$ \\
+ON($f_1$)= $ \lbrace 0110,0111,1000,1001,1010,1011,1100,1101,1110,1111 \rbrace $ \\
+ON($f_2$)= $ \lbrace 0111,1000,1001,1010,1011,1100,1101,1110,1111 \rbrace $ \\
+ON($f_3$)= $ \lbrace 1001,1010,1011,1100,1101,1110,1111 \rbrace $\\
+ON($f_4$)= $ \lbrace 1010,1011,1100,1101,1110,1111 \rbrace $ \\
+ON($f_5$)= $ \lbrace 1111 \rbrace $ \\ \\
+2.3)\\
+\karnaughmap{4}{}{{$x_3$}{$x_2$}{$x_1$}{$x_0$}}{0111111111111111}{}\\
+$y_0$=$\lbrace x_3 \vee x_2 \vee x_1 \vee x_0 \rbrace $\\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\
+$l_0=\lbrace \\
+\neg x_3 \wedge x_2 \wedge x_1 \wedge \neg x_0 ,\\
+\neg x_3 \wedge x_2 \wedge x_1 \wedge x_0,\\
+x_3 \wedge \neg x_2 \wedge \neg x_1 \wedge \neg x_0,\\
+x_3 \wedge \neg x_2 \wedge \neg x_1 \wedge x_0,\\
+x_3 \wedge \neg x_2 \wedge x_1 \wedge \neg x_0, \\
+x_3 \wedge \neg x_2 \wedge x_1 \wedge x_0, \\
+x_3 \wedge x_2 \wedge \neg x_1 \wedge \neg x_0,\\
+x_3 \wedge x_2 \wedge \neg x_1 \wedge x_0,\\
+x_3 \wedge x_2 \wedge x_1 \wedge \neg x_0, \\
+x_3 \wedge x_2 \wedge x_1 \wedge x_0 \rbrace$\\ \\
+$l_1$=$ \lbrace \\
+\neg x_3 \wedge x_2 \wedge x_1,\\
+x_2 \wedge x_1 \wedge x_0,\\
+x_3 \wedge \neg x_2 \wedge \neg x_1,\\
+x_3 \wedge \neg x_2 \wedge x_0,\\
+x_3 \wedge \neg x_2 \wedge x_1,\\
+x_3 \wedge x_1 \wedge x_0,\\
+x_3 \wedge x_2 \wedge \neg x_1,\\
+x_3 \wedge x_2 \wedge x_0,\\
+x_3 \wedge x_2 \wedge x_1 \rbrace$\\ \\
+$l_2$=$\lbrace 
+x_2 \wedge x_1,
+x_3 \wedge \neg x_2,
+x_3 \wedge x_0,
+x_3 \wedge x_1,
+x_3 \wedge x_2 \rbrace$ \\
+$p_2$=$\lbrace
+x_2 \wedge x_1 \wedge x_0,
+x_3 \wedge x_1 \wedge x_0 \rbrace $\\ \\
+$l_3$=$\lbrace x_3 \rbrace$\\ 
+$p_3$=$\lbrace x_2 \wedge x_1, x_3 \wedge x_0, x_3 \wedge x_1 \rbrace$\\
+\begin{tabular}{l | c | c | c | c | c | c | c | c | c | c | c}
+f&0110&0111&1000&1001&1010&1011&1100&1101&1110&1111 \\ \hline
+$x_2 \wedge x_1 \wedge x_0$&0&1&0&0&0&0&0&0&0&1\\
+$x_3 \wedge x_1 \wedge x_0$&0&0&0&0&0&1&0&0&0&1\\
+$x_2 \wedge x_1$&1&1&0&0&0&0&0&0&1&1\\
+$x_3 \wedge x_0$&0&0&0&1&0&1&0&1&0&1\\
+$x_3 \wedge x_1$&0&0&0&0&1&1&0&0&1&1\\
+$x_3$&0&0&1&1&1&1&1&1&1&1\\
+\end{tabular}\\ \\
+$x_3$ Dominiert die Zeile $x_3 \wedge x_1$, $ x_3 \wedge x_0$ und $x_3 \wedge x_1 \wedge x_0$. Deshalb können wir diese beiden Zeilen auslassen. Außerdem hat $x_3$ in den Spalten 1000 und 1100 die einzige 1. Wir können also auch diese Spalten raus lassen.Zeile $x_2 \wedge x_1$  hat in Spalte 0110 als einziger eine 1 also kann auch diese Spalte gekürzt werden.$x_2 \wedge x_1$ Dominiert auch die Zeile $x_2 \wedge x_1 \wedge x_0$.Übrig bleibt nur noch $x_3 \wedge x_1 \wedge x_0$ als Rest. Daraus folgt folgendes Minimalpolynom für $y_1$.
+$y_1 = \lbrace x_3 \vee x_2 \wedge x_1 \rbrace $\\  \\
+$l_0= \lbrace \\
+\neg x_3 \wedge x_2 \wedge x_1 \wedge x_0,\\
+x_3 \wedge \neg x_2 \wedge \neg x_1 \wedge \neg x_0,\\
+x_3 \wedge \neg x_2 \wedge \neg x_1 \wedge x_0,\\
+x_3 \wedge \neg x_2 \wedge x_1 \wedge \neg x_0, \\
+x_3 \wedge \neg x_2 \wedge x_1 \wedge x_0, \\
+x_3 \wedge x_2 \wedge \neg x_1 \wedge \neg x_0,\\
+x_3 \wedge x_2 \wedge \neg x_1 \wedge x_0,\\
+x_3 \wedge x_2 \wedge x_1 \wedge \neg x_0, \\
+x_3 \wedge x_2 \wedge x_1 \wedge x_0 \rbrace$\\ \\
+$l_1= \lbrace\\ 
+x_2 \wedge x_1 \wedge x_0,\\
+x_3 \wedge \neg x_2 \wedge \neg x_1,\\
+x_3 \wedge \neg x_2 \wedge x_0,\\
+x_3 \wedge \neg x_2 \wedge x_1,\\
+x_3 \wedge x_1 \wedge x_0,\\
+x_3 \wedge x_2 \wedge \neg x_1,\\
+x_3 \wedge x_2 \wedge x_0,\\
+x_3 \wedge x_2 \wedge x_1 \rbrace$\\ \\
+$l_2=\lbrace 
+x_2 \wedge x_1,
+x_3 \wedge \neg x_2,
+x_3 \wedge x_0,
+x_3 \wedge x_1,
+x_3 \wedge x_2 \rbrace$\\ 
+$p_2= \lbrace x_2 \wedge x_1 \wedge x_0, x_3 \wedge x_1 \wedge x_0 \rbrace$\\ \\
+$l_3$=$\lbrace x_3 \rbrace$\\
+$p_3$=$\lbrace x_2 \wedge x_1, x_3 \wedge x_0, x_3 \wedge x_1 \rbrace$\\
+\begin{tabular}{l | c | c | c | c | c | c | c | c | c | c }
+f&0111&1000&1001&1010&1011&1100&1101&1110&1111 \\ \hline
+$x_2 \wedge x_1 \wedge x_0$&1&0&0&0&0&0&0&0&1\\
+$x_3 \wedge x_1 \wedge x_0$&0&0&0&0&1&0&0&0&1\\
+$x_2 \wedge x_1$&1&0&0&0&0&0&0&1&1\\
+$x_3 \wedge x_0$&0&0&1&0&1&0&1&0&1\\
+$x_3 \wedge x_1$&0&0&0&1&1&0&0&1&1\\
+$x_3$&0&1&1&1&1&1&1&1&1\\
+\end{tabular}\\ \\
+Durch Zeilendominanz bleiben nur $x_3$ und die $x_2 \wedge x_1$ übrig.\\
+$y_2= \lbrace x_3 \vee x_2 \wedge x_1 \rbrace$\\ \\
+$l_0= \lbrace
+x_3 \wedge \neg x_2 \wedge \neg x_1 \wedge x_0,\\
+x_3 \wedge \neg x_2 \wedge x_1 \wedge \neg x_0, \\
+x_3 \wedge \neg x_2 \wedge x_1 \wedge x_0, \\
+x_3 \wedge x_2 \wedge \neg x_1 \wedge \neg x_0,\\
+x_3 \wedge x_2 \wedge \neg x_1 \wedge x_0,\\
+x_3 \wedge x_2 \wedge x_1 \wedge \neg x_0, \\
+x_3 \wedge x_2 \wedge x_1 \wedge x_0 \rbrace$\\ \\
+$l_1= \lbrace 
+x_3 \wedge \neg x_2 \wedge x_0,\\
+x_3 \wedge \neg x_2 \wedge x_1,\\
+x_3 \wedge x_1 \wedge x_0,\\
+x_3 \wedge x_2 \wedge \neg x_1,\\
+x_3 \wedge x_2 \wedge x_0,\\
+x_3 \wedge x_2 \wedge x_1 \rbrace$\\ \\
+$l_2= \lbrace 
+x_3 \wedge x_0,
+x_3 \wedge x_1,
+x_3 \wedge x_2 \rbrace$\\ 
+$p_2= \lbrace x_3 \wedge x_1 \wedge x_0 \rbrace$\\
+$p_3= \lbrace 
+x_3 \wedge x_0,
+x_3 \wedge x_1,
+x_3 \wedge x_2 \rbrace$\\
+\begin{tabular}{l  | c | c | c | c | c | c | c | c }
+f&1001&1010&1011&1100&1101&1110&1111 \\ \hline
+$x_3 \wedge x_1 \wedge x_0$&0&0&1&0&0&0&1\\
+$x_3 \wedge x_0$&1&0&1&0&1&0&1\\
+$x_3 \wedge x_1$&0&1&1&0&0&1&1\\
+$x_3 \wedge x_2$&0&0&1&1&1&1&1\\
+\end{tabular}\\ \\
+Durch Spaltendominanz kommen wir auf.\\
+$y_3=\lbrace x_3 \wedge x_0 \vee x_3 \wedge x_1 \vee x_3 \wedge x_2 \rbrace$\\ \\
+$l_0= \lbrace \\
+x_3 \wedge \neg x_2 \wedge x_1 \wedge \neg x_0, \\
+x_3 \wedge \neg x_2 \wedge x_1 \wedge x_0, \\
+x_3 \wedge x_2 \wedge \neg x_1 \wedge \neg x_0,\\
+x_3 \wedge x_2 \wedge \neg x_1 \wedge x_0,\\
+x_3 \wedge x_2 \wedge x_1 \wedge \neg x_0, \\
+x_3 \wedge x_2 \wedge x_1 \wedge x_0 \rbrace$\\ \\
+$l_1= \lbrace 
+x_3 \wedge \neg x_2 \wedge x_1,
+x_3 \wedge x_1 \wedge x_0,
+x_3 \wedge x_2 \wedge \neg x_1,
+x_3 \wedge x_2 \wedge x_0,
+x_3 \wedge x_2 \wedge x_1 \rbrace$\\ \\
+$l_2= \lbrace 
+x_3 \wedge x_1,
+x_3 \wedge x_2 \rbrace$\\ 
+$p_2= \lbrace x_3 \wedge x_1 \wedge x_0,x_3 \wedge x_2 \wedge x_0 \rbrace$\\
+$p_3= \lbrace 
+x_3 \wedge x_1,
+x_3 \wedge x_2 \rbrace$\\
+\begin{tabular}{l   | c | c | c | c | c | c | c }
+f&1010&1011&1100&1101&1110&1111 \\ \hline
+$x_3 \wedge x_1 \wedge x_0$&0&1&0&0&0&1\\
+$x_3 \wedge x_2 \wedge x_0$&0&0&0&1&0&1\\
+$x_3 \wedge x_1$&1&1&0&0&1&1\\
+$x_3 \wedge x_2$&0&1&1&1&1&1\\
+\end{tabular}\\
+Durch Spaltendominanz kommen wir auf  $y_4= \lbrace x_3 \wedge x_1 \vee x_3 \wedge x_2 \rbrace$\\ 
+Da $y_5$ sich nicht weiter vereinfachen lässt, ist das Minimalpolynom gleich der Normalform. 
+$y_5= \lbrace x_3 \wedge x_2 \wedge x_1 \wedge x_0 \rbrace $\\ \\
+
+Aufgabe 3 \\
+3.1)\\
+Partielle boolesche Funktion  \\
+f: D-> $B^3$, mit $D= \lbrace 010,011,101,111 \rbrace$ und f$( x_2,x_1,x_0)=(y_2,y_1,y_0)$ ergibt\\
+$y_2 = \lbrace \neg x_2 \wedge x_0 \vee \neg x_1 \rbrace $\\
+$y_1 = \lbrace \neg x_0 \vee x_2 \rbrace $\\
+$y_0 = \lbrace \neg x_2 \vee \neg x_1 \rbrace $\\ \\
+3.2)\\
+Die Wahrheitsmenge der fi von yi \\
+$ON(f_2)=\lbrace 0111,101 \rbrace $\\
+$ON(f_1)=\lbrace 010,101,111 \rbrace $\\
+$ON(f_0)= \lbrace 010,011,101 \rbrace $\\
+und deren Don't care Bereiche \\
+$DC(f_2,f_1,f_0)= \lbrace 000,001,100,110 \rbrace $\\ \\ 
+3.3)\\
+$y_2$\\
+\karnaughmap{3}{}{{$x_2$}{$x_1$}{$x_0$}}{**01*1*0}{}
+$y_2 = \lbrace \neg x_2 \wedge x_0 \vee \neg x_1 \rbrace $\\ \\
+$y_1$\\
+\karnaughmap{3}{}{{$x_2$}{$x_1$}{$x_0$}}{**10*1*1}{}
+$y_1 = \lbrace \neg x_0 \vee x_2 \rbrace $\\ \\
+$y_0$\\
+\karnaughmap{3}{}{{$x_2$}{$x_1$}{$x_0$}}{**11*1*0}{}
+$y_0 = \lbrace \neg x_2 \vee \neg x_1 \rbrace $\\ \\
+
+\end{document}
