@@ -1,0 +1,54 @@
+\documentclass{scrartcl}
+\usepackage{ucs}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{ngerman}
+\usepackage{amsmath,amssymb,amstext}
+\usepackage{tikz}
+\title{Rechnerstrukturen Blatt 3}
+\author{Sven Marquardt}
+\date{\today}
+\input{kvmacros}
+\usetikzlibrary{automata}
+\usetikzlibrary{positioning}
+\usetikzlibrary{topaths}
+\begin{document}
+Aufgabe3.1\\
+Die Schaltung soll einen Zähler darstellen der in 3er Schritten vorwärts oder rückwärts Zählt. Das Umstellen der Zählrichtung erfolgt durch den Schalter $x_0$.\\
+\begin{tikzpicture}[auto,thick]
+	\node[state with output] (Z0) {$Z_0$ \nodepart {lower} $y=0000$};
+	\node[state with output, right=of Z0] (Z1) {$Z_1$ \nodepart {lower} $y=0011$};
+	\node[state with output, right=of Z1] (Z2) {$Z_2$ \nodepart {lower} y=0110};
+	\node[state with output, below=of Z2] (Z3) {$Z_3$ \nodepart {lower} y=1001};
+	\node[state with output, below=of Z1] (Z4) {$Z_4$ \nodepart {lower} y=1100};
+	\node[state with output, below=of Z0] (Z5) {$Z_5$ \nodepart {lower} y=1111};
+	\path[->] (Z0)	edge [bend left]		node	{$x_0$}(Z1)
+			  		edge [bend left]		node[right]	{$\neg x_0$}(Z5)
+			  (Z1)	edge [bend left]		node	{$\neg x_0$}(Z0)
+			  		edge [bend left]		node	{$x_0$}(Z2)
+			  (Z2)	edge [bend left]		node	{$\neg x_0$}(Z1)
+			  		edge [bend left]		node	{$x_0$}(Z3)
+			  (Z3)	edge [bend left]		node	{$\neg x_0$}(Z2)
+			  		edge [bend left]		node	{$x_0$}(Z4)
+			  (Z4)	edge [bend left]		node	{$\neg x_0$}(Z3)
+			  		edge [bend left]		node	{$x_0$}(Z5)
+			  (Z5)	edge [bend left]		node[left]	{$x_0$}(Z0)			  		
+			  		edge [bend left]		node	{$\neg x_0$}(Z4);
+\end{tikzpicture}
+\\
+A=$\lbrace X,Y,Z, \delta, \mu \rbrace$ ,mit\\
+X: $B \Rightarrow \lbrace x_0 \rbrace $ \\
+Y: $ B^4 \Rightarrow \lbrace y_3,y_2,y_1,y_0 \rbrace$\\
+Z: $ B^6 \Rightarrow \lbrace Z_5,Z_4,Z_3,Z_2,Z_1,Z_0 \rbrace$, mit\\
+$ON(Z_0)= \lbrace 0000 \rbrace \\
+ON(Z_1)= \lbrace 0011 \rbrace\\
+ON(Z_2)= \lbrace 0110 \rbrace\\
+ON(Z_3)= \lbrace 1001 \rbrace\\
+ON(Z_4)= \lbrace 1100 \rbrace\\
+ON(Z_5)= \lbrace 1111 \rbrace$\\
+$\delta : B^3 \Rightarrow \lbrace z^+_2,z^+_1,z^+_0 \rbrace$\\
+Für die Zustandsübergangsfunktion gilt \\
+$z^+_2= (x_0 \wedge \neg z_2 \wedge z_1 \wedge \neg z_0) \vee (\neg x_0 \wedge z_1 \wedge z_0) \vee  (x_0 \wedge z_2 \wedge 2_0)$\\
+$z^+_1= \neg x_0 \wedge \neg z_2 \wedge \neg z_1 \wedge z_0 \vee \neg x_0$
+
+\end{document}
