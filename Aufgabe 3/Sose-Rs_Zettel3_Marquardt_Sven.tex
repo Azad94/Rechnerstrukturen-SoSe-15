@@ -1,4 +1,4 @@
-\documentclass{scrartcl}
+\documentclass[11pt,a4paper]{article}
 \usepackage{ucs}
 \usepackage[utf8x]{inputenc}
 \usepackage[T1]{fontenc}
@@ -96,23 +96,34 @@ $y_0$\\
 Aufgabe 3.2\\
 In dieser Aufgabe soll eine Ampel implementiert werden die Automatisch läuft. Heißt nach einer gewissen Zeit gibt es Automatisch grün die Fußgänger ohne das ein Knopf gedrückt werden muss. Es ist also ein Autonomer-Automat. Folglich beschreibt folgender Automat die Funktion der Ampel. \\
 \begin{tikzpicture}[auto,thick]
-	\node[state with output] (Z0) {$Z_0$ \nodepart {lower} $y=0000$};
-	\node[state with output, right=of Z0] (Z1) {$Z_1$ \nodepart {lower} $y=0011$};
-	\node[state with output, right=of Z1] (Z2) {$Z_2$ \nodepart {lower} y=0110};
-	\node[state with output, below=of Z2] (Z3) {$Z_3$ \nodepart {lower} y=1001};
-	\node[state with output, below=of Z1] (Z4) {$Z_4$ \nodepart {lower} y=1100};
-	\node[state with output, below=of Z0] (Z5) {$Z_5$ \nodepart {lower} y=1111};
-	\path[->] (Z0)	edge [bend left]		node	{$x_0$}(Z1)
-			  		edge [bend left]		node[right]	{$\neg x_0$}(Z5)
-			  (Z1)	edge [bend left]		node	{$\neg x_0$}(Z0)
-			  		edge [bend left]		node	{$x_0$}(Z2)
-			  (Z2)	edge [bend left]		node	{$\neg x_0$}(Z1)
-			  		edge [bend left]		node	{$x_0$}(Z3)
-			  (Z3)	edge [bend left]		node	{$\neg x_0$}(Z2)
-			  		edge [bend left]		node	{$x_0$}(Z4)
-			  (Z4)	edge [bend left]		node	{$\neg x_0$}(Z3)
-			  		edge [bend left]		node	{$x_0$}(Z5)
-			  (Z5)	edge [bend left]		node[left]	{$x_0$}(Z0)			  		
-			  		edge [bend left]		node	{$\neg x_0$}(Z4);
-\end{tikzpicture}
+	\node[state with output] (Z0) {$Z_0$ \nodepart {lower} y=10001};
+	\node[state with output, right=of Z0] (Z1) {$Z_1$ \nodepart {lower} y=10010};
+	\node[state with output, right=of Z1] (Z2) {$Z_2$ \nodepart {lower} y=10100};
+	\node[state with output, right=of Z2] (Z3) {$Z_3$ \nodepart {lower} y=01100};
+	\node[state with output, below=of Z3] (Z4) {$Z_4$ \nodepart {lower} y=10100};
+	\node[state with output, below=of Z2] (Z5) {$Z_5$ \nodepart {lower} y=10110};
+	\node[state with output, below=of Z1] (Z6) {$Z_6$ \nodepart {lower} y=10001};
+	\node[state with output, below=of Z0] (Z7) {$Z_7$ \nodepart {lower} y=10001};
+	\path[->]
+	(Z0)	edge [bend left]	node{}	(Z1)
+	(Z1)	edge [bend left]	node{}	(Z2)
+	(Z2)	edge [bend left]	node{}	(Z3)
+	(Z3)	edge [bend left]	node{}	(Z4)
+	(Z4)	edge [bend left]	node{}	(Z5)
+	(Z5)	edge [bend left]	node{}	(Z6)
+	(Z6)	edge [bend left]	node{}	(Z7)
+	(Z7)	edge [bend left]	node{}	(Z0);
+\end{tikzpicture}\\
+\begin{tabular}{c | c | c | c | c | | c | c | c | c | | c | c | c | c}
+$x_0$&Z&$z_2$&$z_1$&$z_0$&$z^+_2$&$z^+_1$&$z^+_0$&$J_2$&$K_2$&$J_1$&$K_1$&$J_0$&$K_0$&$y_4$&$y_3$&$y_2$&$y_1$&$y_0$& \\ \hline
+0&$Z_0$&0&0&0&0&0&0&0&$Z_1$&0&0&1\\
+0&$Z_1$&0&0&1&0&0&1&1&$Z_2$&0&1&0\\
+0&$Z_2$&0&1&0&0&1&1&0&$Z_3$&0&1&1\\
+0&$Z_3$&0&1&1&1&0&0&1&$Z_4$&1&0&0\\
+0&$Z_4$&1&0&0&1&1&0&0&$Z_5$&1&0&1\\
+0&$Z_5$&1&0&1&1&1&1&1&$Z_0$&0&0&0\\
+0&$Z_6$&1&1&0&*&*&*&*&--&*&*&*\\
+0&$Z_7$&1&1&1&*&*&*&*&--&*&*&*\\ \hline
+
+\end{tabular}\\
 \end{document}
