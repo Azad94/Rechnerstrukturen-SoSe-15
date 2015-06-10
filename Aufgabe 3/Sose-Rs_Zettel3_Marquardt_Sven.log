@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/TeX Live for SUSE Linux) (format=pdflatex 2015.4.25)  10 JUN 2015 18:57
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/TeX Live for SUSE Linux) (format=pdflatex 2015.4.25)  10 JUN 2015 22:14
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -605,25 +605,25 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 17.
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
-{/usr/share/texmf/fonts/map/pdftex/updmap/pdftex.map}] (./Sose-Rs_Zettel3_Marqu
-ardt_Sven.aux) ) 
+{/usr/share/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] (./Sose-Rs_Zettel3_M
+arquardt_Sven.aux) ) 
 Here is how much of TeX's memory you used:
  13676 strings out of 493315
  251029 string characters out of 6145893
- 334398 words of memory out of 5000000
+ 350398 words of memory out of 5000000
  16851 multiletter control sequences out of 15000+600000
  9057 words of font info for 33 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
  65i,9n,71p,453b,725s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}</us
-r/share/texmf/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf/fonts
-/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf/fonts/type1/public/amsfon
-ts/cm/cmr8.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmsy10.pfb></us
-r/share/texmf/fonts/type1/public/cm-super/sfrm1095.pfb>
-Output written on Sose-Rs_Zettel3_Marquardt_Sven.pdf (1 page, 62022 bytes).
+{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}
+</usr/share/texmf/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf/f
+onts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf/fonts/type1/public/am
+sfonts/cm/cmr8.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
+</usr/share/texmf/fonts/type1/public/cm-super/sfrm1095.pfb>
+Output written on Sose-Rs_Zettel3_Marquardt_Sven.pdf (2 pages, 65837 bytes).
 PDF statistics:
- 32 PDF objects out of 1000 (max. 8388607)
- 23 compressed objects within 1 object stream
+ 35 PDF objects out of 1000 (max. 8388607)
+ 25 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 
