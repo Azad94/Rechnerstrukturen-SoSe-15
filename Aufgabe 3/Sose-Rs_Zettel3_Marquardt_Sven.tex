@@ -84,7 +84,35 @@ $z^+_1$\\
 \karnaughmap{4}{}{{$x_0$}{$z_2$}{$z_1$}{$z_0$}}{011000**100110**}{}\\ \newpage
 $z^+_0$\\
 \karnaughmap{4}{}{{$x_0$}{$z_2$}{$z_1$}{$z_0$}}{101010**101010**}{}\\
-
+Folglich bilden folgende KV-Diagramme die Minimierung der Ausgangsfunktion.\\
+$y_3$\\
+\karnaughmap{3}{}{{$z_2$}{$z_1$}{$z_0$}}{000111**}{}\\
+$y_2$\\
+\karnaughmap{3}{}{{$z_2$}{$z_1$}{$z_0$}}{001011**}{}\\
+$y_1$\\
+\karnaughmap{3}{}{{$z_2$}{$z_1$}{$z_0$}}{011001**}{}\\
+$y_0$\\
+\karnaughmap{3}{}{{$z_2$}{$z_1$}{$z_0$}}{010101**}{}\\
 Aufgabe 3.2\\
-
+In dieser Aufgabe soll eine Ampel implementiert werden die Automatisch läuft. Heißt nach einer gewissen Zeit gibt es Automatisch grün die Fußgänger ohne das ein Knopf gedrückt werden muss. Es ist also ein Autonomer-Automat. Folglich beschreibt folgender Automat die Funktion der Ampel. \\
+\begin{tikzpicture}[auto,thick]
+	\node[state with output] (Z0) {$Z_0$ \nodepart {lower} $y=0000$};
+	\node[state with output, right=of Z0] (Z1) {$Z_1$ \nodepart {lower} $y=0011$};
+	\node[state with output, right=of Z1] (Z2) {$Z_2$ \nodepart {lower} y=0110};
+	\node[state with output, below=of Z2] (Z3) {$Z_3$ \nodepart {lower} y=1001};
+	\node[state with output, below=of Z1] (Z4) {$Z_4$ \nodepart {lower} y=1100};
+	\node[state with output, below=of Z0] (Z5) {$Z_5$ \nodepart {lower} y=1111};
+	\path[->] (Z0)	edge [bend left]		node	{$x_0$}(Z1)
+			  		edge [bend left]		node[right]	{$\neg x_0$}(Z5)
+			  (Z1)	edge [bend left]		node	{$\neg x_0$}(Z0)
+			  		edge [bend left]		node	{$x_0$}(Z2)
+			  (Z2)	edge [bend left]		node	{$\neg x_0$}(Z1)
+			  		edge [bend left]		node	{$x_0$}(Z3)
+			  (Z3)	edge [bend left]		node	{$\neg x_0$}(Z2)
+			  		edge [bend left]		node	{$x_0$}(Z4)
+			  (Z4)	edge [bend left]		node	{$\neg x_0$}(Z3)
+			  		edge [bend left]		node	{$x_0$}(Z5)
+			  (Z5)	edge [bend left]		node[left]	{$x_0$}(Z0)			  		
+			  		edge [bend left]		node	{$\neg x_0$}(Z4);
+\end{tikzpicture}
 \end{document}
