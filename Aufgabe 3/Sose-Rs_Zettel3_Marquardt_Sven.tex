@@ -36,12 +36,12 @@ Die Schaltung soll einen Zähler darstellen der in 3er Schritten vorwärts oder 
 			  		edge [bend left]		node	{$\neg x_0$}(Z4);
 \end{tikzpicture}
 \\
-A=$\lbrace X,Y,Z, \delta, \mu \rbrace$ ,mit\\
+A=$ ( X,Y,Z, \delta, \mu ) $ ,mit\\
 $X= \lbrace 0,1 \rbrace$\\
 $Y= \lbrace 0000,0011,0110,1001,1100,1111 \rbrace$\\
 $Z= \lbrace 000,001,010,011,100,101 \rbrace$\\
-$\delta : Z \times X \Rightarrow Z$\\
-$\mu : Z \Rightarrow Y$\\ \\
+$\delta : Z \times X \rightarrow Z$\\
+$\mu : Z \rightarrow Y$\\ \\
 Dazu die Wertetabelle \\ \\
 \begin{tabular}{c | c | c | c | c | | c | c | c | c | | c | c | c | c}
 $x_0$&Z&$z_2$&$z_1$&$z_0$&$y_3$&$y_2$&$y_1$&$y_0$&$Z^+$&$z^+_2$&$z^+_1$&$z^+_0$ \\ \hline
@@ -101,6 +101,11 @@ In dieser Aufgabe soll eine Ampel implementiert werden die Automatisch läuft. H
 	(Z6)	edge [bend left]	node{}	(Z7)
 	(Z7)	edge [bend left]	node{}	(Z0);
 \end{tikzpicture}\\ \\
+$A= (Y,Z,\delta,\mu)$ , mit\\
+$Y= \lbrace 10001,10010,10100,01100,10110 \rbrace$ \\
+$Z=\lbrace 000,001,010,011,100,101,110,111 \rbrace$ \\
+$\delta : Z \rightarrow Z$\\
+$\mu : Z \rightarrow Y$\\
 \begin{tabular}{ c | c | c | c | | c | c | c | | c | c | c | c | c | c | | c | c | c | c | c}
 Z&$z_2$&$z_1$&$z_0$&$z^+_2$&$z^+_1$&$z^+_0$&$J_2$&$K_2$&$J_1$&$K_1$&$J_0$&$K_0$&$y_4$&$y_3$&$y_2$&$y_1$&$y_0$ \\ \hline
 $Z_0$&0&0&0&0&0&1&0&*&0&*&1&*&1&0&0&0&1\\
@@ -157,6 +162,12 @@ In dieser Aufgabe soll die Ampelschaltung von 3.2 erweitert werden um einen  Bed
 	(Z6)	edge [bend left]	node{}	(Z7)
 	(Z7)	edge [bend left]	node{}	(Z0);
 \end{tikzpicture}\\ \\ 
+$A=(X,Y,Z, \delta, \mu )$, mit\\
+$X=\lbrace 0,1 \rbrace$\\
+$Y= \lbrace 10001,10010,1010,01100,10100 \rbrace$\\
+$Z=\lbrace 000,001,010,011,100,101,110,111 \rbrace$ \\
+$\delta : Z \times X \rightarrow Z$\\
+$\mu : Z \rightarrow Y$\\ \\
 Die Wertetabelle dazu\\
 \begin{tabular}{c | c | c | c | c | | c | c | c | | c | c | c | c | c | c | | c | c | c | c | c}
 $x_0$&Z&$z_2$&$z_1$&$z_0$&$z^+_2$&$z^+_1$&$z^+_0$&$J_2$&$K_2$&$J_1$&$K_1$&$J_0$&$K_0$&$y_4$&$y_3$&$y_2$&$y_1$&$y_0$ \\ \hline

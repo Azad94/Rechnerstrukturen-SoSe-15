@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/TeX Live for SUSE Linux) (format=pdflatex 2015.5.6)  11 JUN 2015 12:48
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/TeX Live for SUSE Linux) (format=pdflatex 2015.5.6)  11 JUN 2015 13:14
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -579,87 +579,92 @@ Underfull \hbox (badness 10000) in paragraph at lines 73--82
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 83--137
+Underfull \hbox (badness 10000) in paragraph at lines 83--142
 
  []
 
 
-Overfull \hbox (67.0162pt too wide) in paragraph at lines 83--137
+Overfull \hbox (67.0162pt too wide) in paragraph at lines 83--142
 [] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 83--137
+Underfull \hbox (badness 10000) in paragraph at lines 83--142
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 83--137
+Underfull \hbox (badness 10000) in paragraph at lines 83--142
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 83--137
+Underfull \hbox (badness 10000) in paragraph at lines 83--142
 
  []
 
 [3] [4]
-Underfull \hbox (badness 10000) in paragraph at lines 138--201
+Underfull \hbox (badness 10000) in paragraph at lines 143--212
 
  []
 
 
-Overfull \hbox (90.02449pt too wide) in paragraph at lines 138--201
+Underfull \hbox (badness 10000) in paragraph at lines 143--212
+
+ []
+
+
+Overfull \hbox (90.02449pt too wide) in paragraph at lines 143--212
 [] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 138--201
+Underfull \hbox (badness 10000) in paragraph at lines 143--212
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 138--201
+Underfull \hbox (badness 10000) in paragraph at lines 143--212
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 138--201
+Underfull \hbox (badness 10000) in paragraph at lines 143--212
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 138--201
+Underfull \hbox (badness 10000) in paragraph at lines 143--212
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 138--201
+Underfull \hbox (badness 10000) in paragraph at lines 143--212
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 138--201
+Underfull \hbox (badness 10000) in paragraph at lines 143--212
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 138--201
+Underfull \hbox (badness 10000) in paragraph at lines 143--212
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 138--201
+Underfull \hbox (badness 10000) in paragraph at lines 143--212
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 138--201
+Underfull \hbox (badness 10000) in paragraph at lines 143--212
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 138--201
+Underfull \hbox (badness 10000) in paragraph at lines 143--212
 
  []
 
@@ -667,7 +672,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 138--201
 Here is how much of TeX's memory you used:
  12486 strings out of 493315
  230509 string characters out of 6145894
- 358653 words of memory out of 5000000
+ 368797 words of memory out of 5000000
  15678 multiletter control sequences out of 15000+600000
  9823 words of font info for 34 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
@@ -678,7 +683,7 @@ m/cmmi10.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/s
 hare/texmf/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf/fonts/type
 1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf/fonts/type1/public/cm-super/s
 frm0600.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1095.pfb>
-Output written on Sose-Rs_Zettel3_Marquardt_Sven.pdf (7 pages, 102903 bytes).
+Output written on Sose-Rs_Zettel3_Marquardt_Sven.pdf (7 pages, 104351 bytes).
 PDF statistics:
  56 PDF objects out of 1000 (max. 8388607)
  40 compressed objects within 1 object stream
