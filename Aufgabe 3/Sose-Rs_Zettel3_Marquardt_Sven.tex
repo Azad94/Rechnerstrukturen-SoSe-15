@@ -37,26 +37,12 @@ Die Schaltung soll einen Zähler darstellen der in 3er Schritten vorwärts oder 
 \end{tikzpicture}
 \\
 A=$\lbrace X,Y,Z, \delta, \mu \rbrace$ ,mit\\
-X: $B \Rightarrow \lbrace x_0 \rbrace $ \\
-Y: $ B^4 \Rightarrow \lbrace y_3,y_2,y_1,y_0 \rbrace$\\
-Z: $ B^6 \Rightarrow \lbrace Z_5,Z_4,Z_3,Z_2,Z_1,Z_0 \rbrace$, mit\\
-$ON(Z_0)= \lbrace 0000 \rbrace \\
-ON(Z_1)= \lbrace 0011 \rbrace\\
-ON(Z_2)= \lbrace 0110 \rbrace\\
-ON(Z_3)= \lbrace 1001 \rbrace\\
-ON(Z_4)= \lbrace 1100 \rbrace\\
-ON(Z_5)= \lbrace 1111 \rbrace$\\
-$\delta : B^3 \Rightarrow \lbrace z^+_2,z^+_1,z^+_0 \rbrace$\\
-Für die Zustandsübergangsfunktion gilt \\
-$z^+_2= (x_0 \wedge \neg z_2 \wedge z_1 \wedge \neg z_0) \vee (\neg x_0 \wedge z_1 \wedge z_0) \vee  (x_0 \wedge z_2 \wedge 2_0)$\\
-$z^+_1= (\neg x_0 \wedge \neg z_2 \wedge \neg z_1 \wedge z_0 ) \vee ( \neg x_0 \wedge z_1 \wedge \neg z_0) \vee ( x_0 \wedge \neg z_2 \wedge \neg z_1) $\\
-$z^+_0= \neg z_0$ \\
-$\mu :B^4 \Rightarrow \lbrace y_3,y_2,y_1,y_0 \rbrace$ ,mit\\
-$y_3=z_2 \vee (z_1 \wedge z_0 )$\\
-$y_2=z_2 \vee z_1 \wedge z_0 $\\
-$y_1= \neg z_1 \wedge \neg z_0 \vee z_1 \wedge \neg z_0$\\
-$y_0= z_0$\\ \newpage
-Dazu die Wertetabelle \\
+$X= \lbrace 0,1 \rbrace$\\
+$Y= \lbrace 0000,0011,0110,1001,1100,1111 \rbrace$\\
+$Z= \lbrace 000,001,010,011,100,101 \rbrace$\\
+$\delta : Z \times X \Rightarrow Z$\\
+$\mu : Z \Rightarrow Y$\\ \\
+Dazu die Wertetabelle \\ \\
 \begin{tabular}{c | c | c | c | c | | c | c | c | c | | c | c | c | c}
 $x_0$&Z&$z_2$&$z_1$&$z_0$&$y_3$&$y_2$&$y_1$&$y_0$&$Z^+$&$z^+_2$&$z^+_1$&$z^+_0$ \\ \hline
 0&$Z_0$&0&0&0&0&0&0&0&$Z_1$&0&0&1\\
