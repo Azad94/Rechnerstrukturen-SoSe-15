@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/TeX Live for SUSE Linux) (format=pdflatex 2015.4.25)  11 JUN 2015 01:53
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/TeX Live for SUSE Linux) (format=pdflatex 2015.4.25)  11 JUN 2015 10:55
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -549,49 +549,89 @@ Underfull \hbox (badness 10000) in paragraph at lines 16--58
 [1
 
 {/usr/share/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-Underfull \hbox (badness 10000) in paragraph at lines 59--84
+Underfull \hbox (badness 10000) in paragraph at lines 59--86
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 59--84
+Underfull \hbox (badness 10000) in paragraph at lines 59--86
 
  []
 
 [2]
-Underfull \hbox (badness 10000) in paragraph at lines 85--141
+Underfull \hbox (badness 10000) in paragraph at lines 87--96
 
  []
 
 
-Overfull \hbox (67.0162pt too wide) in paragraph at lines 85--141
+Underfull \hbox (badness 10000) in paragraph at lines 97--151
+
+ []
+
+
+Overfull \hbox (67.0162pt too wide) in paragraph at lines 97--151
 [] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 85--141
+Underfull \hbox (badness 10000) in paragraph at lines 97--151
 
  []
 
-[3] [4] [5] (./Sose-Rs_Zettel3_Marquardt_Sven.aux) ) 
+
+Underfull \hbox (badness 10000) in paragraph at lines 97--151
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 97--151
+
+ []
+
+[3] [4]
+Underfull \hbox (badness 10000) in paragraph at lines 152--215
+
+ []
+
+
+Overfull \hbox (90.02449pt too wide) in paragraph at lines 152--215
+[] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 152--215
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 152--215
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 152--215
+
+ []
+
+[5] [6] [7] (./Sose-Rs_Zettel3_Marquardt_Sven.aux) ) 
 Here is how much of TeX's memory you used:
- 12475 strings out of 493315
- 230280 string characters out of 6145893
- 336578 words of memory out of 5000000
- 15667 multiletter control sequences out of 15000+600000
+ 12486 strings out of 493315
+ 230509 string characters out of 6145893
+ 357653 words of memory out of 5000000
+ 15678 multiletter control sequences out of 15000+600000
  9823 words of font info for 34 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 56i,15n,60p,453b,725s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 56i,15n,60p,453b,753s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc
 /dvips/cm-super/cm-super-t1.enc}</usr/share/texmf/fonts/type1/public/amsfonts/c
 m/cmmi10.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/s
 hare/texmf/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf/fonts/type
 1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf/fonts/type1/public/cm-super/s
 frm0600.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1095.pfb>
-Output written on Sose-Rs_Zettel3_Marquardt_Sven.pdf (5 pages, 95650 bytes).
+Output written on Sose-Rs_Zettel3_Marquardt_Sven.pdf (7 pages, 105403 bytes).
 PDF statistics:
- 48 PDF objects out of 1000 (max. 8388607)
- 34 compressed objects within 1 object stream
+ 56 PDF objects out of 1000 (max. 8388607)
+ 40 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 
