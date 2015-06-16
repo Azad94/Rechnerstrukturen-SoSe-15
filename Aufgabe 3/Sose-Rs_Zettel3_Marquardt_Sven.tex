@@ -80,6 +80,7 @@ $y_1$
 \karnaughmap{3}{}{{$z_2$}{$z_1$}{$z_0$}}{011001**}{}
 $y_0$
 \karnaughmap{3}{}{{$z_2$}{$z_1$}{$z_0$}}{010101**}{}\\ \\ \\
+
 Aufgabe 3.2\\
 In dieser Aufgabe soll eine Ampel implementiert werden die Automatisch läuft. Heißt nach einer gewissen Zeit gibt es Automatisch grün für die Fußgänger, ohne dass ein Knopf gedrückt werden muss. Es ist also ein autonomer Automat. Folglich beschreibt folgender Automat die Funktion der Ampel. \\
 \begin{tikzpicture}[auto,thick]
@@ -139,6 +140,7 @@ $y_1$
 \karnaughmap{3}{}{{$z_2$}{$z_1$}{$z_0$}}{00100010}{}\\
 $y_0$
 \karnaughmap{3}{}{{$z_2$}{$z_1$}{$z_0$}}{11000001}{}\\
+
 Aufgabe 3.3\\
 In dieser Aufgabe soll die Ampelschaltung von 3.2 erweitert werden um einen  Bedarfsknopf. Die Ampel der Fußgänger soll nun nur grün zeigen, wenn zuvor ein Taster betätigt wurde. Ohne betätigen des Tasters bleibt  der Zustand der Ampel für die Fußgänger auf rot und für die Autofahrer auf grün. Folgender Automat beschreibt die Ampel.\\ 
 \begin{tikzpicture}[auto,thick]
@@ -170,13 +172,13 @@ $\mu : Z \rightarrow Y$\\ \\
 Die Wertetabelle dazu\\
 \begin{tabular}{c | c | c | c | c | | c | c | c | | c | c | c | c | c | c | | c | c | c | c | c}
 $x_0$&Z&$z_2$&$z_1$&$z_0$&$z^+_2$&$z^+_1$&$z^+_0$&$J_2$&$K_2$&$J_1$&$K_1$&$J_0$&$K_0$&$y_4$&$y_3$&$y_2$&$y_1$&$y_0$ \\ \hline
-0&$Z_0$&0&0&0&0&0&1&0&*&0&*&0&*&1&0&0&0&1\\
-0&$Z_1$&0&0&1&0&1&0&0&*&1&*&*&1&1&0&0&0&1\\
-0&$Z_2$&0&1&0&0&1&1&0&*&*&0&1&*&1&0&0&0&1\\
-0&$Z_3$&0&1&1&1&0&0&1&*&*&1&*&1&1&0&0&0&1\\
-0&$Z_4$&1&0&0&1&0&1&*&0&0&*&1&*&1&0&0&0&1\\
-0&$Z_5$&1&0&1&1&1&0&*&0&1&*&*&1&1&0&0&1&1\\
-0&$Z_6$&1&1&0&1&1&1&*&0&*&0&1&*&1&0&0&0&1\\
+0&$Z_0$&0&0&0&0&0&0&0&*&0&*&0&*&1&0&0&0&1\\
+0&$Z_1$&0&0&1&0&0&0&0&*&1&*&*&1&1&0&0&0&1\\
+0&$Z_2$&0&1&0&0&0&0&0&*&*&0&1&*&1&0&0&0&1\\
+0&$Z_3$&0&1&1&0&0&0&1&*&*&1&*&1&1&0&0&0&1\\
+0&$Z_4$&1&0&0&0&0&0&*&0&0&*&1&*&1&0&0&0&1\\
+0&$Z_5$&1&0&1&0&0&0&*&0&1&*&*&1&1&0&0&1&1\\
+0&$Z_6$&1&1&0&0&0&0&*&0&*&0&1&*&1&0&0&0&1\\
 0&$Z_7$&1&1&1&0&0&0&*&1&*&1&*&1&1&0&0&0&1\\ \hline
 1&$Z_0$&0&0&0&0&0&1&0&*&0&*&1&*&1&0&0&0&1\\
 1&$Z_1$&0&0&1&0&1&0&0&*&1&*&*&1&1&0&0&1&0\\
