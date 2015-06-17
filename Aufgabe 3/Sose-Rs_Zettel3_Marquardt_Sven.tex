@@ -65,12 +65,38 @@ $x_0$&Z&$z_2$&$z_1$&$z_0$&$y_3$&$y_2$&$y_1$&$y_0$&$Z^+$&$z^+_2$&$z^+_1$&$z^+_0$ 
 \end{tabular}\\
 \\ \\  \\
 Daraus ergeben sich folgende KV-Diagramme für $z^+_2,z^+_1$ und $z^+_0$.\\
-$z^+_2$
-\karnaughmap{4}{}{{$x_0$}{$z_2$}{$z_1$}{$z_0$}}{000110**100001**}{}
-$z^+_1$
-\karnaughmap{4}{}{{$x_0$}{$z_2$}{$z_1$}{$z_0$}}{011000**000101}{}\\
-$z^+_0$
-\karnaughmap{4}{}{{$x_0$}{$z_2$}{$z_1$}{$z_0$}}{101010**101010**}{}\\ \\ \\ \\
+\karnaughmap{4}{$z^+_2$}{{$x_0$}{$z_2$}{$z_1$}{$z_0$}}{000110**100001**}{
+\textcolor{blue}{
+\put(3.5,3){\oval(1.0,1.9)[]}}
+\textcolor{red}{
+\put(1.85,2.5){\oval(1.9,1.0)[]}}
+\textcolor{black}{
+\put(0.2,0.5){\oval(1.0,1.0)[]}}
+\textcolor{green}{
+\put(2,1){\oval(1.0,1.9)[]}}
+}\\
+$z^+_2=\textcolor{blue}{ (\neg z_0 \wedge z_2 \wedge \neg x_0 ) } \vee \textcolor{red}{(z_0 \wedge z_1 \wedge \neg x_0)} \vee \textcolor{green}{(z_0 \wedge z_2 \wedge x_0)} \vee \textcolor{black}{ ( \neg z_0 \wedge \neg z_1 \wedge \neg z_2 \wedge x_0)}$\\
+\karnaughmap{4}{$z^+_1$}{{$x_0$}{$z_2$}{$z_1$}{$z_0$}}{011000**000101**}{
+\textcolor{red}{
+\put(1.5,3.5){\oval(1.0,1.0)[]}
+}
+\textcolor{blue}{
+\put(-0.15,2.5){\oval(1.8,0.9)[r]}
+\put(3.85,2.5){\oval(1.8,0.9)[l]}
+}
+\textcolor{green}{
+\put(1.7,1.5){\oval(1.9,0.9)[]}}
+\textcolor{black}{
+\put(2,1){\oval(0.9,1.9)[]}}
+}\\
+$z^+_1= \textcolor{red}{(z_0 \wedge \neg z_1 \wedge \neg z_2 \wedge \neg x_0)} \vee \textcolor{blue}{(\neg z_0 \wedge z_1 \wedge \neg x_0)} \vee \textcolor{green}{(z_0 \wedge z_1 \wedge x_0)} \vee (z_0 \wedge z_2 \wedge x_0)$\\
+\karnaughmap{4}{$z^+_0$}{{$x_0$}{$z_2$}{$z_1$}{$z_0$}}{101010**101010**}{
+\textcolor{red}{
+\put(-0.04,1.95){\oval(2,3.9)[r]}
+\put(4.04,1.95){\oval(2.01,3.9)[l]}
+}
+}\\ 
+$z^+_0=\textcolor{red}{\neg z_0}$\\ 
 Folglich bilden folgende KV-Diagramme die Minimierung der Ausgangsfunktion.\\
 $y_3$
 \karnaughmap{3}{}{{$z_2$}{$z_1$}{$z_0$}}{000111**}{}
