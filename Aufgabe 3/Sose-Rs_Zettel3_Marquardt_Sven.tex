@@ -95,17 +95,36 @@ $z^+_1= \textcolor{red}{(z_0 \wedge \neg z_1 \wedge \neg z_2 \wedge \neg x_0)} \
 \put(-0.04,1.95){\oval(2,3.9)[r]}
 \put(4.04,1.95){\oval(2.01,3.9)[l]}
 }
-}\\ 
+}
 $z^+_0=\textcolor{red}{\neg z_0}$\\ 
 Folglich bilden folgende KV-Diagramme die Minimierung der Ausgangsfunktion.\\
-$y_3$
-\karnaughmap{3}{}{{$z_2$}{$z_1$}{$z_0$}}{000111**}{}
-$y_2$
-\karnaughmap{3}{}{{$z_2$}{$z_1$}{$z_0$}}{001011**}{}\\
-$y_1$
-\karnaughmap{3}{}{{$z_2$}{$z_1$}{$z_0$}}{011001**}{}
-$y_0$
-\karnaughmap{3}{}{{$z_2$}{$z_1$}{$z_0$}}{010101**}{}\\ \\ \\
+\kvunitlength=5mm
+\karnaughmap{3}{$y_3$}{{$z_2$}{$z_1$}{$z_0$}}{000111**}{
+\textcolor{red}{
+\put(3,1){\oval(2,2)}}
+\textcolor{blue}{
+\put(1.85,0.5){\oval(2,1)}}
+}
+$y_3= \textcolor{red}{z_2} \vee \textcolor{blue}{(z_0 \wedge z_1)}$
+\karnaughmap{3}{$y_2$}{{$z_2$}{$z_1$}{$z_0$}}{001011**}{
+\textcolor{red}{
+\put(3,1){\oval(2,2)}}
+\textcolor{blue}{
+\put(-0.15,0.5){\oval(2,0.9)[r]}
+\put(3.85,0.5){\oval(2,0.9)[l]}}
+}
+$y_2= \textcolor{red}{z_2} \vee \textcolor{blue}{ ( \neg z_0 \wedge z_1)}$\\
+\karnaughmap{3}{$y_1$}{{$z_2$}{$z_1$}{$z_0$}}{011001**}{
+\textcolor{red}{
+\put(2,1.5){\oval(2,1)}}
+\textcolor{blue}{
+\put(-0.15,0.5){\oval(2,0.9)[r]}
+\put(3.85,0.5){\oval(2,0.9)[l]}}}
+$y_1=\textcolor{red}{(z_0 \wedge \neg z_1)} \vee \textcolor{blue}{(\neg z_0 \wedge z_1)}$
+\karnaughmap{3}{$y_0$}{{$z_2$}{$z_1$}{$z_0$}}{010101**}{
+\textcolor{red}{
+\put(2,1){\oval(2,2)}}}
+$y_0=\textcolor{red}{z_0}$\\ \\ \\
 
 Aufgabe 3.2\\
 In dieser Aufgabe soll eine Ampel implementiert werden die Automatisch läuft. Heißt nach einer gewissen Zeit gibt es Automatisch grün für die Fußgänger, ohne dass ein Knopf gedrückt werden muss. Es ist also ein autonomer Automat. Folglich beschreibt folgender Automat die Funktion der Ampel. \\
@@ -143,29 +162,58 @@ $Z_4$&1&0&0&1&0&1&*&0&0&*&1&*&1&0&1&0&0\\
 $Z_5$&1&0&1&1&1&0&*&0&1&*&*&1&1&0&1&1&0\\
 $Z_6$&1&1&0&1&1&1&*&0&*&0&1&*&1&0&0&0&1\\
 $Z_7$&1&1&1&0&0&0&*&1&*&1&*&1&1&0&0&0&1\\ \hline
-\end{tabular}\\ \\
+\end{tabular}\\ \\ \\ \\ \\ \\ \\
 Die Minimierung der Zustandsübergangsfunktion \\
-$J_2$ 
-\karnaughmap{3}{}{{$z_2$}{$z_1$}{$z_0$}}{0001****}{} $K_2$
-\karnaughmap{3}{}{{$z_2$}{$z_1$}{$z_0$}}{****0001}{}\\
-$J_1$
-\karnaughmap{3}{}{{$z_2$}{$z_1$}{$z_0$}}{01**01**}{}
-$K_1$
-\karnaughmap{3}{}{{$z_2$}{$z_1$}{$z_0$}}{**01**01}{}\\
-$J_0$
-\karnaughmap{3}{}{{$z_2$}{$z_1$}{$z_0$}}{1*1*1*1*}{}
-$K_0$
-\karnaughmap{3}{}{{$z_2$}{$z_1$}{$z_0$}}{*1*1*1*1}{}\\ \\
-$y_4$
-\karnaughmap{3}{}{{$z_2$}{$z_1$}{$z_0$}}{11110111}{}
-$y_3$
-\karnaughmap{3}{}{{$z_2$}{$z_1$}{$z_0$}}{00001000}{}\\
-$y_2$
-\karnaughmap{3}{}{{$z_2$}{$z_1$}{$z_0$}}{00011110}{}
-$y_1$
-\karnaughmap{3}{}{{$z_2$}{$z_1$}{$z_0$}}{00100010}{}\\
-$y_0$
-\karnaughmap{3}{}{{$z_2$}{$z_1$}{$z_0$}}{11000001}{}\\
+\karnaughmap{3}{$J_2$}{{$z_2$}{$z_1$}{$z_0$}}{0001****}{
+\textcolor{red}{
+\put(2,0.5){\oval(1.9,0.9)}}}
+$J_2= \textcolor{red}{z_0 \wedge z_1}$
+\karnaughmap{3}{$K_3$}{{$z_2$}{$z_1$}{$z_0$}}{****0001}{
+\textcolor{red}{
+\put(2,0.5){\oval(1.9,0.9)}}}$K_2= \textcolor{red}{z_0 \wedge z_1}$\\
+\karnaughmap{3}{$J_1$}{{$z_2$}{$z_1$}{$z_0$}}{01**01**}{
+\textcolor{red}{
+\put(2,1){\oval(2,2)}}}
+$J_1= \textcolor{red}{z_0}$
+\karnaughmap{3}{$K_1$}{{$z_2$}{$z_1$}{$z_0$}}{**01**01}{
+\textcolor{red}{
+\put(2,1){\oval(2,2)}}}
+$K_1= \textcolor{red}{z_0}$\\
+\karnaughmap{3}{$J_0$}{{$z_2$}{$z_1$}{$z_0$}}{1*1*1*1*}{
+\textcolor{red}{
+\put(2,1){\oval(4,2)}}} $J_0= \textcolor{red}{1}$
+\karnaughmap{3}{$K_0$}{{$z_2$}{$z_1$}{$z_0$}}{*1*1*1*1}{\textcolor{red}{
+\put(2,1){\oval(4,2)}}} $K_0= \textcolor{red}{1}$\\ \\
+\karnaughmap{3}{$y_4$}{{$z_2$}{$z_1$}{$z_0$}}{11110111}{
+\textcolor{red}{
+\put(1,1){\oval(2,2)}}
+\textcolor{blue}{
+\put(1.8,1){\oval(2,2)}}
+\textcolor{green}{
+\put(2.5,0.5){\oval(1.9,1)}}}$y_4= \textcolor{red}{ \neg z_2} \vee \textcolor{blue}{z_0} \vee \textcolor{green}{(z_1 \wedge z_2)}$\\
+\karnaughmap{3}{$y_3$}{{$z_2$}{$z_1$}{$z_0$}}{00001000}{
+\textcolor{red}{
+\put(3.5,1.5){\oval(1,1)}}}$y_3= \textcolor{red}{ \neg z_0 \wedge \neg z_1 \wedge z_2}$\\
+\karnaughmap{3}{$y_2$}{{$z_2$}{$z_1$}{$z_0$}}{00011110}{
+\textcolor{red}{
+\put(3,1.5){\oval(1.9,1)}}
+\textcolor{blue}{
+\put(3.25,1){\oval(1,2)}}
+\textcolor{green}{
+\put(1,0.5){\oval(1,1)}}} $y_2= \textcolor{red}{( \neg z_1 \wedge z_2)} \vee \textcolor{blue}{( \neg z_0 \wedge z_2)} \vee \textcolor{green}{(z_0 \wedge z_1 \wedge \neg z_2)}$\\
+\karnaughmap{3}{$y_1$}{{$z_2$}{$z_1$}{$z_0$}}{00100010}{
+\textcolor{red}{
+\put(0,0.5){\oval(1.9,1)[r]}
+\put(4,0.5){\oval(1.9,1)[l]}
+}}
+$y_1= \textcolor{red}{ \neg z_0 \wedge z_1 }$\\
+\karnaughmap{3}{$y_0$}{{$z_2$}{$z_1$}{$z_0$}}{11000001}{
+\textcolor{red}{
+\put(1,1.5){\oval(2,1)}
+}
+\textcolor{blue}{
+\put(2.3,0.5){\oval(1,0.9)}
+}}$y_0= \textcolor{red}{( \neg z_1 \wedge \neg z_2)} \vee \textcolor{blue}{(z_0 \wedge z_1 \wedge z_2)}$
 
 Aufgabe 3.3\\
 In dieser Aufgabe soll die Ampelschaltung von 3.2 erweitert werden um einen  Bedarfsknopf. Die Ampel der Fußgänger soll nun nur grün zeigen, wenn zuvor ein Taster betätigt wurde. Ohne betätigen des Tasters bleibt  der Zustand der Ampel für die Fußgänger auf rot und für die Autofahrer auf grün. Folgender Automat beschreibt die Ampel.\\ 
@@ -215,26 +263,60 @@ $x_0$&Z&$z_2$&$z_1$&$z_0$&$z^+_2$&$z^+_1$&$z^+_0$&$J_2$&$K_2$&$J_1$&$K_1$&$J_0$&
 1&$Z_6$&1&1&0&1&1&1&*&0&*&0&1&*&1&0&0&0&1\\
 1&$Z_7$&1&1&1&0&0&0&*&1&*&1&*&1&1&0&0&0&1\\
 \end{tabular}\\ \\
-$J_2$ 
-\karnaughmap{4}{}{{$x_0$}{$z_2$}{$z_1$}{$z_0$}}{0001****0001****}{} $K_2$
-\karnaughmap{4}{}{{$x_0$}{$z_2$}{$z_1$}{$z_0$}}{****0001****0001}{}\\
-$J_1$
-\karnaughmap{4}{}{{$z_2$}{$z_1$}{$z_0$}}{01**01**01**01**}{}
-$K_1$
-\karnaughmap{4}{}{{$z_2$}{$z_1$}{$z_0$}}{**01**01**01**01}{}\\
-$J_0$
-\karnaughmap{4}{}{{$z_2$}{$z_1$}{$z_0$}}{0*1*1*1*1*1*1*1*}{}
-$K_0$
-\karnaughmap{4}{}{{$z_2$}{$z_1$}{$z_0$}}{*1*1*1*1*1*1*1*1}{} \\ \\ \\ \\ \\ \\ \\ \\ \\
-$y_4$
-\karnaughmap{3}{}{{$z_2$}{$z_1$}{$z_0$}}{11110111}{}
-$y_3$
-\karnaughmap{3}{}{{$z_2$}{$z_1$}{$z_0$}}{00001000}{}\\
-$y_2$
-\karnaughmap{3}{}{{$z_2$}{$z_1$}{$z_0$}}{00011110}{}
-$y_1$
-\karnaughmap{3}{}{{$z_2$}{$z_1$}{$z_0$}}{00100010}{}\\
-$y_0$
-\karnaughmap{3}{}{{$z_2$}{$z_1$}{$z_0$}}{11000001}{}\\
+\karnaughmap{4}{$J_2$}{{$x_0$}{$z_2$}{$z_1$}{$z_0$}}{0001****0001****}{\textcolor{red}{
+\put(2,2){\oval(2,2)}}}
+$J_2= \textcolor{red}{z_0 \wedge z_1}$
+\karnaughmap{4}{$K_2$}{{$x_0$}{$z_2$}{$z_1$}{$z_0$}}{****0001****0001}{\textcolor{red}{
+\put(2,2){\oval(2,2)}}}$K_2= \textcolor{red}{z_0 \wedge z_1}$\\\\
+\karnaughmap{4}{$J_1$}{{$x_0$}{$z_2$}{$z_1$}{$z_0$}}{01**01**01**01**}{\textcolor{red}{
+\put(2,2){\oval(1.9,4)}}}
+$J_1= \textcolor{red}{z_0}$
+\karnaughmap{4}{$K_1$}{{$z_2$}{$z_1$}{$z_0$}}{**01**01**01**01}{\textcolor{red}{
+\put(2,2){\oval(1.9,4)}}}
+$K_1= \textcolor{red}{z_0}$\\
+\karnaughmap{4}{$J_0$}{{$x_0$}{$z_2$}{$z_1$}{$z_0$}}{0*1*1*1*1*1*1*1*}{
+\textcolor{red}{
+\put(3,2){\oval(1.9,4)}
+}
+\textcolor{blue}{
+\put(1.75,2){\oval(4,1.9)}
+}\textcolor{green}{
+\put(1.75,1){\oval(4,1.9)}
+}}
+$J_0= \textcolor{red}{z_2} \vee \textcolor{blue}{z_1} \vee \textcolor{green}{x_0}$
+\karnaughmap{4}{$K_0$}{{$x_0$}{$z_2$}{$z_1$}{$z_0$}}{*1*1*1*1*1*1*1*1}{
+\textcolor{red}{
+\put(2,2){\oval(4,4)}
+}} $K_0= \textcolor{red}{1}$ \\ 
+\karnaughmap{3}{$y_4$}{{$z_2$}{$z_1$}{$z_0$}}{11110111}{
+\textcolor{red}{
+\put(1,1){\oval(2,2)}}
+\textcolor{blue}{
+\put(1.8,1){\oval(2,2)}}
+\textcolor{green}{
+\put(2.5,0.5){\oval(1.9,1)}}}$y_4= \textcolor{red}{ \neg z_2} \vee \textcolor{blue}{z_0} \vee \textcolor{green}{(z_1 \wedge z_2)}$\\
+\karnaughmap{3}{$y_3$}{{$z_2$}{$z_1$}{$z_0$}}{00001000}{
+\textcolor{red}{
+\put(3.5,1.5){\oval(1,1)}}}$y_3= \textcolor{red}{ \neg z_0 \wedge \neg z_1 \wedge z_2}$\\
+\karnaughmap{3}{$y_2$}{{$z_2$}{$z_1$}{$z_0$}}{00011110}{
+\textcolor{red}{
+\put(3,1.5){\oval(1.9,1)}}
+\textcolor{blue}{
+\put(3.25,1){\oval(1,2)}}
+\textcolor{green}{
+\put(1,0.5){\oval(1,1)}}} $y_2= \textcolor{red}{( \neg z_1 \wedge z_2)} \vee \textcolor{blue}{( \neg z_0 \wedge z_2)} \vee \textcolor{green}{(z_0 \wedge z_1 \wedge \neg z_2)}$\\
+\karnaughmap{3}{$y_1$}{{$z_2$}{$z_1$}{$z_0$}}{00100010}{
+\textcolor{red}{
+\put(0,0.5){\oval(1.9,1)[r]}
+\put(4,0.5){\oval(1.9,1)[l]}
+}}
+$y_1= \textcolor{red}{ \neg z_0 \wedge z_1 }$\\
+\karnaughmap{3}{$y_0$}{{$z_2$}{$z_1$}{$z_0$}}{11000001}{
+\textcolor{red}{
+\put(1,1.5){\oval(2,1)}
+}
+\textcolor{blue}{
+\put(2.3,0.5){\oval(1,0.9)}
+}}$y_0= \textcolor{red}{( \neg z_1 \wedge \neg z_2)} \vee \textcolor{blue}{(z_0 \wedge z_1 \wedge z_2)}$
 
 \end{document}
