@@ -1,4 +1,4 @@
- /*
+/*
  * Assembler_g.asm
  *
  *  Created: 18.06.2015 13:09:22
@@ -6,18 +6,18 @@
  */ 
 
  .include "m644PAdef.inc"
-
- .equ A = 1					; Lampe A
  .equ Timer = 5
 
  .cseg						; Hier beginnt der Programmcode
 		
  start:
 		ser R16				;R16 = 0xFF
+		clr R16
 		ser R17
 		ser R18
+		ldi R16, 0x3f
 		out DDRA, R16		;PORTA als Ausgabe konfigurieren
-		ldi R16, A			;initialisieren		
+		ldi r16, 0x01		; Initialisieren des Lauflichtes
 		ldi R18, 0
 		
 outer:
@@ -26,6 +26,7 @@ outer:
 		inc R16				;A = A + 1
 
 inner:
+		nop
 		dec R17
 		cp R17, R18
 		breq outer2
@@ -37,6 +38,7 @@ outer2:
 		dec	R16				;A = A - 1
 
 inner2:
+		nop
 		dec R17
 		cp R17, R18
 		breq outer
