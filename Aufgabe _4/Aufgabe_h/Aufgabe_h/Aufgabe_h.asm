@@ -104,21 +104,17 @@ start:
     ; ab hier kann der Stack verwendet werden 
 	 call InitT1
 	 sei
-	 ldi R16,0x3F
-	 out DDRA,R16
-	 ldi R16,0x02
-	 ldi R17,Timer
+	 ldi R18,0x3F
+	 out DDRA,R18
+	 ldi R18,0x02
 loop:
-	out PortA,R16
-	ldi R17,Timer
-	push R16
-	call wait
-	pop R16
-	dec R16
-	out PortA,R16
-	inc R16
-	ldi R17,Timer
-	push R16
-	call wait
-	pop R16
+	call light
+	dec R18
+	call light
+	inc R18
 	jmp loop
+light:
+	out PortA,R18
+	ldi R17,Timer
+	call wait
+	ret
