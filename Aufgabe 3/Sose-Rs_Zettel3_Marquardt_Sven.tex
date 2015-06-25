@@ -227,15 +227,15 @@ In dieser Aufgabe soll die Ampelschaltung von 3.2 um einen Bedarfsknopf erweiter
 	\node[state with output, below=of Z1] (Z6) {$Z_6$ \nodepart {lower} y=10001};
 	\node[state with output, below=of Z0] (Z7) {$Z_7$ \nodepart {lower} y=10001};
 	\path[->]
-	(Z0)	edge [bend left]	node{}	(Z1)
+	(Z0)	edge [bend left]	node{$x_0$}	(Z1)
 	(Z0)	edge [loop above]			node[swap]{$\neg x_0$}	()
-	(Z1)	edge [bend left]	node{}	(Z2)
-	(Z2)	edge [bend left]	node{}	(Z3)
-	(Z3)	edge [bend left]	node{}	(Z4)
-	(Z4)	edge [bend left]	node{}	(Z5)
-	(Z5)	edge [bend left]	node{}	(Z6)
-	(Z6)	edge [bend left]	node{}	(Z7)
-	(Z7)	edge [bend left]	node{}	(Z0);
+	(Z1)	edge [bend left]	node{$x_0$}	(Z2)
+	(Z2)	edge [bend left]	node{$x_0$}	(Z3)
+	(Z3)	edge [bend left]	node{$x_0$}	(Z4)
+	(Z4)	edge [bend left]	node{$x_0$}	(Z5)
+	(Z5)	edge [bend left]	node{$x_0$}	(Z6)
+	(Z6)	edge [bend left]	node{$x_0$}	(Z7)
+	(Z7)	edge [bend left]	node{$x_0$}	(Z0);
 \end{tikzpicture}\\ \\ 
 $A=(X,Y,Z, \delta, \mu )$, mit\\
 $X=\lbrace 0,1 \rbrace$\\
