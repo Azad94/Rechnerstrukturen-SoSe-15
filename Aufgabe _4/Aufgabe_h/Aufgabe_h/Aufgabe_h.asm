@@ -105,7 +105,7 @@ start:
 	 call InitT1
 	 sei
 	 ldi R18,0x3F
-	 out DDRA,R18
+	 out DDRA,R18 
 	 ldi R18,0x02
 loop:
 	call light
