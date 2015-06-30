@@ -1,0 +1,27 @@
+<ASSEMBLER_INFO>
+ <VERSION>2.1.52</VERSION>
+ <DEVICE>"ATmega644PA"</DEVICE>
+ <WORKING_DIR>C:\Users\Sven\Documents\GitHub\Rechnerstrukturen-SoSe-15\Aufgabe _4\Aufgabe_i\Aufgabe_i\Debug</WORKING_DIR>
+ <INCLUDE_PATH>
+  <DIR>C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR Assembler\Native\2.1.1117\avrassembler\Include</DIR>
+  <DIR></DIR>
+ </INCLUDE_PATH>
+ <SOURCE_FILE>C:\Users\Sven\Documents\GitHub\Rechnerstrukturen-SoSe-15\Aufgabe _4\Aufgabe_i\Aufgabe_i\Aufgabe_i.asm</SOURCE_FILE>
+ <INCLUDED_FILES>
+  <FILE>C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR Assembler\Native\2.1.1117\avrassembler\Include\m644PAdef.inc</FILE>
+ </INCLUDED_FILES>
+ <OBJECT_FILES>
+  <FILE>C:\Users\Sven\Documents\GitHub\Rechnerstrukturen-SoSe-15\Aufgabe _4\Aufgabe_i\Aufgabe_i\Debug/Aufgabe_i.obj</FILE>
+ </OBJECT_FILES>
+ <HEX_FILES>
+  <FILE>Aufgabe_i.hex</FILE>
+ </HEX_FILES>
+ <OUTPUT_FILES>
+  <FILE>Aufgabe_i.map</FILE>
+  <FILE>Aufgabe_i.lss</FILE>
+ </OUTPUT_FILES>
+ <LABELS>
+  <waitkey><FILE>C:\Users\Sven\Documents\GitHub\Rechnerstrukturen-SoSe-15\Aufgabe _4\Aufgabe_i\Aufgabe_i\Aufgabe_i.asm</FILE><LINE>15</LINE></waitkey>
+  <stay><FILE>C:\Users\Sven\Documents\GitHub\Rechnerstrukturen-SoSe-15\Aufgabe _4\Aufgabe_i\Aufgabe_i\Aufgabe_i.asm</FILE><LINE>22</LINE></stay>
+ </LABELS>
+</ASSEMBLER_INFO>
