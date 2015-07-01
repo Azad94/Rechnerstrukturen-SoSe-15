@@ -1,0 +1,42 @@
+<ASSEMBLER_INFO>
+ <VERSION>2.1.52</VERSION>
+ <DEVICE>"ATmega644PA"</DEVICE>
+ <WORKING_DIR>C:\Users\Sheraz\Documents\Atmel Studio\Projects\Aufgabe_Bedarfsampel\Aufgabe_Bedarfsampel\Debug</WORKING_DIR>
+ <INCLUDE_PATH>
+  <DIR>C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR Assembler\Native\2.1.1117\avrassembler\Include</DIR>
+  <DIR></DIR>
+ </INCLUDE_PATH>
+ <SOURCE_FILE>C:\Users\Sheraz\Documents\Atmel Studio\Projects\Aufgabe_Bedarfsampel\Aufgabe_Bedarfsampel\Aufgabe_Bedarfsampel.asm</SOURCE_FILE>
+ <INCLUDED_FILES>
+  <FILE>C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR Assembler\Native\2.1.1117\avrassembler\Include\m644PAdef.inc</FILE>
+ </INCLUDED_FILES>
+ <OBJECT_FILES>
+  <FILE>C:\Users\Sheraz\Documents\Atmel Studio\Projects\Aufgabe_Bedarfsampel\Aufgabe_Bedarfsampel\Debug/Aufgabe_Bedarfsampel.obj</FILE>
+ </OBJECT_FILES>
+ <HEX_FILES>
+  <FILE>Aufgabe_Bedarfsampel.hex</FILE>
+ </HEX_FILES>
+ <OUTPUT_FILES>
+  <FILE>Aufgabe_Bedarfsampel.map</FILE>
+  <FILE>Aufgabe_Bedarfsampel.lss</FILE>
+ </OUTPUT_FILES>
+ <LABELS>
+  <start><FILE>C:\Users\Sheraz\Documents\Atmel Studio\Projects\Aufgabe_Bedarfsampel\Aufgabe_Bedarfsampel\Aufgabe_Bedarfsampel.asm</FILE><LINE>97</LINE></start>
+  <OCR1A_isr><FILE>C:\Users\Sheraz\Documents\Atmel Studio\Projects\Aufgabe_Bedarfsampel\Aufgabe_Bedarfsampel\Aufgabe_Bedarfsampel.asm</FILE><LINE>37</LINE></OCR1A_isr>
+  <T1count><FILE>C:\Users\Sheraz\Documents\Atmel Studio\Projects\Aufgabe_Bedarfsampel\Aufgabe_Bedarfsampel\Aufgabe_Bedarfsampel.asm</FILE><LINE>23</LINE></T1count>
+  <noDec><FILE>C:\Users\Sheraz\Documents\Atmel Studio\Projects\Aufgabe_Bedarfsampel\Aufgabe_Bedarfsampel\Aufgabe_Bedarfsampel.asm</FILE><LINE>46</LINE></noDec>
+  <InitT1><FILE>C:\Users\Sheraz\Documents\Atmel Studio\Projects\Aufgabe_Bedarfsampel\Aufgabe_Bedarfsampel\Aufgabe_Bedarfsampel.asm</FILE><LINE>55</LINE></InitT1>
+  <startWait><FILE>C:\Users\Sheraz\Documents\Atmel Studio\Projects\Aufgabe_Bedarfsampel\Aufgabe_Bedarfsampel\Aufgabe_Bedarfsampel.asm</FILE><LINE>80</LINE></startWait>
+  <wait><FILE>C:\Users\Sheraz\Documents\Atmel Studio\Projects\Aufgabe_Bedarfsampel\Aufgabe_Bedarfsampel\Aufgabe_Bedarfsampel.asm</FILE><LINE>85</LINE></wait>
+  <waitNow><FILE>C:\Users\Sheraz\Documents\Atmel Studio\Projects\Aufgabe_Bedarfsampel\Aufgabe_Bedarfsampel\Aufgabe_Bedarfsampel.asm</FILE><LINE>89</LINE></waitNow>
+  <vorbereiten><FILE>C:\Users\Sheraz\Documents\Atmel Studio\Projects\Aufgabe_Bedarfsampel\Aufgabe_Bedarfsampel\Aufgabe_Bedarfsampel.asm</FILE><LINE>129</LINE></vorbereiten>
+  <Nachtmodus_an><FILE>C:\Users\Sheraz\Documents\Atmel Studio\Projects\Aufgabe_Bedarfsampel\Aufgabe_Bedarfsampel\Aufgabe_Bedarfsampel.asm</FILE><LINE>150</LINE></Nachtmodus_an>
+  <Nachtmodus_aus><FILE>C:\Users\Sheraz\Documents\Atmel Studio\Projects\Aufgabe_Bedarfsampel\Aufgabe_Bedarfsampel\Aufgabe_Bedarfsampel.asm</FILE><LINE>139</LINE></Nachtmodus_aus>
+  <z0><FILE>C:\Users\Sheraz\Documents\Atmel Studio\Projects\Aufgabe_Bedarfsampel\Aufgabe_Bedarfsampel\Aufgabe_Bedarfsampel.asm</FILE><LINE>157</LINE></z0>
+  <z1><FILE>C:\Users\Sheraz\Documents\Atmel Studio\Projects\Aufgabe_Bedarfsampel\Aufgabe_Bedarfsampel\Aufgabe_Bedarfsampel.asm</FILE><LINE>161</LINE></z1>
+  <z2><FILE>C:\Users\Sheraz\Documents\Atmel Studio\Projects\Aufgabe_Bedarfsampel\Aufgabe_Bedarfsampel\Aufgabe_Bedarfsampel.asm</FILE><LINE>165</LINE></z2>
+  <z3><FILE>C:\Users\Sheraz\Documents\Atmel Studio\Projects\Aufgabe_Bedarfsampel\Aufgabe_Bedarfsampel\Aufgabe_Bedarfsampel.asm</FILE><LINE>169</LINE></z3>
+  <z4><FILE>C:\Users\Sheraz\Documents\Atmel Studio\Projects\Aufgabe_Bedarfsampel\Aufgabe_Bedarfsampel\Aufgabe_Bedarfsampel.asm</FILE><LINE>173</LINE></z4>
+  <ueberpruefe><FILE>C:\Users\Sheraz\Documents\Atmel Studio\Projects\Aufgabe_Bedarfsampel\Aufgabe_Bedarfsampel\Aufgabe_Bedarfsampel.asm</FILE><LINE>177</LINE></ueberpruefe>
+ </LABELS>
+</ASSEMBLER_INFO>
