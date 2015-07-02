@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.1.52  C:\Users\Sheraz\Documents\Atmel Studio\Projects\Aufgabe_Bedarfsampel\Aufgabe_Bedarfsampel\Aufgabe_Bedarfsampel.asm Thu Jul 02 10:49:50 2015
+AVRASM ver. 2.1.52  C:\Users\Sheraz\Documents\Atmel Studio\Projects\Aufgabe_Bedarfsampel\Aufgabe_Bedarfsampel\Aufgabe_Bedarfsampel.asm Thu Jul 02 12:52:54 2015
 
 [builtin](2): Including file 'C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR Assembler\Native\2.1.1117\avrassembler\Include\m644PAdef.inc'
 C:\Users\Sheraz\Documents\Atmel Studio\Projects\Aufgabe_Bedarfsampel\Aufgabe_Bedarfsampel\Aufgabe_Bedarfsampel.asm(8): Including file 'C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR Assembler\Native\2.1.1117\avrassembler\Include\m644PAdef.inc'
@@ -1208,7 +1208,9 @@ C:\Users\Sheraz\Documents\Atmel Studio\Projects\Aufgabe_Bedarfsampel\Aufgabe_Bed
                  ;		Hier nur Sprungtabelle anlegen. Mindestens für den 
                  ;		Reset-Interrupt (An Adresse 0):
                  	.org	0		; Am Anfang des Code-Speicher 
-000000 940c 0024 	jmp start		; Sprung bei reset
+000000 940c 00b0 	jmp vorbereiten		; Sprung bei reset
+                 	.org OC1Aaddr	; Timer1 Overflow Interrupt
+00001a 940c 007c 	jmp OCR1A_isr	; Timer1 Overflow Interrupt
                  ; hier folgen weitere Interrupts, wenn benötigt
                  ;	jmp TIMER-ISR	; Sprungvektor 
                  ; ***** Hier werden die "Variablen" definiert
@@ -1217,75 +1219,74 @@ C:\Users\Sheraz\Documents\Atmel Studio\Projects\Aufgabe_Bedarfsampel\Aufgabe_Bed
                  	.cseg			; dies ist Code
                  ; ----- Platz um .equ definitionen vorzunehmen
                  #ifdef DEBUG 
-                 .equ	T1Counter = 10			; Debug-Timer-Wert	für xxs
+                 .equ	T1Counter = 10			; Debug-Timer-Wert für xxs
                  #else
                  #endif
-                 .equ Timer = 5
+                 .equ Timer=4
+                 ; ----- Programm beginnt hinter der Vektortabelle: -----
+                 	.org 2*INT_VECTORS_SIZE
+                 ; hier kommen die Interrupt Service Routinen hin, wenn benutzt
+                 /********************************************************/
+                 ;	ISR Timer1 Compare Interrupt A
+                 OCR1A_isr:	
+00007c 930f      	push r16				; Register auf den Stack retten
+00007d b70f          in   r16, SREG			; Statusregister zum Sichern nach R16
+00007e 930f      	push r16				; und auf den Stack
+00007f 9100 0100 	lds r16, T1count		; Zählwert lesen
+000081 2300      	tst r16					; schon Null?
+000082 f019      	breq noDec				; ja: nichts weiter Abziehen
+000083 950a      	dec r16					; T1count--
+000084 9300 0100 	sts T1count, r16		; und abspeichern
+                 noDec:
+000086 910f          pop r16					; die Statusregister von Stack holen
+000087 bf0f      	out SREG, r16			; und wieder herstellen
+000088 910f      	pop r16					; Register restaurierten
+000089 9518      	reti					; Return from Interrupt;
+                 ;
+                 
                  
                  ; ----- Initialisierung von Timer1 auf 0,1s Periode -----
                  InitT1:
                  	; beim 644PA sind Timer1-Register Memory.mapped
-000002 931f      	push r17
-000003 e010      	ldi r17, HIGH(T1Counter)	; Timer-Schwelle 
-000004 9310 0089 	sts OCR1AH, r17				; byte-weise 
-000006 e01a      	ldi r17, LOW(T1Counter)		; nach OCR1A
-000007 9310 0088 	sts OCR1AL, r17
-000009 2711      	clr r17					; r17=0 
-00000a 9310 0085 	sts TCNT1H, r17			; Counter=0
-00000c 9310 0084 	sts TCNT1L, r17
-00000e 9310 0080 	sts TCCR1A, r17			; configure to CTC-Mode	
+00008a 931f      	push r17
+00008b e010      	ldi r17, HIGH(T1Counter)	; Timer-Schwelle 
+00008c 9310 0089 	sts OCR1AH, r17				; byte-weise 
+00008e e01a      	ldi r17, LOW(T1Counter)		; nach OCR1A
+00008f 9310 0088 	sts OCR1AL, r17
+000091 2711      	clr r17					; r17=0 
+000092 9310 0085 	sts TCNT1H, r17			; Counter=0
+000094 9310 0084 	sts TCNT1L, r17
+000096 9310 0080 	sts TCCR1A, r17			; configure to CTC-Mode	
                  #ifdef DEBUG 
-000010 e01a      	ldi r17, 0b0001010		; CTC-mode, prescaler 8 für DEBUG 
+000098 e01a      	ldi r17, 0b0001010		; CTC-mode, prescaler 8 für DEBUG 
                  #else 
                  #endif
-000011 9310 0081 	sts TCCR1B, r17				
+000099 9310 0081 	sts TCCR1B, r17				
                  	; und den OC1A intrerrupt einschalten:
-000013 9110 006f 	lds r17, TIMSK1			; Interruptmaske Timer1 
-000015 6012      	ori r17, 0b00000010		; OCIE1A setzen
-000016 9310 006f 	sts TIMSK1, r17			; und abspeichern
-000018 911f      	pop r17
-000019 9508      	ret
+00009b 9110 006f 	lds r17, TIMSK1			; Interruptmaske Timer1 
+00009d 6012      	ori r17, 0b00000010		; OCIE1A setzen
+00009e 9310 006f 	sts TIMSK1, r17			; und abspeichern
+0000a0 911f      	pop r17
+0000a1 9508      	ret
                  
                  ; ----- Warte-Zähler Setzen und Starten (nonblocking)
                  startWait:
-00001a 9300 0100 	sts T1count, r16		; Nur Zähler setzen
-00001c 9508      	ret
+0000a2 9300 0100 	sts T1count, r16		; Nur Zähler setzen
+0000a4 9508      	ret
                  ; ----- Wait-funktion komplett
                  ; Parameter: R16 enthält die Wartedauer in Zehntelsekunden
                  wait:
                  ; Timer resetten, Interrupt aktivieren
-00001d 9300 0100 	sts T1count, r16		
+0000a5 9300 0100 	sts T1count, r16		
                  ; ----- Rest der Komplett-Funktion als Abwarte-Funktion -----
                  waitNow:
                  ; polling auf Counter=0
-00001f 9100 0100 	lds r16, T1count
-000021 2300      	tst r16
-000022 f7e1      	brne waitNow
-000023 9508      	ret
+0000a7 9100 0100 	lds r16, T1count
+0000a9 2300      	tst r16
+0000aa f7e1      	brne waitNow
+0000ab 9508      	ret
                  
-                 ; ***** Einsprungpunkt in das Hauptprogramm *****
-                 start:
-                 ; ----- Initialisierung der grundlegenden Funktionen -----
-                 	; Initialisieren des Stacks am oberen Ende des RAM
-                     ; 16 bit SP wird als SPH:SPL im IO-Space angesprochen 
-000024 ef0f          ldi r16, LOW(RAMEND)	; low-Byte von RAMEND nach r16
-000025 bf0d          out SPL, r16	; in low-byte des SP ausgeben
-                 					; der SP liegt im IO-Space 
-000026 e100          ldi r16, HIGH(RAMEND)	; high-Byte von RAMEND nach r16
-000027 bf0e          out SPH, r16		; in high-byte des SP ausgeben
-                     ; ab hier kann der Stack verwendet werden 
-                 
-000028 940e 0002 	call InitT1			; Timer 1 initialisieren
-00002a 9478      	sei					; global Interrupt enable
-                 	; testroutine: Lauflicht auf PortD
-00002b ef1f      	ldi r17, 0xFF		; PortD als Ausgabe
-00002c b91a      	out DDRD, r17		; PortD als Ausgabe
-00002d e011      	ldi r17, 0x01		; Initialisieren des Lauflichtes
-00002e e005      	ldi r16, Timer		; 0,5s Wartezeit
-                 
-                 
-                 						;	********** HAUPTPROGRAMM *****
-                 ;Bit bekommen sinnvolle Namen
+                 	; ---------- Pin-Konfiguration -----------------------------------------------------------------
                  .equ A_gruen_F_rot = 0x06	
                  .equ A_gelb_F_rot = 0x0A
                  .equ A_rot_F_rot = 0x12
@@ -1293,77 +1294,106 @@ C:\Users\Sheraz\Documents\Atmel Studio\Projects\Aufgabe_Bedarfsampel\Aufgabe_Bed
                  .equ A_rotgelb_F_rot = 0x1A
                  .equ A_F_aus = 0x00
                  
-00002f ef0f      	ser R16
-000030 e10f      	ldi R16, 0x1F		;Ausgabe definieren
-000031 b90a      	out DDRD, R16	
+                 ;	********** HAUPTPROGRAMM **********
+                 ;	**********				 **********
+                 setTimer:
+0000ac e004      		ldi R16, Timer
+0000ad 940e 00a5 		call wait 
+0000af 9508      		ret
                  
-                 ; ---------- 
+                 
+                 ; ----- auf Vorbedingung prüfen (Nachtmodus) ----- 
                  vorbereiten:
-                 	
-000032 994d      	SBIC PIND, 5
-000033 940c 003a 	jmp Nachtmodus_an
                  
-000035 994e      	SBIC PIND, 6
-000036 940c 0044 	jmp Nachtmodus_aus
+0000b0 ef0f      	ldi r16, LOW(RAMEND)	; low-Byte von RAMEND nach r16
+0000b1 bf0d          out SPL, r16	; in low-byte des SP ausgeben
+                 					; der SP liegt im IO-Space 
+0000b2 e100          ldi r16, HIGH(RAMEND)	; high-Byte von RAMEND nach r16
+0000b3 bf0e          out SPH, r16		; in high-byte des SP ausgeben
+                     ; ab hier kann der Stack verwendet werden 
+0000b4 940e 008a 	 call InitT1
                  
-000038 940c 0032 	jmp vorbereiten	
+0000b6 ef2f      	  ser R18
+0000b7 e12f      	ldi R18, 0x1F		
+0000b8 b92a      	out DDRD, R18
                  
+                 start:
+                 
+                 
+0000b9 994d      	SBIC PIND, 5				; Skip Bit if Register
+0000ba 940c 00c1 	jmp Nachtmodus_an
+                 
+0000bc 994e      	SBIC PIND, 6
+0000bd 940c 00cb 	jmp Nachtmodus_aus
+                 
+0000bf 940c 00b9 	jmp start
+                 
+                 ;----- Zyklus für Nachtmodus AN ----
                  Nachtmodus_an:	
                  	
-00003a e040      	ldi R20, A_F_aus
-00003b b94b      	out PORTD, R20
+0000c1 e040      	ldi R20, A_F_aus
+0000c2 b94b      	out PORTD, R20
                  
-00003c 994e      	SBIC PIND ,6
-00003d 940c 0044 	jmp Nachtmodus_aus
+0000c3 994e      	SBIC PIND ,6
+0000c4 940c 00cb 	jmp Nachtmodus_aus
                  
-00003f 994f      	SBIC PIND, 7
-000040 940e 004e 	call z2
+0000c6 994f      	SBIC PIND, 7
+0000c7 940e 00d5 	call z2
                  
-000042 940c 003a 	jmp Nachtmodus_an
+0000c9 940c 00c1 	jmp Nachtmodus_an
                  
+                 ;----- Zyklus für Nachtmodus AUS ----
                  Nachtmodus_aus:
                  	
-000044 e046      	ldi R20, A_gruen_F_rot
-000045 b94b      	out PORTD, R20
+0000cb e046      	ldi R20, A_gruen_F_rot
+0000cc b94b      	out PORTD, R20
                  
-000046 994d      	SBIC PIND, 5
-000047 940c 003a 	jmp Nachtmodus_an
+0000cd 994d      	SBIC PIND, 5
+0000ce 940c 00c1 	jmp Nachtmodus_an
                  
-000049 994f      	SBIC PIND, 7
-00004a 940e 004e 	call z2
+0000d0 994f      	SBIC PIND, 7
+0000d1 940e 00d5 	call z2
                  
-00004c 940c 0044 	jmp Nachtmodus_aus
+0000d3 940c 00cb 	jmp Nachtmodus_aus
                  
+                 ;---- Ampel Zyklus ----
                  z2:
-00004e e046      	ldi R20, A_gruen_F_rot
-00004f b94b      	out PORTD, R20
-                 
+0000d5 e046      	ldi R20, A_gruen_F_rot
+0000d6 b94b      	out PORTD, R20
+0000d7 940e 00ac 	call setTimer
                  z3:
-000050 e04a      	ldi R20, A_gelb_F_rot
-000051 b94b      	out PORTD, R20
+0000d9 e04a      	ldi R20, A_gelb_F_rot
+0000da b94b      	out PORTD, R20
+0000db 940e 00ac 	call setTimer
                  
                  z4:
-000052 e142      	ldi R20, A_rot_F_rot
-000053 b94b      	out PORTD, R20
+0000dd e142      	ldi R20, A_rot_F_rot
+0000de b94b      	out PORTD, R20
+0000df 940e 00ac 	call setTimer
                  
                  z5:
-000054 e141      	ldi R20, A_rot_F_gruen
-000055 b94b      	out PORTD, R20
+0000e1 e141      	ldi R20, A_rot_F_gruen
+0000e2 b94b      	out PORTD, R20
+0000e3 940e 00ac 	call setTimer
                  	
                  z6:
-000056 e142      	ldi R20, A_rot_F_rot
-000057 b94b      	out PORTD, R20
+0000e5 e142      	ldi R20, A_rot_F_rot
+0000e6 b94b      	out PORTD, R20
+0000e7 940e 00ac 	call setTimer
                  
                  z7:
-000058 e14a      	ldi R20, A_rotgelb_F_rot
-000059 b94b      	out PORTD, R20
+0000e9 e14a      	ldi R20, A_rotgelb_F_rot
+0000ea b94b      	out PORTD, R20
+0000eb 940e 00ac 	call setTimer
                  
                  z8:
-00005a e046      	ldi R20, A_gruen_F_rot
-00005b b94b      	out PORTD, R20
+0000ed e046      	ldi R20, A_gruen_F_rot
+0000ee b94b      	out PORTD, R20
+0000ef 940e 00ac 	call setTimer
                  
+                 ;Zyklus wieder vom jeweiligen Nachtmodus-Zyklus beginnen
                  back:
-00005c 9508      	ret
+0000f1 9508      	ret
 
 
 RESOURCE USE INFORMATION
@@ -1383,37 +1413,37 @@ counted separately from r26..r31 here.
 "ATmega644PA" register use summary:
 r0 :   0 r1 :   0 r2 :   0 r3 :   0 r4 :   0 r5 :   0 r6 :   0 r7 :   0 
 r8 :   0 r9 :   0 r10:   0 r11:   0 r12:   0 r13:   0 r14:   0 r15:   0 
-r16:  12 r17:  18 r18:   0 r19:   0 r20:  18 r21:   0 r22:   0 r23:   0 
+r16:  19 r17:  15 r18:   3 r19:   0 r20:  18 r21:   0 r22:   0 r23:   0 
 r24:   0 r25:   0 r26:   0 r27:   0 r28:   0 r29:   0 r30:   0 r31:   0 
 x  :   0 y  :   0 z  :   0 
-Registers used: 3 out of 35 (8.6%)
+Registers used: 4 out of 35 (11.4%)
 
 "ATmega644PA" instruction use summary:
 .lds  :   0 .sts  :   0 adc   :   0 add   :   0 adiw  :   0 and   :   0 
 andi  :   0 asr   :   0 bclr  :   0 bld   :   0 brbc  :   0 brbs  :   0 
-brcc  :   0 brcs  :   0 break :   0 breq  :   0 brge  :   0 brhc  :   0 
+brcc  :   0 brcs  :   0 break :   0 breq  :   1 brge  :   0 brhc  :   0 
 brhs  :   0 brid  :   0 brie  :   0 brlo  :   0 brlt  :   0 brmi  :   0 
 brne  :   1 brpl  :   0 brsh  :   0 brtc  :   0 brts  :   0 brvc  :   0 
-brvs  :   0 bset  :   0 bst   :   0 call  :   3 cbi   :   0 cbr   :   0 
+brvs  :   0 bset  :   0 bst   :   0 call  :  11 cbi   :   0 cbr   :   0 
 clc   :   0 clh   :   0 cli   :   0 cln   :   0 clr   :   1 cls   :   0 
 clt   :   0 clv   :   0 clz   :   0 com   :   0 cp    :   0 cpc   :   0 
-cpi   :   0 cpse  :   0 dec   :   0 eor   :   0 fmul  :   0 fmuls :   0 
-fmulsu:   0 icall :   0 ijmp  :   0 in    :   0 inc   :   0 jmp   :   8 
-ld    :   0 ldd   :   0 ldi   :  18 lds   :   2 lpm   :   0 lsl   :   0 
+cpi   :   0 cpse  :   0 dec   :   1 eor   :   0 fmul  :   0 fmuls :   0 
+fmulsu:   0 icall :   0 ijmp  :   0 in    :   1 inc   :   0 jmp   :   9 
+ld    :   0 ldd   :   0 ldi   :  16 lds   :   3 lpm   :   0 lsl   :   0 
 lsr   :   0 mov   :   0 movw  :   0 mul   :   0 muls  :   0 mulsu :   0 
-neg   :   0 nop   :   0 or    :   0 ori   :   1 out   :  13 pop   :   1 
-push  :   1 rcall :   0 ret   :   4 reti  :   0 rjmp  :   0 rol   :   0 
+neg   :   0 nop   :   0 or    :   0 ori   :   1 out   :  13 pop   :   3 
+push  :   3 rcall :   0 ret   :   5 reti  :   1 rjmp  :   0 rol   :   0 
 ror   :   0 sbc   :   0 sbci  :   0 sbi   :   0 sbic  :   6 sbis  :   0 
 sbiw  :   0 sbr   :   0 sbrc  :   0 sbrs  :   0 sec   :   0 seh   :   0 
-sei   :   1 sen   :   0 ser   :   1 ses   :   0 set   :   0 sev   :   0 
-sez   :   0 sleep :   0 spm   :   0 st    :   0 std   :   0 sts   :   9 
-sub   :   0 subi  :   0 swap  :   0 tst   :   1 wdr   :   0 
-Instructions used: 16 out of 113 (14.2%)
+sei   :   0 sen   :   0 ser   :   1 ses   :   0 set   :   0 sev   :   0 
+sez   :   0 sleep :   0 spm   :   0 st    :   0 std   :   0 sts   :  10 
+sub   :   0 subi  :   0 swap  :   0 tst   :   2 wdr   :   0 
+Instructions used: 19 out of 113 (16.8%)
 
 "ATmega644PA" memory use summary [bytes]:
 Segment   Begin    End      Code   Data   Used    Size   Use%
 ---------------------------------------------------------------
-[.cseg] 0x000000 0x0000ba    186      0    186   65536   0.3%
+[.cseg] 0x000000 0x0001e4    244      0    244   65536   0.4%
 [.dseg] 0x000100 0x000101      0      1      1    4096   0.0%
 [.eseg] 0x000000 0x000000      0      0      0    2048   0.0%
 

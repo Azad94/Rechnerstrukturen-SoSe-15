@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.1.52  C:\Users\Sheraz\Documents\Atmel Studio\Projects\Aufgabe_Bedarfsampel\Aufgabe_Bedarfsampel\Aufgabe_Bedarfsampel.asm Thu Jul 02 10:49:50 2015
+AVRASM ver. 2.1.52  C:\Users\Sheraz\Documents\Atmel Studio\Projects\Aufgabe_Bedarfsampel\Aufgabe_Bedarfsampel\Aufgabe_Bedarfsampel.asm Thu Jul 02 12:52:54 2015
 
 
 EQU  SIGNATURE_000 0000001e
@@ -826,28 +826,31 @@ EQU  URXC1addr    00000038
 EQU  UDRE1addr    0000003a
 EQU  UTXC1addr    0000003c
 EQU  INT_VECTORS_SIZE 0000003e
-CSEG start        00000024
+CSEG vorbereiten  000000b0
+CSEG OCR1A_isr    0000007c
 DSEG T1count      00000100
 EQU  T1Counter    0000000a
-EQU  Timer        00000005
-CSEG InitT1       00000002
-CSEG startWait    0000001a
-CSEG wait         0000001d
-CSEG waitNow      0000001f
+EQU  Timer        00000004
+CSEG noDec        00000086
+CSEG InitT1       0000008a
+CSEG startWait    000000a2
+CSEG wait         000000a5
+CSEG waitNow      000000a7
 EQU  A_gruen_F_rot 00000006
 EQU  A_gelb_F_rot 0000000a
 EQU  A_rot_F_rot  00000012
 EQU  A_rot_F_gruen 00000011
 EQU  A_rotgelb_F_rot 0000001a
 EQU  A_F_aus      00000000
-CSEG vorbereiten  00000032
-CSEG Nachtmodus_an 0000003a
-CSEG Nachtmodus_aus 00000044
-CSEG z2           0000004e
-CSEG z3           00000050
-CSEG z4           00000052
-CSEG z5           00000054
-CSEG z6           00000056
-CSEG z7           00000058
-CSEG z8           0000005a
-CSEG back         0000005c
+CSEG setTimer     000000ac
+CSEG start        000000b9
+CSEG Nachtmodus_an 000000c1
+CSEG Nachtmodus_aus 000000cb
+CSEG z2           000000d5
+CSEG z3           000000d9
+CSEG z4           000000dd
+CSEG z5           000000e1
+CSEG z6           000000e5
+CSEG z7           000000e9
+CSEG z8           000000ed
+CSEG back         000000f1
