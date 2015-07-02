@@ -10,28 +10,30 @@
 
 	.cseg			; dies ist Code
 	
-	.equ muster_1 = 6
-	.equ muster_2 = 9
+	.equ muster_1 = 0x06		;Bits die beim ersten Muster angehen
+	.equ muster_2 = 0x09		;Bits die beim zweiten Muster angehen
 
-	ser R16
-	ldi R16, 0b0111111		;Ausgabe definieren
+	ser R16						
+	ldi R16, 0x3F				;Ausgabe definieren
 	out DDRD, R16	
 
-	ldi R18, muster_1
-	out PORTD, R18       
+	ldi R18, muster_1			
+	out PORTD, R18				;"Standard"-Ausgabe 
 
+				; ********** HAUPTPROGRAMM **********
 start:
-	
-	SBIC PIND, 6
+	;--- Taster überprüfen (bedingt jeweiliges Muster ausgeben)
+
+	SBIC PIND, 6				
 	jmp Taster_1_gedrueckt
 
-	SBIC PIND, 7
+	SBIC PIND, 7				
 	jmp Taster_2_gedrueckt
 
 	jmp start
 
 Taster_1_gedrueckt:
-	
+
 	ldi R18, muster_2
 	out PORTD, R18
 	jmp start

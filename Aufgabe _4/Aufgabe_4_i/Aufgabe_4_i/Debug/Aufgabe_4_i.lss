@@ -1,8 +1,8 @@
 
-AVRASM ver. 2.1.52  C:\Users\Sheraz\Documents\Atmel Studio\Projects\Aufgabe_4_i\Aufgabe_4_i\Aufgabe_4_i.asm Wed Jul 01 12:26:41 2015
+AVRASM ver. 2.1.52  C:\Users\Sheraz\Documents\GitHub\Rechnerstrukturen-SoSe-15\Aufgabe _4\Aufgabe_4_i\Aufgabe_4_i\Aufgabe_4_i.asm Wed Jul 01 21:23:08 2015
 
 [builtin](2): Including file 'C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR Assembler\Native\2.1.1117\avrassembler\Include\m644PAdef.inc'
-C:\Users\Sheraz\Documents\Atmel Studio\Projects\Aufgabe_4_i\Aufgabe_4_i\Aufgabe_4_i.asm(9): Including file 'C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR Assembler\Native\2.1.1117\avrassembler\Include\m644PAdef.inc'
+C:\Users\Sheraz\Documents\GitHub\Rechnerstrukturen-SoSe-15\Aufgabe _4\Aufgabe_4_i\Aufgabe_4_i\Aufgabe_4_i.asm(9): Including file 'C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR Assembler\Native\2.1.1117\avrassembler\Include\m644PAdef.inc'
                  
                  /*
                  
@@ -1205,17 +1205,15 @@ C:\Users\Sheraz\Documents\Atmel Studio\Projects\Aufgabe_4_i\Aufgabe_4_i\Aufgabe_
                  
                  	.cseg			; dies ist Code
                  	
-                 	.equ muster_1 = 6
-                 	.equ muster_2 = 9
-                 	
+                 	.equ muster_1 = 0x06		;
+                 	.equ muster_2 = 0x09
                  
 000000 ef0f      	ser R16
-000001 e30f      	ldi R16, 0b0111111		;Ausgabe definieren
+000001 e30f      	ldi R16, 0x3F		;Ausgabe definieren
 000002 b90a      	out DDRD, R16	
                  
 000003 e026      	ldi R18, muster_1
-000004 b92b      	out PORTD, R18
-                                      
+000004 b92b      	out PORTD, R18       
                  
                  start:
                  	
@@ -1232,7 +1230,6 @@ C:\Users\Sheraz\Documents\Atmel Studio\Projects\Aufgabe_4_i\Aufgabe_4_i\Aufgabe_
 00000d e029      	ldi R18, muster_2
 00000e b92b      	out PORTD, R18
 00000f 940c 0005 	jmp start
-                 
                  
                  Taster_2_gedrueckt:
                  
