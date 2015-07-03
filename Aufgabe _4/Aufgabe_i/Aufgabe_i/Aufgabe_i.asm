@@ -4,21 +4,21 @@
  *  Created: 30.06.2015 19:48:28
  *   Author: Sven
  */ 
-
+ .include "m644PAdef.inc"
+ .cseg
  ;Nur ein Test sollte aber mit unseren alten aufgabe funktionieren
  ; Initialisierungscode weggelassen
-push r20 ; r20 auf den Stack retten
-ser r20 ; r20=0xFF
-out DDRD, r20 ; PortD als Ausgang verwenden
-ldi r20, 0x55 ; Warte-Anzeige definieren
-out PORTD, r20 ; und ausgeben
-waitkey:
-nop
-sbis PINA,4 ; Verlasse Schleife, wenn [ENTER] gedrückt
-jmp waitkey ; sonst springe zum Schleifenanfang
-ser r20 ; flag Ende
-out PORTD, r20 ; und ausgeben
-pop r20 ; Restaurieren des Zählregisters
-stay:
-jmp stay 
-
+ldi r16, 0xFF
+         out DDRB, r16     ; Alle Pins am Port B durch Ausgabe von 0xFF ins
+                           ; Richtungsregister DDRB als Ausgang konfigurieren
+         ldi r16, 0x00
+         out DDRD, r16     ; Alle Pins am Port D durch Ausgabe von 0x00 ins
+                           ; Richtungsregister DDRD als Eingang konfigurieren
+ 
+         ldi r16, 0xE0     ; An allen Pins vom Port D die Pullup-Widerstände
+         out PORTD, r16    ; aktivieren. Dies geht deshalb durch eine Ausgabe
+                           ; nach PORTD, da ja der Port auf Eingang gestellt ist.
+loop:
+         in r16, PIND      ; an Port D anliegende Werte (Taster) nach r16 einlesen
+         out PORTB, r16    ; Inhalt von r16 an Port B ausgeben
+         rjmp loop         ;  zu "loop:" -> Endlosschleife

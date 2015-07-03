@@ -1,8 +1,8 @@
 
-AVRASM ver. 2.1.52  C:\Users\Sven\Documents\GitHub\Rechnerstrukturen-SoSe-15\Aufgabe _4\Aufgabe_i\Aufgabe_i\Aufgabe_i.asm Fri Jul 03 16:01:28 2015
+AVRASM ver. 2.1.52  C:\Users\Sven\Documents\GitHub\Rechnerstrukturen-SoSe-15\Aufgabe _4\interruptWithIOHandling\interruptWithIOHandling\interruptWithIOHandling.asm Fri Jul 03 23:09:31 2015
 
 [builtin](2): Including file 'C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR Assembler\Native\2.1.1117\avrassembler\Include\m644PAdef.inc'
-C:\Users\Sven\Documents\GitHub\Rechnerstrukturen-SoSe-15\Aufgabe _4\Aufgabe_i\Aufgabe_i\Aufgabe_i.asm(7): Including file 'C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR Assembler\Native\2.1.1117\avrassembler\Include\m644PAdef.inc'
+C:\Users\Sven\Documents\GitHub\Rechnerstrukturen-SoSe-15\Aufgabe _4\interruptWithIOHandling\interruptWithIOHandling\interruptWithIOHandling.asm(13): Including file 'C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR Assembler\Native\2.1.1117\avrassembler\Include\m644PAdef.inc'
                  
                  /*
                  
@@ -1151,12 +1151,18 @@ C:\Users\Sven\Documents\GitHub\Rechnerstrukturen-SoSe-15\Aufgabe _4\Aufgabe_i\Au
                  
                  ; ***** END OF FILE ******************************************************
                  
-                  * Aufgabe_i.asm
+                  * interruptWithIOHandling.asm
                   *
-                  *  Created: 30.06.2015 19:48:28
+                  *  Created: 03.07.2015 22:31:06
                   *   Author: Sven
                   */ 
-                  .include "m644PAdef.inc"
+                  ;Die meisten Infos hab ich von hier http://www.mikrocontroller.net/articles/AVR-Tutorial:_Interrupts
+                  ;dieses Programm soll verdeutlichen wie in Interrupt mit einer IO zu händeln ist
+                  ;Wichtig zu befolgen ist ein Interrupt sollte so schnell wie möglich beendet werden es kann sonst zu einem Stau der Interrupts führen
+                  ;Dadurch könnten Interrupts verloren gehen oder schimmeres
+                  ;reti wird deshalb benutzt weil ansonsten jedes Interrupt weitere Interrupt sperrt dies wird duch reti verhindert
+                  ;rjmp vielleicht nciht nötig nur bei 4byte registern AUSPROBIEREN!!
+                 	.include  "m644PAdef.inc"
                  
                  ;***** Created: 2011-02-09 12:03 ******* Source: ATmega644PA.xml *********
                  ;*************************************************************************
@@ -1200,23 +1206,71 @@ C:\Users\Sven\Documents\GitHub\Rechnerstrukturen-SoSe-15\Aufgabe _4\Aufgabe_i\Au
                  #endif  /* _M644PADEF_INC_ */
                  
                  ; ***** END OF FILE ******************************************************
-                  .cseg
-                  ;Nur ein Test sollte aber mit unseren alten aufgabe funktionieren
-                  ; Initialisierungscode weggelassen
-000000 ef0f      ldi r16, 0xFF
-000001 b904               out DDRB, r16     ; Alle Pins am Port B durch Ausgabe von 0xFF ins
-                                            ; Richtungsregister DDRB als Ausgang konfigurieren
-000002 e000               ldi r16, 0x00
-000003 b90a               out DDRD, r16     ; Alle Pins am Port D durch Ausgabe von 0x00 ins
-                                            ; Richtungsregister DDRD als Eingang konfigurieren
-                  
-000004 ee00               ldi r16, 0xE0     ; An allen Pins vom Port D die Pullup-Widerstände
-000005 b90b               out PORTD, r16    ; aktivieren. Dies geht deshalb durch eine Ausgabe
-                                            ; nach PORTD, da ja der Port auf Eingang gestellt ist.
-                 loop:
-000006 b109               in r16, PIND      ; an Port D anliegende Werte (Taster) nach r16 einlesen
-000007 b905               out PORTB, r16    ; Inhalt von r16 an Port B ausgeben
-000008 cffd               rjmp loop         ;  zu "loop:" -> Endlosschleife
+                 	.org 0x000					;Steht für Reset und bedeutet start der Hardware alles wurde zurückgesetzt und programm fängt am kleinsten Bit(LBI) wieder an 
+000000 c0d1      		rjmp main
+                 	.org INT0addr				;Steht auch für einen festen bit wie im reset kann allerdings von Mikrocontroller zu Mikrocontroller variieren deswegen lieber die 
+                 								;begiffe verwenden das macht es leichter dieses Programm auf ander Mikrocontroller zu porten da diese begriffe durch die eingebudene Header datei 
+                 								;definiert sind
+000002 c0ba      		rjmp int0_handler
+                 	.org OC1Aaddr
+00001a c09f      		rjmp OCR1A_isr
+                 	.org 3*INT_VECTORS_SIZE
+                 
+                 /********************************************************/
+                 	; ISR Timer1 Compare Interrupt A
+                 	OCR1A_isr:
+0000ba 930f      	push r16 ; Kontext retten
+                 	; Code der ISR weggelassen
+0000bb 910f      	pop r16 ; Register restaurierten
+0000bc 9518      	reti ; Return from Interrupt
+                 
+                 /********************************************************/
+                 
+                 
+                 /********************************************************/
+                 ;	ISR External Interrupt 0: INT0 
+                 int0_handler:	
+0000bd 930f      	push r16
+0000be 931f      	push r17
+0000bf e011      	ldi r17,0x01			; Wert für Toggeln von Bit0
+0000c0 b10b      	in r16, PORTD			; PORT-wert lesen
+0000c1 2701      	eor r16,r17				; XOR PORTD xor 1 --> toggle
+0000c2 b90b      	out PORTD, r16			; Neuen Wert ausgeben
+0000c3 911f      	pop r17					; Register restaurierten
+0000c4 910f      	pop r16					; Register restaurierten
+0000c5 9518      	reti					; Return from Interrupt;
+                 ;
+                 
+                 /********************************************************/
+                 ; ----- Initialisierung des INT0 auf änderung -----
+                 InitINT0:
+0000c6 930f      	push r16
+0000c7 931f      	push r17
+0000c8 e012      	ldi r17,0x02			; Wert für (ISC01,ISC00)
+0000c9 9100 0069 	lds r16, EICRA			; Config EICRA in laden
+0000cb 2b01      	or r16,r17				; ISC01 in EICRA setzen
+0000cc 9300 0069 	sts EICRA, r16			; und nach EICRA speichern
+0000ce 9ae8      	sbi EIMSK, 0			; Nur INT0 starten
+0000cf 911f      	pop r17
+0000d0 910f      	pop r16
+0000d1 9508      	ret
+                 /********************************************************/
+                 
+                 /*******************************************************/
+                 /*Hauptprogramm hier wird der Stack initalisiert und anschließend die Ausgabe der Ampel 
+                 bewerkstelligt. Hierhin springt das programm bei reset als erstes*/
+                 main:
+                 ; ----- Initialisierung der grundlegenden Funktionen -----
+                 ; Initialisieren des Stacks am oberen Ende des RAM
+                 ; 16 bit SP wird als SPH:SPL im IO-Space angesprochen
+0000d2 ef0f      	ldi r16, LOW(RAMEND) ; low-Byte von RAMEND nach r16
+0000d3 bf0d      	out SPL, r16 ; in low-byte des SP ausgeben
+                 ; der SP liegt im IO-Space
+0000d4 e100      	ldi r16, HIGH(RAMEND) ; high-Byte von RAMEND nach r16
+0000d5 bf0e      	out SPH, r16 ; in high-byte des SP ausgeben
+                 ; ab hier kann der Stack verwendet werden
+0000d6 940e 00c6 	call InitINT0 ; INT0 initialisieren
+                 
 
 
 RESOURCE USE INFORMATION
@@ -1236,10 +1290,10 @@ counted separately from r26..r31 here.
 "ATmega644PA" register use summary:
 r0 :   0 r1 :   0 r2 :   0 r3 :   0 r4 :   0 r5 :   0 r6 :   0 r7 :   0 
 r8 :   0 r9 :   0 r10:   0 r11:   0 r12:   0 r13:   0 r14:   0 r15:   0 
-r16:   8 r17:   0 r18:   0 r19:   0 r20:   0 r21:   0 r22:   0 r23:   0 
+r16:  16 r17:   8 r18:   0 r19:   0 r20:   0 r21:   0 r22:   0 r23:   0 
 r24:   0 r25:   0 r26:   0 r27:   0 r28:   0 r29:   0 r30:   0 r31:   0 
 x  :   0 y  :   0 z  :   0 
-Registers used: 1 out of 35 (2.9%)
+Registers used: 2 out of 35 (5.7%)
 
 "ATmega644PA" instruction use summary:
 .lds  :   0 .sts  :   0 adc   :   0 add   :   0 adiw  :   0 and   :   0 
@@ -1247,26 +1301,26 @@ andi  :   0 asr   :   0 bclr  :   0 bld   :   0 brbc  :   0 brbs  :   0
 brcc  :   0 brcs  :   0 break :   0 breq  :   0 brge  :   0 brhc  :   0 
 brhs  :   0 brid  :   0 brie  :   0 brlo  :   0 brlt  :   0 brmi  :   0 
 brne  :   0 brpl  :   0 brsh  :   0 brtc  :   0 brts  :   0 brvc  :   0 
-brvs  :   0 bset  :   0 bst   :   0 call  :   0 cbi   :   0 cbr   :   0 
+brvs  :   0 bset  :   0 bst   :   0 call  :   1 cbi   :   0 cbr   :   0 
 clc   :   0 clh   :   0 cli   :   0 cln   :   0 clr   :   0 cls   :   0 
 clt   :   0 clv   :   0 clz   :   0 com   :   0 cp    :   0 cpc   :   0 
-cpi   :   0 cpse  :   0 dec   :   0 eor   :   0 fmul  :   0 fmuls :   0 
+cpi   :   0 cpse  :   0 dec   :   0 eor   :   1 fmul  :   0 fmuls :   0 
 fmulsu:   0 icall :   0 ijmp  :   0 in    :   1 inc   :   0 jmp   :   0 
-ld    :   0 ldd   :   0 ldi   :   3 lds   :   0 lpm   :   0 lsl   :   0 
+ld    :   0 ldd   :   0 ldi   :   4 lds   :   1 lpm   :   0 lsl   :   0 
 lsr   :   0 mov   :   0 movw  :   0 mul   :   0 muls  :   0 mulsu :   0 
-neg   :   0 nop   :   0 or    :   0 ori   :   0 out   :   4 pop   :   0 
-push  :   0 rcall :   0 ret   :   0 reti  :   0 rjmp  :   1 rol   :   0 
-ror   :   0 sbc   :   0 sbci  :   0 sbi   :   0 sbic  :   0 sbis  :   0 
+neg   :   0 nop   :   0 or    :   1 ori   :   0 out   :   3 pop   :   5 
+push  :   5 rcall :   0 ret   :   1 reti  :   2 rjmp  :   3 rol   :   0 
+ror   :   0 sbc   :   0 sbci  :   0 sbi   :   1 sbic  :   0 sbis  :   0 
 sbiw  :   0 sbr   :   0 sbrc  :   0 sbrs  :   0 sec   :   0 seh   :   0 
 sei   :   0 sen   :   0 ser   :   0 ses   :   0 set   :   0 sev   :   0 
-sez   :   0 sleep :   0 spm   :   0 st    :   0 std   :   0 sts   :   0 
+sez   :   0 sleep :   0 spm   :   0 st    :   0 std   :   0 sts   :   1 
 sub   :   0 subi  :   0 swap  :   0 tst   :   0 wdr   :   0 
-Instructions used: 4 out of 113 (3.5%)
+Instructions used: 14 out of 113 (12.4%)
 
 "ATmega644PA" memory use summary [bytes]:
 Segment   Begin    End      Code   Data   Used    Size   Use%
 ---------------------------------------------------------------
-[.cseg] 0x000000 0x000012     18      0     18   65536   0.0%
+[.cseg] 0x000000 0x0001b0     66      0     66   65536   0.1%
 [.dseg] 0x000100 0x000100      0      0      0    4096   0.0%
 [.eseg] 0x000000 0x000000      0      0      0    2048   0.0%
 
