@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.1.52  C:\Users\Sven\Documents\GitHub\Rechnerstrukturen-SoSe-15\Aufgabe _4\Aufgabe_h\Aufgabe_h\Aufgabe_h.asm Wed Jun 24 22:11:29 2015
+AVRASM ver. 2.1.52  C:\Users\Sven\Documents\GitHub\Rechnerstrukturen-SoSe-15\Aufgabe _4\Aufgabe_h\Aufgabe_h\Aufgabe_h.asm Fri Jul 03 14:50:52 2015
 
 
 EQU  SIGNATURE_000 0000001e
@@ -837,4 +837,4 @@ CSEG startWait    000000a2
 CSEG wait         000000a5
 CSEG waitNow      000000a7
 CSEG loop         000000b6
-CSEG light        000000be
+CSEG light        000000c4

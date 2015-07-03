@@ -105,16 +105,21 @@ start:
 	 call InitT1
 	 sei
 	 ldi R18,0x3F
-	 out DDRA,R18 
-	 ldi R18,0x02
+	 out DDRA,R18
+	 ldi R18,0x05
 loop:
 	call light
-	dec R18
+	ldi R18,0x06
 	call light
-	inc R18
+	ldi R18,0x0A
+	call light
+	ldi R18,0x09
+	call light
+	ldi R18,0x05
 	jmp loop
 light:
 	out PortA,R18
-	ldi R17,Timer
+	ldi R16,Timer
 	call wait
+	inc R18
 	ret
