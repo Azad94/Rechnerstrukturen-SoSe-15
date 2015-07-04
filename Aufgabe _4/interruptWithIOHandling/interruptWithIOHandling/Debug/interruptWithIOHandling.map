@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.1.52  C:\Users\Sven\Documents\GitHub\Rechnerstrukturen-SoSe-15\Aufgabe _4\interruptWithIOHandling\interruptWithIOHandling\interruptWithIOHandling.asm Fri Jul 03 23:09:31 2015
+AVRASM ver. 2.1.52  C:\Users\Sven\Documents\GitHub\Rechnerstrukturen-SoSe-15\Aufgabe _4\interruptWithIOHandling\interruptWithIOHandling\interruptWithIOHandling.asm Sat Jul 04 04:50:14 2015
 
 
 EQU  SIGNATURE_000 0000001e
@@ -826,7 +826,8 @@ EQU  URXC1addr    00000038
 EQU  UDRE1addr    0000003a
 EQU  UTXC1addr    0000003c
 EQU  INT_VECTORS_SIZE 0000003e
-CSEG main         000000d2
+CSEG main         000000d0
 CSEG int0_handler 000000bd
 CSEG OCR1A_isr    000000ba
-CSEG InitINT0     000000c6
+CSEG InitINT0     000000c4
+CSEG stay         000000d9

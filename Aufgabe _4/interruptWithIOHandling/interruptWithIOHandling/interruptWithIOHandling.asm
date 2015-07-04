@@ -14,13 +14,12 @@
 	.org 0x000					;Steht für Reset und bedeutet start der Hardware alles wurde zurückgesetzt und programm fängt am kleinsten Bit(LBI) wieder an 
 		rjmp main
 	.org INT0addr				;Steht auch für einen festen bit wie im reset kann allerdings von Mikrocontroller zu Mikrocontroller variieren deswegen lieber die 
-								;begiffe verwenden das macht es leichter dieses Programm auf ander Mikrocontroller zu porten da diese begriffe durch die eingebudene Header datei 
+		rjmp int0_handler		;begiffe verwenden das macht es leichter dieses Programm auf ander Mikrocontroller zu porten da diese begriffe durch die eingebudene Header datei 
 								;definiert sind
-		rjmp int0_handler
 	.org OC1Aaddr
 		rjmp OCR1A_isr
 	.org 3*INT_VECTORS_SIZE
-
+	.cseg
 /********************************************************/
 	; ISR Timer1 Compare Interrupt A
 	OCR1A_isr:
@@ -37,10 +36,8 @@
 int0_handler:	
 	push r16
 	push r17
-	ldi r17,0x01			; Wert für Toggeln von Bit0
-	in r16, PORTD			; PORT-wert lesen
-	eor r16,r17				; XOR PORTD xor 1 --> toggle
-	out PORTD, r16			; Neuen Wert ausgeben
+	ldi r17,0xFF			; Wert für Toggeln von Bit0
+	out PORTD, r17			; Neuen Wert ausgeben
 	pop r17					; Register restaurierten
 	pop r16					; Register restaurierten
 	reti					; Return from Interrupt;
@@ -51,8 +48,8 @@ int0_handler:
 InitINT0:
 	push r16
 	push r17
-	ldi r17,0x02			; Wert für (ISC01,ISC00)
-	lds r16, EICRA			; Config EICRA in laden
+	ldi r17,0x02			; Wert für (ISC01,ISC00) einstellung für rückflanke da unsere taster immer eins haben genau das was wir haben wollen
+	lds r16, EICRA			; Config EICRA in laden wichtig um die änderungen beobachten zu können im io View auf den EXTERNAL_INTERRUPT schalten dort sieht man dann die isc0 bis 2 
 	or r16,r17				; ISC01 in EICRA setzen
 	sts EICRA, r16			; und nach EICRA speichern
 	sbi EIMSK, 0			; Nur INT0 starten
@@ -75,5 +72,13 @@ main:
 	out SPH, r16 ; in high-byte des SP ausgeben
 ; ab hier kann der Stack verwendet werden
 	call InitINT0 ; INT0 initialisieren
-
+	sei
+	ldi R17, 0x03
+	out DDRD, R17
+stay:
+	sbi PortD, 1
+	nop
+	cbi PORTD, 1
+	nop
+	jmp stay
 /*******************************************************/	
