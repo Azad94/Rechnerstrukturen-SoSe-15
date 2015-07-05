@@ -9,40 +9,51 @@
 ;		Hier nur Sprungtabelle anlegen. Mindestens für den 
 ;		Reset-Interrupt (An Adresse 0):
 	.org	0		; Am Anfang des Code-Speicher 
-	jmp start		; Sprung bei reset
+	jmp Main		; Sprung bei reset
 	.org $0008		;External Pin wurden angesprochen heißt PINA(7..0)
 	jmp PCINT0_isr
 	.org OC1Aaddr
 	jmp OCRA1A_isr
 ; ***** Hier werden die "Variablen" definiert
-	.dseg				; dies sind Daten
+	.dseg					; dies sind Daten
 T1count:		.byte 1		; Zähler für Wartefunktion mit Timer1
-Nachtmodus:		.byte 1		;Nachtmodus
-Bereitschaft:	.byte 1		;Bereitschaft 
-Zustand:		.byte 1		;Welchen Zustand bestizen wir für die Bereitschaft
+Nachtmodus:		.byte 1
+Bereitschaft:	.byte 1
+Zustand:		.byte 1
 	.cseg			; dies ist Code
 ; ----- Platz um .equ definitionen vorzunehmen
 #ifdef DEBUG 
-.equ	T1Counter = 10			; Debug-Timer-Wert für xxs
+.equ	T1Counter = 10				; Debug-Timer-Wert für xxs
 #else
-.equ	T1Counter = 98			; Timer-Wert für 0,1s
+.equ	T1Counter = 98				; Timer-Wert für 0,1s
 #endif
+//.equ Nachtmodus = 1				;Nachtmodus standard wert Aus
+//.equ Bereitschaft=0x00				;BEreitschaftsknopf standard wert Aus
 .equ Timer=5						; Zeit zum warten 0.,5s
+//.equ Zustand=0x00					;Welchen Zustand bestizen wir für die Bereitschaft
+.equ A_gruen_F_rot = 0x06	
+.equ A_gelb_F_rot = 0x0A
+.equ A_rot_F_rot = 0x12
+.equ A_rot_F_gruen = 0x11
+.equ A_rotgelb_F_rot = 0x1A
+.equ A_F_aus = 0x00
 ; ----- Programm beginnt hinter der Vektortabelle: -----
 	.org 4*INT_VECTORS_SIZE
 ; hier kommen die Interrupt Service Routinen hin, wenn benutzt
 /********************************************************/
 ;	ISR External Interrupt 0: PCINT0 
 PCINT0_isr:	
-	push r16				;
+	push r16	
+	ldi R16,0x00
 	sbis PINA,5
-	ldi Nachtmodus, 0x01	;Nachtmodus an
+	sts Nachtmodus, R16			;Nachtmodus an
+	ldi R16,0x01
 	sbis PINA,6
-	ldi Nachtmodus, 0x00	;Nachtmodus aus
+	sts Nachtmodus, R16			;Nachtmodus aus
 	sbis PINA,7
 	call BereitschaftPruefen	;Bereitschaft an
-	pop r16					; Register restaurierten
-	reti					; Return from Interrupt;
+	pop r16						; Register restaurierten
+	reti						; Return from Interrupt;
 ;
 
 
@@ -50,19 +61,23 @@ BereitschaftPruefen:
 	push R16
 	push R17
 	push R18
-	ldi R16, Zustand
+	lds R16, Zustand
 	ldi R17, 0x05
 	ldi R18, 0x01
-	cp	R16,R18
+	cp	R16,R18				;Prüfen ob wir <= Zustand 1 sind
 	brge BereitschaftAn
-	cpi R16,R17
+	cp R17,R16				;Prüfen ob wir >= Zustand 5 sind
 	brge BereitschaftAn
 	pop R18
 	pop R17
 	pop R16
 	ret
 BereitschaftAn:
-	ldi Bereitschaft, 0x01
+	ldi R16,0x01
+	sts Bereitschaft, R16
+	pop R18
+	pop R17
+	pop R16
 	ret
 
 
@@ -121,9 +136,29 @@ InitTImer1:
 	sts TIMSK1, r17			; und abspeichern
 	pop r17
 	ret
+
+; ----- Warte-Zähler Setzen und Starten (nonblocking)
+startWait:
+	ldi R16,Timer
+	sts T1count, r16		; Nur Zähler setzen
+	ret
+; ----- Wait-funktion komplett
+; Parameter: R16 enthält die Wartedauer in Zehntelsekunden
+wait:
+; Timer resetten, Interrupt aktivieren
+	ldi R16,Timer
+	sts T1count, r16		
+; ----- Rest der Komplett-Funktion als Abwarte-Funktion -----
+waitNow:
+; polling auf Counter=0
+	lds r16, T1count
+	tst r16
+	brne waitNow
+	ret
 ;
+
 ; ***** Einsprungpunkt in das Hauptprogramm *****
-start:
+Main:
 ; ----- Initialisierung der grundlegenden Funktionen -----
 	; Initialisieren des Stacks am oberen Ende des RAM
     ; 16 bit SP wird als SPH:SPL im IO-Space angesprochen 
@@ -134,10 +169,86 @@ start:
     out SPH, r16		; in high-byte des SP ausgeben
     ; ab hier kann der Stack verwendet werden 
 
-	call InitPCINT0		; PCINT0 auf PIINA 5,6,7 initialisieren
-	call InitTimer1		; Timer1 initalisieren
-	sei					; global Interrupt enable
-	ldi Nachtmodus, 0x01
-	
-stay:
-	jmp stay			; Endlosschleife
+	call InitPCINT0				; PCINT0 auf PIINA 5,6,7 initialisieren
+	call InitTimer1				; Timer1 initalisieren
+	sei							; global Interrupt enabl
+	ldi R16,0x01				;Wir beginnen mit Nachtmodus aus
+	sts Nachtmodus, R16		
+	ldi R16, 0x1F
+	out DDRA,R16				;Vorbereiten der Ausgänge
+Start:
+	ldi R17,0x00
+	lds R18,Nachtmodus
+	cp	R18,R17
+	brne Zustand1
+Zustand0:
+	ldi R18,0x00
+	out PORTA, R18				;Alle aus
+	sts Zustand,R16
+	ldi R17,0x01
+	sts Zustand,R17				;Zustand setzen auf Zustand1
+	lds R18,Bereitschaft
+	cp R18,R17					;Prfen ob bereitschaft  gedrückt wurde
+	breq Zustand1				;Wenn ja gehe zu  Zustand2
+	jmp Start
+Zustand1:
+	ldi R18, A_gruen_F_rot	
+	out PORTA,  R18
+	ldi R17,0x01
+	sts Zustand,R17				;Zustand setzen auf Zustand1
+	lds R18,Bereitschaft
+	cp R18,R17					;Prfen ob bereitschaft  gedrückt wurde
+	breq Zustand2				;Wenn ja gehe zu  Zustand2
+	jmp Start					;Ansonsten erneut prüfen
+Zustand2:
+	call Wait
+	ldi R16,0x00
+	sts Bereitschaft,R16
+	ldi R18, A_gelb_F_rot
+	out PORTA, R18
+	inc R17
+	sts Zustand,R17
+Zustand3:
+	call Wait
+	ldi R18, A_rot_F_rot
+	out PORTA, R18
+	inc R17
+	sts Zustand,R17
+Zustand4:
+	call Wait
+	ldi R18, A_rot_F_gruen
+	out PORTA, R18
+	inc R17
+	sts Zustand,R17
+Zustand5:
+	call Wait
+	ldi R18, A_rot_F_rot
+	out PORTA, R18
+	inc R17
+	sts Zustand,R17
+Zustand6:
+	call Wait
+	ldi R18, A_rotgelb_F_rot
+	out PORTA, R18
+	inc R17
+	sts Zustand,R17
+Zustand7:
+	call Wait
+	ldi R18, A_gruen_F_rot
+	out PORTA, R18
+	inc R17
+	sts Zustand, R17
+Zustand8:
+	call Wait
+	ldi R18, A_gruen_F_rot
+	out PORTA, R18
+	inc R17
+	sts Zustand, R17
+Zustand9:
+	call Wait
+	ldi R18, A_gruen_F_rot
+	out PORTA, R18
+	inc R17
+	sts Zustand, R17
+	call Wait
+	jmp Start
