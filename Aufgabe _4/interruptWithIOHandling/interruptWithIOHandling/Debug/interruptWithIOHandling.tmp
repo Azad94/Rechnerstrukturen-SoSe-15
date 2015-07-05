@@ -21,9 +21,13 @@
   <FILE>interruptWithIOHandling.lss</FILE>
  </OUTPUT_FILES>
  <LABELS>
-  <start><FILE>C:\Users\Sven\Documents\GitHub\Rechnerstrukturen-SoSe-15\Aufgabe _4\interruptWithIOHandling\interruptWithIOHandling\interruptWithIOHandling.asm</FILE><LINE>50</LINE></start>
-  <INT0_isr><FILE>C:\Users\Sven\Documents\GitHub\Rechnerstrukturen-SoSe-15\Aufgabe _4\interruptWithIOHandling\interruptWithIOHandling\interruptWithIOHandling.asm</FILE><LINE>21</LINE></INT0_isr>
-  <InitINT0><FILE>C:\Users\Sven\Documents\GitHub\Rechnerstrukturen-SoSe-15\Aufgabe _4\interruptWithIOHandling\interruptWithIOHandling\interruptWithIOHandling.asm</FILE><LINE>35</LINE></InitINT0>
-  <stay><FILE>C:\Users\Sven\Documents\GitHub\Rechnerstrukturen-SoSe-15\Aufgabe _4\interruptWithIOHandling\interruptWithIOHandling\interruptWithIOHandling.asm</FILE><LINE>66</LINE></stay>
+  <start><FILE>C:\Users\Sven\Documents\GitHub\Rechnerstrukturen-SoSe-15\Aufgabe _4\interruptWithIOHandling\interruptWithIOHandling\interruptWithIOHandling.asm</FILE><LINE>102</LINE></start>
+  <PCINT0_isr><FILE>C:\Users\Sven\Documents\GitHub\Rechnerstrukturen-SoSe-15\Aufgabe _4\interruptWithIOHandling\interruptWithIOHandling\interruptWithIOHandling.asm</FILE><LINE>33</LINE></PCINT0_isr>
+  <OCRA1A_isr><FILE>C:\Users\Sven\Documents\GitHub\Rechnerstrukturen-SoSe-15\Aufgabe _4\interruptWithIOHandling\interruptWithIOHandling\interruptWithIOHandling.asm</FILE><LINE>47</LINE></OCRA1A_isr>
+  <T1count><FILE>C:\Users\Sven\Documents\GitHub\Rechnerstrukturen-SoSe-15\Aufgabe _4\interruptWithIOHandling\interruptWithIOHandling\interruptWithIOHandling.asm</FILE><LINE>19</LINE></T1count>
+  <noDec><FILE>C:\Users\Sven\Documents\GitHub\Rechnerstrukturen-SoSe-15\Aufgabe _4\interruptWithIOHandling\interruptWithIOHandling\interruptWithIOHandling.asm</FILE><LINE>56</LINE></noDec>
+  <InitPCINT0><FILE>C:\Users\Sven\Documents\GitHub\Rechnerstrukturen-SoSe-15\Aufgabe _4\interruptWithIOHandling\interruptWithIOHandling\interruptWithIOHandling.asm</FILE><LINE>64</LINE></InitPCINT0>
+  <InitTImer1><FILE>C:\Users\Sven\Documents\GitHub\Rechnerstrukturen-SoSe-15\Aufgabe _4\interruptWithIOHandling\interruptWithIOHandling\interruptWithIOHandling.asm</FILE><LINE>77</LINE></InitTImer1>
+  <stay><FILE>C:\Users\Sven\Documents\GitHub\Rechnerstrukturen-SoSe-15\Aufgabe _4\interruptWithIOHandling\interruptWithIOHandling\interruptWithIOHandling.asm</FILE><LINE>119</LINE></stay>
  </LABELS>
 </ASSEMBLER_INFO>
