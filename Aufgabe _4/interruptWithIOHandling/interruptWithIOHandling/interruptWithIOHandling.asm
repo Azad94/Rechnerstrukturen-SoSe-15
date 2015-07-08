@@ -176,6 +176,9 @@ Main:
 	sts Nachtmodus, R16		
 	ldi R16, 0x1F
 	out DDRA,R16				;Vorbereiten der Ausgänge
+	ldi R16,0xE0
+	out PORTA, R16				;Pull up wiederstände für PINA 5,6,7 aktivieren
+	nop							;Bitte die PINA 5,6,7 aktivieren für PULL up Hinweis aus dem Mikrocontroller.net Forum 
 Start:
 	ldi R17,0x00
 	lds R18,Nachtmodus
@@ -251,4 +254,4 @@ Zustand9:
 	inc R17
 	sts Zustand, R17
 	call Wait
-	jmp Start
+	rjmp Start

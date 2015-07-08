@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.1.52  C:\Users\Sven\Documents\GitHub\Rechnerstrukturen-SoSe-15\Aufgabe _4\interruptWithIOHandling\interruptWithIOHandling\interruptWithIOHandling.asm Sun Jul 05 23:59:19 2015
+AVRASM ver. 2.1.52  C:\Users\Sven\Documents\GitHub\Rechnerstrukturen-SoSe-15\Aufgabe _4\interruptWithIOHandling\interruptWithIOHandling\interruptWithIOHandling.asm Wed Jul 08 05:49:14 2015
 
 [builtin](2): Including file 'C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR Assembler\Native\2.1.1117\avrassembler\Include\m644PAdef.inc'
 C:\Users\Sven\Documents\GitHub\Rechnerstrukturen-SoSe-15\Aufgabe _4\interruptWithIOHandling\interruptWithIOHandling\interruptWithIOHandling.asm(7): Including file 'C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR Assembler\Native\2.1.1117\avrassembler\Include\m644PAdef.inc'
@@ -1369,81 +1369,84 @@ C:\Users\Sven\Documents\GitHub\Rechnerstrukturen-SoSe-15\Aufgabe _4\interruptWit
 000163 9300 0101 	sts Nachtmodus, R16		
 000165 e10f      	ldi R16, 0x1F
 000166 b901      	out DDRA,R16				;Vorbereiten der Ausgänge
+000167 ee00      	ldi R16,0xE0
+000168 b902      	out PORTA, R16				;Pull up wiederstände für PINA 5,6,7 aktivieren
+000169 0000      	nop							;Bitte die PINA 5,6,7 aktivieren für PULL up
                  Start:
-000167 e010      	ldi R17,0x00
-000168 9120 0101 	lds R18,Nachtmodus
-00016a 1721      	cp	R18,R17
-00016b f469      	brne Zustand1
+00016a e010      	ldi R17,0x00
+00016b 9120 0101 	lds R18,Nachtmodus
+00016d 1721      	cp	R18,R17
+00016e f469      	brne Zustand1
                  Zustand0:
-00016c e020      	ldi R18,0x00
-00016d b922      	out PORTA, R18				;Alle aus
-00016e 9300 0103 	sts Zustand,R16
-000170 e011      	ldi R17,0x01
-000171 9310 0103 	sts Zustand,R17				;Zustand setzen auf Zustand1
-000173 9120 0102 	lds R18,Bereitschaft
-000175 1721      	cp R18,R17					;Prfen ob bereitschaft  gedrückt wurde
-000176 f011      	breq Zustand1				;Wenn ja gehe zu  Zustand2
-000177 940c 0167 	jmp Start
+00016f e020      	ldi R18,0x00
+000170 b922      	out PORTA, R18				;Alle aus
+000171 9300 0103 	sts Zustand,R16
+000173 e011      	ldi R17,0x01
+000174 9310 0103 	sts Zustand,R17				;Zustand setzen auf Zustand1
+000176 9120 0102 	lds R18,Bereitschaft
+000178 1721      	cp R18,R17					;Prfen ob bereitschaft  gedrückt wurde
+000179 f011      	breq Zustand1				;Wenn ja gehe zu  Zustand2
+00017a 940c 016a 	jmp Start
                  Zustand1:
-000179 e026      	ldi R18, A_gruen_F_rot	
-00017a b922      	out PORTA,  R18
-00017b e011      	ldi R17,0x01
-00017c 9310 0103 	sts Zustand,R17				;Zustand setzen auf Zustand1
-00017e 9120 0102 	lds R18,Bereitschaft
-000180 1721      	cp R18,R17					;Prfen ob bereitschaft  gedrückt wurde
-000181 f011      	breq Zustand2				;Wenn ja gehe zu  Zustand2
-000182 940c 0167 	jmp Start					;Ansonsten erneut prüfen
+00017c e026      	ldi R18, A_gruen_F_rot	
+00017d b922      	out PORTA,  R18
+00017e e011      	ldi R17,0x01
+00017f 9310 0103 	sts Zustand,R17				;Zustand setzen auf Zustand1
+000181 9120 0102 	lds R18,Bereitschaft
+000183 1721      	cp R18,R17					;Prfen ob bereitschaft  gedrückt wurde
+000184 f011      	breq Zustand2				;Wenn ja gehe zu  Zustand2
+000185 940c 016a 	jmp Start					;Ansonsten erneut prüfen
                  Zustand2:
-000184 940e 0151 	call Wait
-000186 e000      	ldi R16,0x00
-000187 9300 0102 	sts Bereitschaft,R16
-000189 e02a      	ldi R18, A_gelb_F_rot
-00018a b922      	out PORTA, R18
-00018b 9513      	inc R17
-00018c 9310 0103 	sts Zustand,R17
+000187 940e 0151 	call Wait
+000189 e000      	ldi R16,0x00
+00018a 9300 0102 	sts Bereitschaft,R16
+00018c e02a      	ldi R18, A_gelb_F_rot
+00018d b922      	out PORTA, R18
+00018e 9513      	inc R17
+00018f 9310 0103 	sts Zustand,R17
                  Zustand3:
-00018e 940e 0151 	call Wait
-000190 e122      	ldi R18, A_rot_F_rot
-000191 b922      	out PORTA, R18
-000192 9513      	inc R17
-000193 9310 0103 	sts Zustand,R17
+000191 940e 0151 	call Wait
+000193 e122      	ldi R18, A_rot_F_rot
+000194 b922      	out PORTA, R18
+000195 9513      	inc R17
+000196 9310 0103 	sts Zustand,R17
                  Zustand4:
-000195 940e 0151 	call Wait
-000197 e121      	ldi R18, A_rot_F_gruen
-000198 b922      	out PORTA, R18
-000199 9513      	inc R17
-00019a 9310 0103 	sts Zustand,R17
+000198 940e 0151 	call Wait
+00019a e121      	ldi R18, A_rot_F_gruen
+00019b b922      	out PORTA, R18
+00019c 9513      	inc R17
+00019d 9310 0103 	sts Zustand,R17
                  Zustand5:
-00019c 940e 0151 	call Wait
-00019e e122      	ldi R18, A_rot_F_rot
-00019f b922      	out PORTA, R18
-0001a0 9513      	inc R17
-0001a1 9310 0103 	sts Zustand,R17
+00019f 940e 0151 	call Wait
+0001a1 e122      	ldi R18, A_rot_F_rot
+0001a2 b922      	out PORTA, R18
+0001a3 9513      	inc R17
+0001a4 9310 0103 	sts Zustand,R17
                  Zustand6:
-0001a3 940e 0151 	call Wait
-0001a5 e12a      	ldi R18, A_rotgelb_F_rot
-0001a6 b922      	out PORTA, R18
-0001a7 9513      	inc R17
-0001a8 9310 0103 	sts Zustand,R17
+0001a6 940e 0151 	call Wait
+0001a8 e12a      	ldi R18, A_rotgelb_F_rot
+0001a9 b922      	out PORTA, R18
+0001aa 9513      	inc R17
+0001ab 9310 0103 	sts Zustand,R17
                  Zustand7:
-0001aa 940e 0151 	call Wait
-0001ac e026      	ldi R18, A_gruen_F_rot
-0001ad b922      	out PORTA, R18
-0001ae 9513      	inc R17
-0001af 9310 0103 	sts Zustand, R17
+0001ad 940e 0151 	call Wait
+0001af e026      	ldi R18, A_gruen_F_rot
+0001b0 b922      	out PORTA, R18
+0001b1 9513      	inc R17
+0001b2 9310 0103 	sts Zustand, R17
                  Zustand8:
-0001b1 940e 0151 	call Wait
-0001b3 e026      	ldi R18, A_gruen_F_rot
-0001b4 b922      	out PORTA, R18
-0001b5 9513      	inc R17
-0001b6 9310 0103 	sts Zustand, R17
+0001b4 940e 0151 	call Wait
+0001b6 e026      	ldi R18, A_gruen_F_rot
+0001b7 b922      	out PORTA, R18
+0001b8 9513      	inc R17
+0001b9 9310 0103 	sts Zustand, R17
                  Zustand9:
-0001b8 940e 0151 	call Wait
-0001ba e026      	ldi R18, A_gruen_F_rot
-0001bb b922      	out PORTA, R18
-0001bc 9513      	inc R17
-0001bd 9310 0103 	sts Zustand, R17
-0001bf 940e 0151 	call Wait
+0001bb 940e 0151 	call Wait
+0001bd e026      	ldi R18, A_gruen_F_rot
+0001be b922      	out PORTA, R18
+0001bf 9513      	inc R17
+0001c0 9310 0103 	sts Zustand, R17
+0001c2 940e 0151 	call Wait
 
 
 RESOURCE USE INFORMATION
@@ -1463,7 +1466,7 @@ counted separately from r26..r31 here.
 "ATmega644PA" register use summary:
 r0 :   0 r1 :   0 r2 :   0 r3 :   0 r4 :   0 r5 :   0 r6 :   0 r7 :   0 
 r8 :   0 r9 :   0 r10:   0 r11:   0 r12:   0 r13:   0 r14:   0 r15:   0 
-r16:  47 r17:  46 r18:  31 r19:   0 r20:   0 r21:   0 r22:   0 r23:   0 
+r16:  49 r17:  46 r18:  31 r19:   0 r20:   0 r21:   0 r22:   0 r23:   0 
 r24:   0 r25:   0 r26:   0 r27:   0 r28:   0 r29:   0 r30:   0 r31:   0 
 x  :   0 y  :   0 z  :   0 
 Registers used: 3 out of 35 (8.6%)
@@ -1479,21 +1482,21 @@ clc   :   0 clh   :   0 cli   :   0 cln   :   0 clr   :   1 cls   :   0
 clt   :   0 clv   :   0 clz   :   0 com   :   0 cp    :   5 cpc   :   0 
 cpi   :   0 cpse  :   0 dec   :   1 eor   :   0 fmul  :   0 fmuls :   0 
 fmulsu:   0 icall :   0 ijmp  :   0 in    :   1 inc   :   8 jmp   :   6 
-ld    :   0 ldd   :   0 ldi   :  30 lds   :   7 lpm   :   0 lsl   :   0 
+ld    :   0 ldd   :   0 ldi   :  31 lds   :   7 lpm   :   0 lsl   :   0 
 lsr   :   0 mov   :   0 movw  :   0 mul   :   0 muls  :   0 mulsu :   0 
-neg   :   0 nop   :   0 or    :   0 ori   :   1 out   :  14 pop   :  12 
+neg   :   0 nop   :   1 or    :   0 ori   :   1 out   :  15 pop   :  12 
 push  :   9 rcall :   0 ret   :   6 reti  :   2 rjmp  :   0 rol   :   0 
 ror   :   0 sbc   :   0 sbci  :   0 sbi   :   0 sbic  :   0 sbis  :   3 
 sbiw  :   0 sbr   :   0 sbrc  :   0 sbrs  :   0 sec   :   0 seh   :   0 
 sei   :   1 sen   :   0 ser   :   0 ses   :   0 set   :   0 sev   :   0 
 sez   :   0 sleep :   0 spm   :   0 st    :   0 std   :   0 sts   :  28 
 sub   :   0 subi  :   0 swap  :   0 tst   :   2 wdr   :   0 
-Instructions used: 22 out of 113 (19.5%)
+Instructions used: 23 out of 113 (20.4%)
 
 "ATmega644PA" memory use summary [bytes]:
 Segment   Begin    End      Code   Data   Used    Size   Use%
 ---------------------------------------------------------------
-[.cseg] 0x000000 0x000386    418      0    418   65536   0.6%
+[.cseg] 0x000000 0x00038c    424      0    424   65536   0.6%
 [.dseg] 0x000100 0x000104      0      4      4    4096   0.1%
 [.eseg] 0x000000 0x000000      0      0      0    2048   0.0%
 
