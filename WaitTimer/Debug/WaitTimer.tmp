@@ -1,0 +1,35 @@
+<ASSEMBLER_INFO>
+ <VERSION>2.1.52</VERSION>
+ <DEVICE>"ATmega644PA"</DEVICE>
+ <WORKING_DIR>F:\WaitTimer\Debug</WORKING_DIR>
+ <INCLUDE_PATH>
+  <DIR>C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR Assembler\Native\2.1.1117\avrassembler\Include</DIR>
+  <DIR></DIR>
+ </INCLUDE_PATH>
+ <SOURCE_FILE>F:\WaitTimer\WaitTimer.asm</SOURCE_FILE>
+ <INCLUDED_FILES>
+  <FILE>C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR Assembler\Native\2.1.1117\avrassembler\Include\m644PAdef.inc</FILE>
+ </INCLUDED_FILES>
+ <OBJECT_FILES>
+  <FILE>F:\WaitTimer\Debug/WaitTimer.obj</FILE>
+ </OBJECT_FILES>
+ <HEX_FILES>
+  <FILE>WaitTimer.hex</FILE>
+ </HEX_FILES>
+ <OUTPUT_FILES>
+  <FILE>WaitTimer.map</FILE>
+  <FILE>WaitTimer.lss</FILE>
+ </OUTPUT_FILES>
+ <LABELS>
+  <start><FILE>F:\WaitTimer\WaitTimer.asm</FILE><LINE>95</LINE></start>
+  <OCR1A_isr><FILE>F:\WaitTimer\WaitTimer.asm</FILE><LINE>35</LINE></OCR1A_isr>
+  <T1count><FILE>F:\WaitTimer\WaitTimer.asm</FILE><LINE>22</LINE></T1count>
+  <noDec><FILE>F:\WaitTimer\WaitTimer.asm</FILE><LINE>44</LINE></noDec>
+  <InitT1><FILE>F:\WaitTimer\WaitTimer.asm</FILE><LINE>53</LINE></InitT1>
+  <startWait><FILE>F:\WaitTimer\WaitTimer.asm</FILE><LINE>78</LINE></startWait>
+  <wait><FILE>F:\WaitTimer\WaitTimer.asm</FILE><LINE>83</LINE></wait>
+  <waitNow><FILE>F:\WaitTimer\WaitTimer.asm</FILE><LINE>87</LINE></waitNow>
+  <loop><FILE>F:\WaitTimer\WaitTimer.asm</FILE><LINE>113</LINE></loop>
+  <stay><FILE>F:\WaitTimer\WaitTimer.asm</FILE><LINE>123</LINE></stay>
+ </LABELS>
+</ASSEMBLER_INFO>

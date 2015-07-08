@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.1.52  F:\Aufgabe _4\interruptWithIOHandling\interruptWithIOHandling\interruptWithIOHandling.asm Wed Jul 08 12:16:14 2015
+AVRASM ver. 2.1.52  F:\WaitTimer\WaitTimer.asm Thu Jul 02 13:28:39 2015
 
 
 EQU  SIGNATURE_000 0000001e
@@ -826,36 +826,14 @@ EQU  URXC1addr    00000038
 EQU  UDRE1addr    0000003a
 EQU  UTXC1addr    0000003c
 EQU  INT_VECTORS_SIZE 0000003e
-CSEG Main         00000159
-CSEG PCINT0_isr   000000f8
-CSEG OCRA1A_isr   0000011c
+CSEG start        000000ac
+CSEG OCR1A_isr    0000007c
 DSEG T1count      00000100
-DSEG Nachtmodus   00000101
-DSEG Bereitschaft 00000102
-DSEG Zustand      00000103
-EQU  T1Counter    00000062
-EQU  Timer        00000005
-EQU  A_gruen_F_rot 00000011
-EQU  A_gelb_F_rot 00000012
-EQU  A_rot_F_rot  00000014
-EQU  A_rot_F_gruen 0000000c
-EQU  A_rotgelb_F_rot 00000016
-EQU  A_F_aus      00000000
-CSEG BereitschaftPruefen 00000106
-CSEG BereitschaftAn 00000115
-CSEG noDec        00000126
-CSEG InitPCINT0   0000012a
-CSEG InitTimer1   00000135
-CSEG startWait    0000014d
-CSEG wait         00000151
-CSEG waitNow      00000154
-CSEG Start        0000016a
-CSEG Zustand1     0000017a
-CSEG Zustand0     0000016f
-CSEG Zustand2     00000185
-CSEG Zustand3     0000018f
-CSEG Zustand4     00000196
-CSEG Zustand5     0000019d
-CSEG Zustand6     000001a4
-CSEG Zustand7     000001ab
-CSEG Zustand8     000001b2
+EQU  T1Counter    0000000a
+CSEG noDec        00000086
+CSEG InitT1       0000008a
+CSEG startWait    000000a2
+CSEG wait         000000a5
+CSEG waitNow      000000a7
+CSEG loop         000000b7
+CSEG stay         000000c2

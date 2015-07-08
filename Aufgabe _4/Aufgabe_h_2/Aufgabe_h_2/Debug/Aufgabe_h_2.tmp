@@ -1,0 +1,35 @@
+<ASSEMBLER_INFO>
+ <VERSION>2.1.52</VERSION>
+ <DEVICE>"ATmega644PA"</DEVICE>
+ <WORKING_DIR>F:\Aufgabe _4\Aufgabe_h_2\Aufgabe_h_2\Debug</WORKING_DIR>
+ <INCLUDE_PATH>
+  <DIR>C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR Assembler\Native\2.1.1117\avrassembler\Include</DIR>
+  <DIR></DIR>
+ </INCLUDE_PATH>
+ <SOURCE_FILE>F:\Aufgabe _4\Aufgabe_h_2\Aufgabe_h_2\Aufgabe_h_2.asm</SOURCE_FILE>
+ <INCLUDED_FILES>
+  <FILE>C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR Assembler\Native\2.1.1117\avrassembler\Include\m644PAdef.inc</FILE>
+ </INCLUDED_FILES>
+ <OBJECT_FILES>
+  <FILE>F:\Aufgabe _4\Aufgabe_h_2\Aufgabe_h_2\Debug/Aufgabe_h_2.obj</FILE>
+ </OBJECT_FILES>
+ <HEX_FILES>
+  <FILE>Aufgabe_h_2.hex</FILE>
+ </HEX_FILES>
+ <OUTPUT_FILES>
+  <FILE>Aufgabe_h_2.map</FILE>
+  <FILE>Aufgabe_h_2.lss</FILE>
+ </OUTPUT_FILES>
+ <LABELS>
+  <start><FILE>F:\Aufgabe _4\Aufgabe_h_2\Aufgabe_h_2\Aufgabe_h_2.asm</FILE><LINE>95</LINE></start>
+  <OCR1A_isr><FILE>F:\Aufgabe _4\Aufgabe_h_2\Aufgabe_h_2\Aufgabe_h_2.asm</FILE><LINE>37</LINE></OCR1A_isr>
+  <T1count><FILE>F:\Aufgabe _4\Aufgabe_h_2\Aufgabe_h_2\Aufgabe_h_2.asm</FILE><LINE>23</LINE></T1count>
+  <noDec><FILE>F:\Aufgabe _4\Aufgabe_h_2\Aufgabe_h_2\Aufgabe_h_2.asm</FILE><LINE>46</LINE></noDec>
+  <InitT1><FILE>F:\Aufgabe _4\Aufgabe_h_2\Aufgabe_h_2\Aufgabe_h_2.asm</FILE><LINE>55</LINE></InitT1>
+  <startWait><FILE>F:\Aufgabe _4\Aufgabe_h_2\Aufgabe_h_2\Aufgabe_h_2.asm</FILE><LINE>80</LINE></startWait>
+  <wait><FILE>F:\Aufgabe _4\Aufgabe_h_2\Aufgabe_h_2\Aufgabe_h_2.asm</FILE><LINE>85</LINE></wait>
+  <waitNow><FILE>F:\Aufgabe _4\Aufgabe_h_2\Aufgabe_h_2\Aufgabe_h_2.asm</FILE><LINE>89</LINE></waitNow>
+  <loop><FILE>F:\Aufgabe _4\Aufgabe_h_2\Aufgabe_h_2\Aufgabe_h_2.asm</FILE><LINE>110</LINE></loop>
+  <light><FILE>F:\Aufgabe _4\Aufgabe_h_2\Aufgabe_h_2\Aufgabe_h_2.asm</FILE><LINE>120</LINE></light>
+ </LABELS>
+</ASSEMBLER_INFO>
