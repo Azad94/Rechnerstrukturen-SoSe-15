@@ -1,8 +1,8 @@
 
-AVRASM ver. 2.1.52  C:\Users\Sven\Documents\GitHub\Rechnerstrukturen-SoSe-15\Aufgabe _4\Aufgabe_i\Aufgabe_i\Aufgabe_i.asm Fri Jul 03 16:01:28 2015
+AVRASM ver. 2.1.52  C:\Users\Sven\Documents\GitHub\Rechnerstrukturen-SoSe-15\Aufgabe _4\interruptWithIOHandling\interruptWithIOHandling\interruptWithIOHandling.asm Sun Jul 05 23:59:19 2015
 
 [builtin](2): Including file 'C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR Assembler\Native\2.1.1117\avrassembler\Include\m644PAdef.inc'
-C:\Users\Sven\Documents\GitHub\Rechnerstrukturen-SoSe-15\Aufgabe _4\Aufgabe_i\Aufgabe_i\Aufgabe_i.asm(7): Including file 'C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR Assembler\Native\2.1.1117\avrassembler\Include\m644PAdef.inc'
+C:\Users\Sven\Documents\GitHub\Rechnerstrukturen-SoSe-15\Aufgabe _4\interruptWithIOHandling\interruptWithIOHandling\interruptWithIOHandling.asm(7): Including file 'C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR Assembler\Native\2.1.1117\avrassembler\Include\m644PAdef.inc'
                  
                  /*
                  
@@ -1151,12 +1151,12 @@ C:\Users\Sven\Documents\GitHub\Rechnerstrukturen-SoSe-15\Aufgabe _4\Aufgabe_i\Au
                  
                  ; ***** END OF FILE ******************************************************
                  
-                  * Aufgabe_i.asm
+                  * INT0Demo.asm
                   *
-                  *  Created: 30.06.2015 19:48:28
-                  *   Author: Sven
+                  *  Created: 28.12.2012 21:33:59
+                  *   Author: Ole
                   */ 
-                  .include "m644PAdef.inc"
+                 .include "m644PAdef.inc"	; device: ATmega 644PA
                  
                  ;***** Created: 2011-02-09 12:03 ******* Source: ATmega644PA.xml *********
                  ;*************************************************************************
@@ -1200,23 +1200,250 @@ C:\Users\Sven\Documents\GitHub\Rechnerstrukturen-SoSe-15\Aufgabe _4\Aufgabe_i\Au
                  #endif  /* _M644PADEF_INC_ */
                  
                  ; ***** END OF FILE ******************************************************
-                  .cseg
-                  ;Nur ein Test sollte aber mit unseren alten aufgabe funktionieren
-                  ; Initialisierungscode weggelassen
-000000 ef0f      ldi r16, 0xFF
-000001 b904               out DDRB, r16     ; Alle Pins am Port B durch Ausgabe von 0xFF ins
-                                            ; Richtungsregister DDRB als Ausgang konfigurieren
-000002 e000               ldi r16, 0x00
-000003 b90a               out DDRD, r16     ; Alle Pins am Port D durch Ausgabe von 0x00 ins
-                                            ; Richtungsregister DDRD als Eingang konfigurieren
-                  
-000004 ee00               ldi r16, 0xE0     ; An allen Pins vom Port D die Pullup-Widerstände
-000005 b90b               out PORTD, r16    ; aktivieren. Dies geht deshalb durch eine Ausgabe
-                                            ; nach PORTD, da ja der Port auf Eingang gestellt ist.
-                 loop:
-000006 b109               in r16, PIND      ; an Port D anliegende Werte (Taster) nach r16 einlesen
-000007 b905               out PORTB, r16    ; Inhalt von r16 an Port B ausgeben
-000008 cffd               rjmp loop         ;  zu "loop:" -> Endlosschleife
+                 ; ----- Am Beginn des Codespeichers liegt die Vektortabelle -----
+                 ;		Hier nur Sprungtabelle anlegen. Mindestens für den 
+                 ;		Reset-Interrupt (An Adresse 0):
+                 	.org	0		; Am Anfang des Code-Speicher 
+000000 940c 0159 	jmp Main		; Sprung bei reset
+                 	.org $0008		;External Pin wurden angesprochen heißt PINA(7..0)
+000008 940c 00f8 	jmp PCINT0_isr
+                 	.org OC1Aaddr
+00001a 940c 011c 	jmp OCRA1A_isr
+                 ; ***** Hier werden die "Variablen" definiert
+                 	.dseg					; dies sind Daten
+000100           T1count:		.byte 1		; Zähler für Wartefunktion mit Timer1
+000101           Nachtmodus:		.byte 1
+000102           Bereitschaft:	.byte 1
+000103           Zustand:		.byte 1
+                 	.cseg			; dies ist Code
+                 ; ----- Platz um .equ definitionen vorzunehmen
+                 #ifdef DEBUG 
+                 #else
+                 .equ	T1Counter = 98				; Timer-Wert für 0,1s
+                 #endif
+                 //.equ Nachtmodus = 1				;Nachtmodus standard wert Aus
+                 //.equ Bereitschaft=0x00				;BEreitschaftsknopf standard wert Aus
+                 .equ Timer=5						; Zeit zum warten 0.,5s
+                 //.equ Zustand=0x00					;Welchen Zustand bestizen wir für die Bereitschaft
+                 .equ A_gruen_F_rot = 0x06	
+                 .equ A_gelb_F_rot = 0x0A
+                 .equ A_rot_F_rot = 0x12
+                 .equ A_rot_F_gruen = 0x11
+                 .equ A_rotgelb_F_rot = 0x1A
+                 .equ A_F_aus = 0x00
+                 ; ----- Programm beginnt hinter der Vektortabelle: -----
+                 	.org 4*INT_VECTORS_SIZE
+                 ; hier kommen die Interrupt Service Routinen hin, wenn benutzt
+                 /********************************************************/
+                 ;	ISR External Interrupt 0: PCINT0 
+                 PCINT0_isr:	
+0000f8 930f      	push r16	
+0000f9 e000      	ldi R16,0x00
+0000fa 9b05      	sbis PINA,5
+0000fb 9300 0101 	sts Nachtmodus, R16			;Nachtmodus an
+0000fd e001      	ldi R16,0x01
+0000fe 9b06      	sbis PINA,6
+0000ff 9300 0101 	sts Nachtmodus, R16			;Nachtmodus aus
+000101 9b07      	sbis PINA,7
+000102 940e 0106 	call BereitschaftPruefen	;Bereitschaft an
+000104 910f      	pop r16						; Register restaurierten
+000105 9518      	reti						; Return from Interrupt;
+                 ;
+                 
+                 
+                 BereitschaftPruefen:
+000106 930f      	push R16
+000107 931f      	push R17
+000108 932f      	push R18
+000109 9100 0103 	lds R16, Zustand
+00010b e015      	ldi R17, 0x05
+00010c e021      	ldi R18, 0x01
+00010d 1702      	cp	R16,R18				;Prüfen ob wir <= Zustand 1 sind
+00010e f434      	brge BereitschaftAn
+00010f 1710      	cp R17,R16				;Prüfen ob wir >= Zustand 5 sind
+000110 f424      	brge BereitschaftAn
+000111 912f      	pop R18
+000112 911f      	pop R17
+000113 910f      	pop R16
+000114 9508      	ret
+                 BereitschaftAn:
+000115 e001      	ldi R16,0x01
+000116 9300 0102 	sts Bereitschaft, R16
+000118 912f      	pop R18
+000119 911f      	pop R17
+00011a 910f      	pop R16
+00011b 9508      	ret
+                 
+                 
+                 /********************************************************/
+                 ;	ISR Timer1 Compare Interrupt A
+                 OCRA1A_isr:
+00011c 930f      	push r16				; Register auf den Stack retten
+00011d b70f          in   r16, SREG			; Statusregister zum Sichern nach R16
+00011e 930f      	push r16				; und auf den Stack
+00011f 9100 0100 	lds r16, T1count		; Zählwert lesen
+000121 2300      	tst r16					; schon Null?
+000122 f019      	breq noDec				; ja: nichts weiter Abziehen
+000123 950a      	dec r16					; T1count--
+000124 9300 0100 	sts T1count, r16		; und abspeichern
+                 noDec:
+000126 910f          pop r16					; die Statusregister von Stack holen
+000127 bf0f      	out SREG, r16			; und wieder herstellen
+000128 910f      	pop r16					; Register restaurierten
+000129 9518      	reti					; Return from Interrupt;
+                 ;
+                 
+                 ; ----- Initialisierung des PCINT0-----
+                 InitPCINT0:
+00012a 930f      	push r16
+00012b 931f      	push r17
+00012c e001      	ldi R16 , 0x01	; Setze Die PINA(7..0) als external Interrupt
+00012d 9300 0068 	sts PCICR, R16
+00012f ee00      	ldi R16, 0xE0
+000130 9300 006b 	sts PCMSK0, R16
+000132 911f      	pop r17
+000133 910f      	pop r16
+000134 9508      	ret
+                 ;
+                 
+                 ; ----- Initialisierung von Timer1 auf 0,1s Periode -----
+                 InitTImer1:
+                 	; beim 644PA sind Timer1-Register Memory.mapped
+000135 931f      	push r17
+000136 e010      	ldi r17, HIGH(T1Counter)	; Timer-Schwelle 
+000137 9310 0089 	sts OCR1AH, r17				; byte-weise 
+000139 e612      	ldi r17, LOW(T1Counter)		; nach OCR1A
+00013a 9310 0088 	sts OCR1AL, r17
+00013c 2711      	clr r17					; r17=0 
+00013d 9310 0085 	sts TCNT1H, r17			; Counter=0
+00013f 9310 0084 	sts TCNT1L, r17
+000141 9310 0080 	sts TCCR1A, r17			; configure to CTC-Mode	
+                 #ifdef DEBUG 
+                 #else 
+000143 e01d      	ldi r17, 0b0001101		; CTC-mode, prescaler 1024 
+                 #endif
+000144 9310 0081 	sts TCCR1B, r17				
+                 	; und den OC1A intrerrupt einschalten:
+000146 9110 006f 	lds r17, TIMSK1			; Interruptmaske Timer1 
+000148 6012      	ori r17, 0b00000010		; OCIE1A setzen
+000149 9310 006f 	sts TIMSK1, r17			; und abspeichern
+00014b 911f      	pop r17
+00014c 9508      	ret
+                 
+                 ; ----- Warte-Zähler Setzen und Starten (nonblocking)
+                 startWait:
+00014d e005      	ldi R16,Timer
+00014e 9300 0100 	sts T1count, r16		; Nur Zähler setzen
+000150 9508      	ret
+                 ; ----- Wait-funktion komplett
+                 ; Parameter: R16 enthält die Wartedauer in Zehntelsekunden
+                 wait:
+                 ; Timer resetten, Interrupt aktivieren
+000151 e005      	ldi R16,Timer
+000152 9300 0100 	sts T1count, r16		
+                 ; ----- Rest der Komplett-Funktion als Abwarte-Funktion -----
+                 waitNow:
+                 ; polling auf Counter=0
+000154 9100 0100 	lds r16, T1count
+000156 2300      	tst r16
+000157 f7e1      	brne waitNow
+000158 9508      	ret
+                 ;
+                 
+                 ; ***** Einsprungpunkt in das Hauptprogramm *****
+                 Main:
+                 ; ----- Initialisierung der grundlegenden Funktionen -----
+                 	; Initialisieren des Stacks am oberen Ende des RAM
+                     ; 16 bit SP wird als SPH:SPL im IO-Space angesprochen 
+000159 ef0f          ldi r16, LOW(RAMEND)	; low-Byte von RAMEND nach r16
+00015a bf0d          out SPL, r16	; in low-byte des SP ausgeben
+                 					; der SP liegt im IO-Space 
+00015b e100          ldi r16, HIGH(RAMEND)	; high-Byte von RAMEND nach r16
+00015c bf0e          out SPH, r16		; in high-byte des SP ausgeben
+                     ; ab hier kann der Stack verwendet werden 
+                 
+00015d 940e 012a 	call InitPCINT0				; PCINT0 auf PIINA 5,6,7 initialisieren
+00015f 940e 0135 	call InitTimer1				; Timer1 initalisieren
+000161 9478      	sei							; global Interrupt enabl
+000162 e001      	ldi R16,0x01				;Wir beginnen mit Nachtmodus aus
+000163 9300 0101 	sts Nachtmodus, R16		
+000165 e10f      	ldi R16, 0x1F
+000166 b901      	out DDRA,R16				;Vorbereiten der Ausgänge
+                 Start:
+000167 e010      	ldi R17,0x00
+000168 9120 0101 	lds R18,Nachtmodus
+00016a 1721      	cp	R18,R17
+00016b f469      	brne Zustand1
+                 Zustand0:
+00016c e020      	ldi R18,0x00
+00016d b922      	out PORTA, R18				;Alle aus
+00016e 9300 0103 	sts Zustand,R16
+000170 e011      	ldi R17,0x01
+000171 9310 0103 	sts Zustand,R17				;Zustand setzen auf Zustand1
+000173 9120 0102 	lds R18,Bereitschaft
+000175 1721      	cp R18,R17					;Prfen ob bereitschaft  gedrückt wurde
+000176 f011      	breq Zustand1				;Wenn ja gehe zu  Zustand2
+000177 940c 0167 	jmp Start
+                 Zustand1:
+000179 e026      	ldi R18, A_gruen_F_rot	
+00017a b922      	out PORTA,  R18
+00017b e011      	ldi R17,0x01
+00017c 9310 0103 	sts Zustand,R17				;Zustand setzen auf Zustand1
+00017e 9120 0102 	lds R18,Bereitschaft
+000180 1721      	cp R18,R17					;Prfen ob bereitschaft  gedrückt wurde
+000181 f011      	breq Zustand2				;Wenn ja gehe zu  Zustand2
+000182 940c 0167 	jmp Start					;Ansonsten erneut prüfen
+                 Zustand2:
+000184 940e 0151 	call Wait
+000186 e000      	ldi R16,0x00
+000187 9300 0102 	sts Bereitschaft,R16
+000189 e02a      	ldi R18, A_gelb_F_rot
+00018a b922      	out PORTA, R18
+00018b 9513      	inc R17
+00018c 9310 0103 	sts Zustand,R17
+                 Zustand3:
+00018e 940e 0151 	call Wait
+000190 e122      	ldi R18, A_rot_F_rot
+000191 b922      	out PORTA, R18
+000192 9513      	inc R17
+000193 9310 0103 	sts Zustand,R17
+                 Zustand4:
+000195 940e 0151 	call Wait
+000197 e121      	ldi R18, A_rot_F_gruen
+000198 b922      	out PORTA, R18
+000199 9513      	inc R17
+00019a 9310 0103 	sts Zustand,R17
+                 Zustand5:
+00019c 940e 0151 	call Wait
+00019e e122      	ldi R18, A_rot_F_rot
+00019f b922      	out PORTA, R18
+0001a0 9513      	inc R17
+0001a1 9310 0103 	sts Zustand,R17
+                 Zustand6:
+0001a3 940e 0151 	call Wait
+0001a5 e12a      	ldi R18, A_rotgelb_F_rot
+0001a6 b922      	out PORTA, R18
+0001a7 9513      	inc R17
+0001a8 9310 0103 	sts Zustand,R17
+                 Zustand7:
+0001aa 940e 0151 	call Wait
+0001ac e026      	ldi R18, A_gruen_F_rot
+0001ad b922      	out PORTA, R18
+0001ae 9513      	inc R17
+0001af 9310 0103 	sts Zustand, R17
+                 Zustand8:
+0001b1 940e 0151 	call Wait
+0001b3 e026      	ldi R18, A_gruen_F_rot
+0001b4 b922      	out PORTA, R18
+0001b5 9513      	inc R17
+0001b6 9310 0103 	sts Zustand, R17
+                 Zustand9:
+0001b8 940e 0151 	call Wait
+0001ba e026      	ldi R18, A_gruen_F_rot
+0001bb b922      	out PORTA, R18
+0001bc 9513      	inc R17
+0001bd 9310 0103 	sts Zustand, R17
+0001bf 940e 0151 	call Wait
 
 
 RESOURCE USE INFORMATION
@@ -1236,38 +1463,38 @@ counted separately from r26..r31 here.
 "ATmega644PA" register use summary:
 r0 :   0 r1 :   0 r2 :   0 r3 :   0 r4 :   0 r5 :   0 r6 :   0 r7 :   0 
 r8 :   0 r9 :   0 r10:   0 r11:   0 r12:   0 r13:   0 r14:   0 r15:   0 
-r16:   8 r17:   0 r18:   0 r19:   0 r20:   0 r21:   0 r22:   0 r23:   0 
+r16:  47 r17:  46 r18:  31 r19:   0 r20:   0 r21:   0 r22:   0 r23:   0 
 r24:   0 r25:   0 r26:   0 r27:   0 r28:   0 r29:   0 r30:   0 r31:   0 
 x  :   0 y  :   0 z  :   0 
-Registers used: 1 out of 35 (2.9%)
+Registers used: 3 out of 35 (8.6%)
 
 "ATmega644PA" instruction use summary:
 .lds  :   0 .sts  :   0 adc   :   0 add   :   0 adiw  :   0 and   :   0 
 andi  :   0 asr   :   0 bclr  :   0 bld   :   0 brbc  :   0 brbs  :   0 
-brcc  :   0 brcs  :   0 break :   0 breq  :   0 brge  :   0 brhc  :   0 
+brcc  :   0 brcs  :   0 break :   0 breq  :   3 brge  :   2 brhc  :   0 
 brhs  :   0 brid  :   0 brie  :   0 brlo  :   0 brlt  :   0 brmi  :   0 
-brne  :   0 brpl  :   0 brsh  :   0 brtc  :   0 brts  :   0 brvc  :   0 
-brvs  :   0 bset  :   0 bst   :   0 call  :   0 cbi   :   0 cbr   :   0 
-clc   :   0 clh   :   0 cli   :   0 cln   :   0 clr   :   0 cls   :   0 
-clt   :   0 clv   :   0 clz   :   0 com   :   0 cp    :   0 cpc   :   0 
-cpi   :   0 cpse  :   0 dec   :   0 eor   :   0 fmul  :   0 fmuls :   0 
-fmulsu:   0 icall :   0 ijmp  :   0 in    :   1 inc   :   0 jmp   :   0 
-ld    :   0 ldd   :   0 ldi   :   3 lds   :   0 lpm   :   0 lsl   :   0 
+brne  :   2 brpl  :   0 brsh  :   0 brtc  :   0 brts  :   0 brvc  :   0 
+brvs  :   0 bset  :   0 bst   :   0 call  :  12 cbi   :   0 cbr   :   0 
+clc   :   0 clh   :   0 cli   :   0 cln   :   0 clr   :   1 cls   :   0 
+clt   :   0 clv   :   0 clz   :   0 com   :   0 cp    :   5 cpc   :   0 
+cpi   :   0 cpse  :   0 dec   :   1 eor   :   0 fmul  :   0 fmuls :   0 
+fmulsu:   0 icall :   0 ijmp  :   0 in    :   1 inc   :   8 jmp   :   6 
+ld    :   0 ldd   :   0 ldi   :  30 lds   :   7 lpm   :   0 lsl   :   0 
 lsr   :   0 mov   :   0 movw  :   0 mul   :   0 muls  :   0 mulsu :   0 
-neg   :   0 nop   :   0 or    :   0 ori   :   0 out   :   4 pop   :   0 
-push  :   0 rcall :   0 ret   :   0 reti  :   0 rjmp  :   1 rol   :   0 
-ror   :   0 sbc   :   0 sbci  :   0 sbi   :   0 sbic  :   0 sbis  :   0 
+neg   :   0 nop   :   0 or    :   0 ori   :   1 out   :  14 pop   :  12 
+push  :   9 rcall :   0 ret   :   6 reti  :   2 rjmp  :   0 rol   :   0 
+ror   :   0 sbc   :   0 sbci  :   0 sbi   :   0 sbic  :   0 sbis  :   3 
 sbiw  :   0 sbr   :   0 sbrc  :   0 sbrs  :   0 sec   :   0 seh   :   0 
-sei   :   0 sen   :   0 ser   :   0 ses   :   0 set   :   0 sev   :   0 
-sez   :   0 sleep :   0 spm   :   0 st    :   0 std   :   0 sts   :   0 
-sub   :   0 subi  :   0 swap  :   0 tst   :   0 wdr   :   0 
-Instructions used: 4 out of 113 (3.5%)
+sei   :   1 sen   :   0 ser   :   0 ses   :   0 set   :   0 sev   :   0 
+sez   :   0 sleep :   0 spm   :   0 st    :   0 std   :   0 sts   :  28 
+sub   :   0 subi  :   0 swap  :   0 tst   :   2 wdr   :   0 
+Instructions used: 22 out of 113 (19.5%)
 
 "ATmega644PA" memory use summary [bytes]:
 Segment   Begin    End      Code   Data   Used    Size   Use%
 ---------------------------------------------------------------
-[.cseg] 0x000000 0x000012     18      0     18   65536   0.0%
-[.dseg] 0x000100 0x000100      0      0      0    4096   0.0%
+[.cseg] 0x000000 0x000386    418      0    418   65536   0.6%
+[.dseg] 0x000100 0x000104      0      4      4    4096   0.1%
 [.eseg] 0x000000 0x000000      0      0      0    2048   0.0%
 
 Assembly complete, 0 errors, 0 warnings

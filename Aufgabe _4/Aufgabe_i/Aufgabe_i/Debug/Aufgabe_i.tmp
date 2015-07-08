@@ -21,7 +21,6 @@
   <FILE>Aufgabe_i.lss</FILE>
  </OUTPUT_FILES>
  <LABELS>
-  <waitkey><FILE>C:\Users\Sven\Documents\GitHub\Rechnerstrukturen-SoSe-15\Aufgabe _4\Aufgabe_i\Aufgabe_i\Aufgabe_i.asm</FILE><LINE>15</LINE></waitkey>
-  <stay><FILE>C:\Users\Sven\Documents\GitHub\Rechnerstrukturen-SoSe-15\Aufgabe _4\Aufgabe_i\Aufgabe_i\Aufgabe_i.asm</FILE><LINE>22</LINE></stay>
+  <loop><FILE>C:\Users\Sven\Documents\GitHub\Rechnerstrukturen-SoSe-15\Aufgabe _4\Aufgabe_i\Aufgabe_i\Aufgabe_i.asm</FILE><LINE>21</LINE></loop>
  </LABELS>
 </ASSEMBLER_INFO>
