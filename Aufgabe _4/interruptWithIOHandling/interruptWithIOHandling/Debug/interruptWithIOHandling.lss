@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.1.52  C:\Users\Sven\Documents\GitHub\Rechnerstrukturen-SoSe-15\Aufgabe _4\interruptWithIOHandling\interruptWithIOHandling\interruptWithIOHandling.asm Thu Jul 09 09:17:47 2015
+AVRASM ver. 2.1.52  C:\Users\Sven\Documents\GitHub\Rechnerstrukturen-SoSe-15\Aufgabe _4\interruptWithIOHandling\interruptWithIOHandling\interruptWithIOHandling.asm Thu Jul 09 09:31:53 2015
 
 [builtin](2): Including file 'C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR Assembler\Native\2.1.1117\avrassembler\Include\m644PAdef.inc'
 C:\Users\Sven\Documents\GitHub\Rechnerstrukturen-SoSe-15\Aufgabe _4\interruptWithIOHandling\interruptWithIOHandling\interruptWithIOHandling.asm(6): Including file 'C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR Assembler\Native\2.1.1117\avrassembler\Include\m644PAdef.inc'
@@ -1253,7 +1253,7 @@ C:\Users\Sven\Documents\GitHub\Rechnerstrukturen-SoSe-15\Aufgabe _4\interruptWit
 0000fe e031      	ldi Nachtmodus, 0x01						; Nachtmodus aus
                  	
 0000ff 9b07      	sbis PINA,7
-000100 940e 0106 	call BereitschaftPruefen					; Bereitschaft an
+000100 940e 0106 	call BereitschaftPruefen					; Bereitschaft an prufen
                  	
 000102 910f      	pop R16
 000103 bf0f      	out SREG,R16
@@ -1423,7 +1423,7 @@ C:\Users\Sven\Documents\GitHub\Rechnerstrukturen-SoSe-15\Aufgabe _4\interruptWit
                  Zustand2:
 000172 940e 014a 	call Wait
                  	
-000174 9543      	inc Bereitschaft
+000174 9543      	inc Bereitschaft						;Zustand immer auf den Aktuellen wert setzen
                  
 000175 ef22      	ldi R18, A_gelb_F_rot
 000176 b922      	out PORTA, R18
@@ -1471,7 +1471,7 @@ C:\Users\Sven\Documents\GitHub\Rechnerstrukturen-SoSe-15\Aufgabe _4\interruptWit
 000194 b922      	out PORTA, R18
                  
 000195 9553      	inc Zustand
-000196 940e 014a 	call Wait
+000196 940e 014a 	call Wait								; Nochmal warten für den Anfang
 
 
 RESOURCE USE INFORMATION

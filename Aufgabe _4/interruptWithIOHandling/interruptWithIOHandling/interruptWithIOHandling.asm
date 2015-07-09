@@ -17,9 +17,6 @@
 ; ***** Hier werden die "Variablen" definiert
 	.dseg										; dies sind Daten
 T1count:		.byte 1							; Zähler für Wartefunktion mit Timer1
-//Nachtmodus:		.byte 1
-//Bereitschaft:		.byte 1
-//Zustand:		.byte 1
 	.cseg										; dies ist Code
 
 ; ----- Platz um .equ definitionen vorzunehmen
@@ -31,10 +28,10 @@ T1count:		.byte 1							; Zähler für Wartefunktion mit Timer1
 .equ Timer=5									; Zeit zum Warten 0,5s
 
 ;----- Ampelzustände Auto = A, Fußgänger = F
-.def Nachtmodus = R19
-.def Bereitschaft = R20
-.def Zustand = R21
-.equ A_gruen_F_rot = 0xF1		; je + 0xE0 wegen der Pull Ups
+.def Nachtmodus = R19							; Speichert ob Nachtmodus an oder aus
+.def Bereitschaft = R20							; Speichert ob Bereitschaft an oder aus
+.def Zustand = R21								; Speichert den jeweiligen Zustand
+.equ A_gruen_F_rot = 0xF1						; je + 0xE0 wegen der Pull Ups
 .equ A_gelb_F_rot = 0xF2
 .equ A_rot_F_rot = 0xF4
 .equ A_rot_F_gruen = 0xEC
@@ -59,7 +56,7 @@ PCINT0_isr:
 	ldi Nachtmodus, 0x01						; Nachtmodus aus
 	
 	sbis PINA,7
-	call BereitschaftPruefen					; Bereitschaft an
+	call BereitschaftPruefen					; Bereitschaft an prufen
 	
 	pop R16
 	out SREG,R16
@@ -228,9 +225,9 @@ Zustand1:
 	jmp Start								; Ansonsten erneut prüfen
 
 Zustand2:
-	call Wait
+	call Wait								; Warte zeit für Ampelumschalten
 	
-	inc Bereitschaft
+	inc Bereitschaft						;Zustand immer auf den Aktuellen wert setzen
 
 	ldi R18, A_gelb_F_rot
 	out PORTA, R18
@@ -278,5 +275,5 @@ Zustand8:
 	out PORTA, R18
 
 	inc Zustand
-	call Wait
+	call Wait								; Nochmal warten für den Anfang
 	jmp Start
