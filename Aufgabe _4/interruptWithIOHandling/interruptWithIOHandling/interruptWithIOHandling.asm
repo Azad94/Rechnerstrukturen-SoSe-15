@@ -39,12 +39,15 @@ T1count:		.byte 1							; Zähler für Wartefunktion mit Timer1
 .equ A_F_aus = 0xE0				
 
 ; ----- Programm beginnt hinter der Vektortabelle: -----
-	.org 4*INT_VECTORS_SIZE
+	.org 3*INT_VECTORS_SIZE
 ; hier kommen die Interrupt Service Routinen hin, wenn benutzt
 /********************************************************/
 ;	ISR External Interrupt 0: PCINT0 
 
 ;---- Tasterabfrage ----
+;PINA5 Nachtmodus an
+;PINA6 Nachtmodus aus 
+;PINA7 Bereitschaft an
 PCINT0_isr:	
 	push r16
 	in R16,SREG
@@ -89,6 +92,7 @@ BereitschaftAn:
 
 /********************************************************/
 ;	ISR Timer1 Compare Interrupt A
+;Author Ole Blaurock FH Lübeck
 OCRA1A_isr:
 	push r16									; Register auf den Stack retten
    	in   r16, SREG								; Statusregister zum Sichern nach R16
@@ -124,6 +128,7 @@ InitPCINT0:
 ;
 
 ; ----- Initialisierung von Timer1 auf 0,1s Periode -----
+; Author Ole Blaurock FH Lübeck
 InitTimer1:
 	; beim 644PA sind Timer1-Register Memory.mapped
 	push r17
@@ -215,16 +220,16 @@ Zustand0:
 	jmp Start
 
 Zustand1:
+	inc Zustand								; Zustand setzen auf Zustand1
 	ldi R18, A_gruen_F_rot	
 	out PORTA,  R18
-	
-	inc Zustand								; Zustand setzen auf Zustand1
 	
 	tst Bereitschaft						; Prüfen (auf 0), ob Bereitschaft gedrückt wurde
 	breq Zustand2							; Wenn ja, gehe zu  Zustand2
 	jmp Start								; Ansonsten erneut prüfen
 
 Zustand2:
+	inc Zustand
 	call Wait								; Warte zeit für Ampelumschalten
 	
 	inc Bereitschaft						;Zustand immer auf den Aktuellen wert setzen
@@ -232,48 +237,39 @@ Zustand2:
 	ldi R18, A_gelb_F_rot
 	out PORTA, R18
 
-	inc Zustand
-
 Zustand3:
+	inc Zustand
 	call Wait
 	ldi R18, A_rot_F_rot
 	out PORTA, R18
-	
-	inc Zustand
-
 Zustand4:
+	inc Zustand
 	call Wait
 	ldi R18, A_rot_F_gruen
 	out PORTA, R18
-
-	inc Zustand
-
 Zustand5:
+	inc Zustand
 	call Wait
 	ldi R18, A_rot_F_rot
 	out PORTA, R18
 
-	inc Zustand
-
 Zustand6:
+	inc Zustand
 	call Wait
 	ldi R18, A_rotgelb_F_rot
 	out PORTA, R18
-	
-	inc Zustand
 
 Zustand7:
+	inc Zustand
 	call Wait
 	ldi R18, A_gruen_F_rot
 	out PORTA, R18
-	
-	inc Zustand
 
 Zustand8:
+	inc Zustand
 	call Wait
 	ldi R18, A_gruen_F_rot
 	out PORTA, R18
 
-	inc Zustand
 	call Wait								; Nochmal warten für den Anfang
 	jmp Start
