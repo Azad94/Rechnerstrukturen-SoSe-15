@@ -62,7 +62,7 @@ PCINT0_isr:
 	call BereitschaftPruefen					; Bereitschaft an
 	
 	pop R16
-	out SEG,R16
+	out SREG,R16
 	pop r16										; Register wiederherstellen
 	reti										; Return from Interrupt;
 
@@ -204,18 +204,16 @@ Main:
 	nop										; Bitte die PINA 5,6,7 aktivieren für PULL up Hinweis aus dem Mikrocontroller.net Forum
  
 Start:
-	ldi Zustand,0x00
-	cp Nachtmodus,R17
+	ldi Zustand,0x00						;Zustand setzen aus Zustand0
+	tst Nachtmodus
 	brne Zustand1
 
 Zustand0:
 	ldi R18, A_F_aus
 	out PORTA, R18							; Alle aus
 	
-	ldi Zustand,0x00						; Zustand setzen auf Zustand0
-	
 		
-	cp Zustand, Bereitschaft				; Prüfen auf 0, ob Bereitschaft gedrückt wurde 
+	tst Bereitschaft						; Prüfen auf 0, ob Bereitschaft gedrückt wurde 
 	breq Zustand1							; Wenn ja gehe zu  Zustand1
 	jmp Start
 
@@ -225,8 +223,8 @@ Zustand1:
 	
 	inc Zustand								; Zustand setzen auf Zustand1
 	
-	cp Bereitschaft,Zustand					; Prüfen (auf 0), ob Bereitschaft gedrückt wurde
-	brlo Zustand2							; Wenn ja, gehe zu  Zustand2
+	tst Bereitschaft						; Prüfen (auf 0), ob Bereitschaft gedrückt wurde
+	breq Zustand2							; Wenn ja, gehe zu  Zustand2
 	jmp Start								; Ansonsten erneut prüfen
 
 Zustand2:

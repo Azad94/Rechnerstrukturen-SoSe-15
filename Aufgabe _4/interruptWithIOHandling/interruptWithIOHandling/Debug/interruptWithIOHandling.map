@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.1.52  C:\Users\Sven\Documents\GitHub\Rechnerstrukturen-SoSe-15\Aufgabe _4\interruptWithIOHandling\interruptWithIOHandling\interruptWithIOHandling.asm Thu Jul 09 06:59:34 2015
+AVRASM ver. 2.1.52  C:\Users\Sven\Documents\GitHub\Rechnerstrukturen-SoSe-15\Aufgabe _4\interruptWithIOHandling\interruptWithIOHandling\interruptWithIOHandling.asm Thu Jul 09 09:17:47 2015
 
 
 EQU  SIGNATURE_000 0000001e
@@ -826,9 +826,9 @@ EQU  URXC1addr    00000038
 EQU  UDRE1addr    0000003a
 EQU  UTXC1addr    0000003c
 EQU  INT_VECTORS_SIZE 0000003e
-CSEG Main         00000151
+CSEG Main         00000152
 CSEG PCINT0_isr   000000f8
-CSEG OCRA1A_isr   00000114
+CSEG OCRA1A_isr   00000115
 DSEG T1count      00000100
 EQU  T1Counter    00000062
 EQU  Timer        00000005
@@ -841,17 +841,17 @@ EQU  A_rot_F_rot  000000f4
 EQU  A_rot_F_gruen 000000ec
 EQU  A_rotgelb_F_rot 000000f6
 EQU  A_F_aus      000000e0
-CSEG BereitschaftPruefen 00000102
-CSEG BereitschaftAn 0000010f
-CSEG noDec        0000011e
-CSEG InitPCINT0   00000122
-CSEG InitTimer1   0000012d
-CSEG startWait    00000145
-CSEG wait         00000149
-CSEG waitNow      0000014c
-CSEG Start        00000161
+CSEG BereitschaftPruefen 00000106
+CSEG BereitschaftAn 00000111
+CSEG noDec        0000011f
+CSEG InitPCINT0   00000123
+CSEG InitTimer1   0000012e
+CSEG startWait    00000146
+CSEG wait         0000014a
+CSEG waitNow      0000014d
+CSEG Start        00000162
 CSEG Zustand1     0000016b
-CSEG Zustand0     00000164
+CSEG Zustand0     00000165
 CSEG Zustand2     00000172
 CSEG Zustand3     00000178
 CSEG Zustand4     0000017d
