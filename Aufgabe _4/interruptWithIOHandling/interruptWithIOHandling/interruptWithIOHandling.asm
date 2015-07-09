@@ -216,7 +216,6 @@ Zustand0:
 	ldi R18, A_F_aus
 	out PORTA, R18								; Alle aus
 	
-		
 	tst Bereitschaft							; Prüfen auf 0, ob Bereitschaft gedrückt wurde 
 	breq Zustand1								; Wenn ja gehe zu  Zustand1
 	jmp Start
