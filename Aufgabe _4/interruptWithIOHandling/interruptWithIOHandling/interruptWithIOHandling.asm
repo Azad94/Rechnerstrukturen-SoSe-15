@@ -83,7 +83,7 @@ BereitschaftPruefen:
 	ret
 
 BereitschaftAn:
-	ldi Bereitschaft,0x01						; 0 bedeutet Bereitschaft ist an
+	ldi Bereitschaft,0x00						; 0 bedeutet Bereitschaft ist an
 
 	pop R18
 	pop R17
