@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.1.52  C:\Users\Sheraz\Documents\GitHub\Rechnerstrukturen-SoSe-15\Aufgabe _4\interruptWithIOHandling\interruptWithIOHandling\interruptWithIOHandling.asm Thu Jul 09 12:11:01 2015
+AVRASM ver. 2.1.52  C:\Users\Sheraz\Documents\GitHub\Rechnerstrukturen-SoSe-15\Aufgabe _4\interruptWithIOHandling\interruptWithIOHandling\interruptWithIOHandling.asm Thu Jul 09 12:18:26 2015
 
 [builtin](2): Including file 'C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR Assembler\Native\2.1.1117\avrassembler\Include\m644PAdef.inc'
 C:\Users\Sheraz\Documents\GitHub\Rechnerstrukturen-SoSe-15\Aufgabe _4\interruptWithIOHandling\interruptWithIOHandling\interruptWithIOHandling.asm(6): Including file 'C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR Assembler\Native\2.1.1117\avrassembler\Include\m644PAdef.inc'
@@ -1219,7 +1219,7 @@ C:\Users\Sheraz\Documents\GitHub\Rechnerstrukturen-SoSe-15\Aufgabe _4\interruptW
                  #else
                  .equ	T1Counter = 98							; Timer-Wert für 0,1s
                  #endif
-                 .equ Timer_rot = 5									; Zeit zum Warten 0,5s
+                 .equ Timer_rot = 5								; Zeit zum Warten 0,5s
                  .equ Timer_gruen = 5
                  .equ Timer_gelb = 2
                  
@@ -1378,57 +1378,57 @@ C:\Users\Sheraz\Documents\GitHub\Rechnerstrukturen-SoSe-15\Aufgabe _4\interruptW
                  	; Initialisieren des Stacks am oberen Ende des RAM
                  	; 16 bit SP wird als SPH:SPL im IO-Space angesprochen 
                      
-000112 ef0f      	ldi r16, LOW(RAMEND)					; low-Byte von RAMEND nach r16
-000113 bf0d      	out SPL, r16							; in low-byte des SP ausgeben
-                 											; der SP liegt im IO-Space 
-000114 e100          ldi r16, HIGH(RAMEND)					; high-Byte von RAMEND nach r16
-000115 bf0e          out SPH, r16							; in high-byte des SP ausgeben
+000112 ef0f      	ldi r16, LOW(RAMEND)						; low-Byte von RAMEND nach r16
+000113 bf0d      	out SPL, r16								; in low-byte des SP ausgeben
+                 												; der SP liegt im IO-Space 
+000114 e100          ldi r16, HIGH(RAMEND)						; high-Byte von RAMEND nach r16
+000115 bf0e          out SPH, r16								; in high-byte des SP ausgeben
                      
                  	; ab hier kann der Stack verwendet werden 
                  
-000116 940e 00e5 	call InitPCINT0							; PCINT0 auf PINA 5,6,7 initialisieren
-000118 940e 00f0 	call InitTimer1							; Timer1 initialisieren
-00011a 9478      	sei										; global Interrupt enable
+000116 940e 00e5 	call InitPCINT0								; PCINT0 auf PINA 5,6,7 initialisieren
+000118 940e 00f0 	call InitTimer1								; Timer1 initialisieren
+00011a 9478      	sei											; global Interrupt enable
                  	
-00011b e031      	ldi Nachtmodus,0x01						; Wir beginnen mit Nachtmodus aus
-00011c e041      	ldi Bereitschaft, 0x01					; Bereitschaft ist auch aus
+00011b e031      	ldi Nachtmodus,0x01							; Wir beginnen mit Nachtmodus aus
+00011c e041      	ldi Bereitschaft, 0x01						; Bereitschaft ist auch aus
                  	
 00011d e10f      	ldi R16, 0x1F
-00011e b901      	out DDRA,R16							; Vorbereiten der Ausgänge
+00011e b901      	out DDRA,R16								; Vorbereiten der Ausgänge
                  	
 00011f ee00      	ldi R16,0xE0
-000120 b902      	out PORTA, R16							; Pull up Widerstände für PINA 5,6,7 aktivieren
-000121 0000      	nop										; Bitte die PINA 5,6,7 aktivieren für PULL up Hinweis aus dem Mikrocontroller.net Forum
+000120 b902      	out PORTA, R16								; Pull up Widerstände für PINA 5,6,7 aktivieren
+000121 0000      	nop											; Bitte die PINA 5,6,7 aktivieren für PULL up Hinweis aus dem Mikrocontroller.net Forum
                   
                  Start:
-000122 e050      	ldi Zustand,0x00						; Zustand setzen aus Zustand0
-000123 2333      	tst Nachtmodus							; test for zero or minus
+000122 e050      	ldi Zustand,0x00							; Zustand setzen aus Zustand0
+000123 2333      	tst Nachtmodus								; test for zero or minus
 000124 f431      	brne Zustand1
                  
                  Zustand0:
 000125 ee20      	ldi R18, A_F_aus
-000126 b922      	out PORTA, R18							; Alle aus
+000126 b922      	out PORTA, R18								; Alle aus
                  	
                  		
-000127 2344      	tst Bereitschaft						; Prüfen auf 0, ob Bereitschaft gedrückt wurde 
-000128 f011      	breq Zustand1							; Wenn ja gehe zu  Zustand1
+000127 2344      	tst Bereitschaft							; Prüfen auf 0, ob Bereitschaft gedrückt wurde 
+000128 f011      	breq Zustand1								; Wenn ja gehe zu  Zustand1
 000129 940c 0122 	jmp Start
                  
                  Zustand1:
-00012b 9553      	inc Zustand								; Zustand setzen auf Zustand1
+00012b 9553      	inc Zustand									; Zustand setzen auf Zustand1
 00012c ef21      	ldi R18, A_gruen_F_rot	
 00012d b922      	out PORTA,  R18
                  	
-00012e 2344      	tst Bereitschaft						; Prüfen (auf 0), ob Bereitschaft gedrückt wurde
-00012f f011      	breq Zustand2							; Wenn ja, gehe zu  Zustand2
-000130 940c 0122 	jmp Start								; Ansonsten erneut prüfen
+00012e 2344      	tst Bereitschaft							; Prüfen (auf 0), ob Bereitschaft gedrückt wurde
+00012f f011      	breq Zustand2								; Wenn ja, gehe zu  Zustand2
+000130 940c 0122 	jmp Start									; Ansonsten erneut prüfen
                  
                  Zustand2:
-000132 9553      	inc Zustand								; Zustand immer auf den Aktuellen wert setzen
+000132 9553      	inc Zustand									; Zustand immer auf den Aktuellen wert setzen
 000133 e002      	ldi R16, Timer_gelb
-000134 940e 010b 	call Wait								; Warte zeit für Ampelumschalten
+000134 940e 010b 	call Wait									; Warte zeit für Ampelumschalten
                  	
-000136 9543      	inc Bereitschaft						; setze zurück auf 1			
+000136 9543      	inc Bereitschaft							; setze zurück auf 1			
                  
 000137 ef22      	ldi R18, A_gelb_F_rot
 000138 b922      	out PORTA, R18
@@ -1474,7 +1474,7 @@ C:\Users\Sheraz\Documents\GitHub\Rechnerstrukturen-SoSe-15\Aufgabe _4\interruptW
 00015c b922      	out PORTA, R18
                  
 00015d e005      	ldi R16, Timer_gruen
-00015e 940e 010b 	call Wait								; Nochmal warten für den Anfang
+00015e 940e 010b 	call Wait									; Nochmal warten für den Anfang
 
 
 RESOURCE USE INFORMATION

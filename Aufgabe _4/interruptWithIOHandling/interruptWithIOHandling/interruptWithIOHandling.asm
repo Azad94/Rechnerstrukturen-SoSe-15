@@ -25,7 +25,7 @@ T1count:		.byte 1							; Zähler für Wartefunktion mit Timer1
 #else
 .equ	T1Counter = 98							; Timer-Wert für 0,1s
 #endif
-.equ Timer_rot = 5									; Zeit zum Warten 0,5s
+.equ Timer_rot = 5								; Zeit zum Warten 0,5s
 .equ Timer_gruen = 5
 .equ Timer_gelb = 2
 
@@ -185,57 +185,57 @@ Main:
 	; Initialisieren des Stacks am oberen Ende des RAM
 	; 16 bit SP wird als SPH:SPL im IO-Space angesprochen 
     
-	ldi r16, LOW(RAMEND)					; low-Byte von RAMEND nach r16
-	out SPL, r16							; in low-byte des SP ausgeben
-											; der SP liegt im IO-Space 
-    ldi r16, HIGH(RAMEND)					; high-Byte von RAMEND nach r16
-    out SPH, r16							; in high-byte des SP ausgeben
+	ldi r16, LOW(RAMEND)						; low-Byte von RAMEND nach r16
+	out SPL, r16								; in low-byte des SP ausgeben
+												; der SP liegt im IO-Space 
+    ldi r16, HIGH(RAMEND)						; high-Byte von RAMEND nach r16
+    out SPH, r16								; in high-byte des SP ausgeben
     
 	; ab hier kann der Stack verwendet werden 
 
-	call InitPCINT0							; PCINT0 auf PINA 5,6,7 initialisieren
-	call InitTimer1							; Timer1 initialisieren
-	sei										; global Interrupt enable
+	call InitPCINT0								; PCINT0 auf PINA 5,6,7 initialisieren
+	call InitTimer1								; Timer1 initialisieren
+	sei											; global Interrupt enable
 	
-	ldi Nachtmodus,0x01						; Wir beginnen mit Nachtmodus aus
-	ldi Bereitschaft, 0x01					; Bereitschaft ist auch aus
+	ldi Nachtmodus,0x01							; Wir beginnen mit Nachtmodus aus
+	ldi Bereitschaft, 0x01						; Bereitschaft ist auch aus
 	
 	ldi R16, 0x1F
-	out DDRA,R16							; Vorbereiten der Ausgänge
+	out DDRA,R16								; Vorbereiten der Ausgänge
 	
 	ldi R16,0xE0
-	out PORTA, R16							; Pull up Widerstände für PINA 5,6,7 aktivieren
-	nop										; Bitte die PINA 5,6,7 aktivieren für PULL up Hinweis aus dem Mikrocontroller.net Forum
+	out PORTA, R16								; Pull up Widerstände für PINA 5,6,7 aktivieren
+	nop											; Bitte die PINA 5,6,7 aktivieren für PULL up Hinweis aus dem Mikrocontroller.net Forum
  
 Start:
-	ldi Zustand,0x00						; Zustand setzen aus Zustand0
-	tst Nachtmodus							; test for zero or minus
+	ldi Zustand,0x00							; Zustand setzen aus Zustand0
+	tst Nachtmodus								; test for zero or minus
 	brne Zustand1
 
 Zustand0:
 	ldi R18, A_F_aus
-	out PORTA, R18							; Alle aus
+	out PORTA, R18								; Alle aus
 	
 		
-	tst Bereitschaft						; Prüfen auf 0, ob Bereitschaft gedrückt wurde 
-	breq Zustand1							; Wenn ja gehe zu  Zustand1
+	tst Bereitschaft							; Prüfen auf 0, ob Bereitschaft gedrückt wurde 
+	breq Zustand1								; Wenn ja gehe zu  Zustand1
 	jmp Start
 
 Zustand1:
-	inc Zustand								; Zustand setzen auf Zustand1
+	inc Zustand									; Zustand setzen auf Zustand1
 	ldi R18, A_gruen_F_rot	
 	out PORTA,  R18
 	
-	tst Bereitschaft						; Prüfen (auf 0), ob Bereitschaft gedrückt wurde
-	breq Zustand2							; Wenn ja, gehe zu  Zustand2
-	jmp Start								; Ansonsten erneut prüfen
+	tst Bereitschaft							; Prüfen (auf 0), ob Bereitschaft gedrückt wurde
+	breq Zustand2								; Wenn ja, gehe zu  Zustand2
+	jmp Start									; Ansonsten erneut prüfen
 
 Zustand2:
-	inc Zustand								; Zustand immer auf den Aktuellen wert setzen
+	inc Zustand									; Zustand immer auf den Aktuellen wert setzen
 	ldi R16, Timer_gelb
-	call Wait								; Warte zeit für Ampelumschalten
+	call Wait									; Warte zeit für Ampelumschalten
 	
-	inc Bereitschaft						; setze zurück auf 1			
+	inc Bereitschaft							; setze zurück auf 1			
 
 	ldi R18, A_gelb_F_rot
 	out PORTA, R18
@@ -281,5 +281,5 @@ Zustand8:
 	out PORTA, R18
 
 	ldi R16, Timer_gruen
-	call Wait								; Nochmal warten für den Anfang
+	call Wait									; Nochmal warten für den Anfang
 	jmp Start
