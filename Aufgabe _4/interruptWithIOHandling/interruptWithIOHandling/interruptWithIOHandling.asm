@@ -25,9 +25,13 @@ T1count:		.byte 1							; Zähler für Wartefunktion mit Timer1
 #else
 .equ	T1Counter = 98							; Timer-Wert für 0,1s
 #endif
-.equ Timer=5									; Zeit zum Warten 0,5s
+.equ Timer_rot = 5									; Zeit zum Warten 0,5s
+.equ Timer_gruen = 5
+.equ Timer_gelb = 2
 
-;----- Ampelzustände Auto = A, Fußgänger = F
+
+
+;----- Ampelzustände Auto = A, Fußgänger = F -----
 .def Nachtmodus = R19							; Speichert ob Nachtmodus an oder aus
 .def Bereitschaft = R20							; Speichert ob Bereitschaft an oder aus
 .def Zustand = R21								; Speichert den jeweiligen Zustand
@@ -155,7 +159,6 @@ InitTimer1:
 
 ; ----- Warte-Zähler Setzen und Starten (nonblocking)
 startWait:
-	ldi R16,Timer
 	sts T1count, r16							; Nur Zähler setzen
 	ret
 
@@ -164,7 +167,6 @@ startWait:
 
 wait:
 ; Timer resetten, Interrupt aktivieren
-	ldi R16,Timer
 	sts T1count, r16		
 
 ; ----- Rest der Komplett-Funktion als Abwarte-Funktion -----
@@ -206,8 +208,8 @@ Main:
 	nop										; Bitte die PINA 5,6,7 aktivieren für PULL up Hinweis aus dem Mikrocontroller.net Forum
  
 Start:
-	ldi Zustand,0x00						;Zustand setzen aus Zustand0
-	tst Nachtmodus
+	ldi Zustand,0x00						; Zustand setzen aus Zustand0
+	tst Nachtmodus							; test for zero or minus
 	brne Zustand1
 
 Zustand0:
@@ -229,47 +231,55 @@ Zustand1:
 	jmp Start								; Ansonsten erneut prüfen
 
 Zustand2:
-	inc Zustand
+	inc Zustand								; Zustand immer auf den Aktuellen wert setzen
+	ldi R16, Timer_gelb
 	call Wait								; Warte zeit für Ampelumschalten
 	
-	inc Bereitschaft						;Zustand immer auf den Aktuellen wert setzen
+	inc Bereitschaft						; setze zurück auf 1			
 
 	ldi R18, A_gelb_F_rot
 	out PORTA, R18
 
 Zustand3:
 	inc Zustand
+	ldi R16, Timer_rot
 	call Wait
 	ldi R18, A_rot_F_rot
 	out PORTA, R18
 Zustand4:
 	inc Zustand
+	ldi R16, Timer_rot
 	call Wait
 	ldi R18, A_rot_F_gruen
 	out PORTA, R18
 Zustand5:
 	inc Zustand
+	ldi R16, Timer_rot
 	call Wait
 	ldi R18, A_rot_F_rot
 	out PORTA, R18
 
 Zustand6:
 	inc Zustand
+	ldi R16, Timer_gelb
 	call Wait
 	ldi R18, A_rotgelb_F_rot
 	out PORTA, R18
 
 Zustand7:
 	inc Zustand
+	ldi R16, Timer_gruen
 	call Wait
 	ldi R18, A_gruen_F_rot
 	out PORTA, R18
 
 Zustand8:
 	inc Zustand
+	ldi R16, Timer_gruen
 	call Wait
 	ldi R18, A_gruen_F_rot
 	out PORTA, R18
 
+	ldi R16, Timer_gruen
 	call Wait								; Nochmal warten für den Anfang
 	jmp Start
