@@ -17,9 +17,9 @@
 ; ***** Hier werden die "Variablen" definiert
 	.dseg										; dies sind Daten
 T1count:		.byte 1							; Zähler für Wartefunktion mit Timer1
-Nachtmodus:		.byte 1
-Bereitschaft:		.byte 1
-Zustand:		.byte 1
+//Nachtmodus:		.byte 1
+//Bereitschaft:		.byte 1
+//Zustand:		.byte 1
 	.cseg										; dies ist Code
 
 ; ----- Platz um .equ definitionen vorzunehmen
@@ -31,12 +31,15 @@ Zustand:		.byte 1
 .equ Timer=5									; Zeit zum Warten 0,5s
 
 ;----- Ampelzustände Auto = A, Fußgänger = F
-.equ A_gruen_F_rot = 0xF1	
+.def Nachtmodus = R19
+.def Bereitschaft = R20
+.def Zustand = R21
+.equ A_gruen_F_rot = 0xF1		; je + 0xE0 wegen der Pull Ups
 .equ A_gelb_F_rot = 0xF2
 .equ A_rot_F_rot = 0xF4
 .equ A_rot_F_gruen = 0xEC
 .equ A_rotgelb_F_rot = 0xF6
-.equ A_F_aus = 0xE0
+.equ A_F_aus = 0xE0				
 
 ; ----- Programm beginnt hinter der Vektortabelle: -----
 	.org 4*INT_VECTORS_SIZE
@@ -46,47 +49,44 @@ Zustand:		.byte 1
 
 ;---- Tasterabfrage ----
 PCINT0_isr:	
-	push r16	
-	ldi R16,0x00								; 0 = Nachtmodus aktiv
+	push r16
+	in R16,SREG
+	push R16	
 	sbis PINA,5
-	sts Nachtmodus, R16							; Nachtmodus an
-	
-	ldi R16,0x01								; 1 = Nachtmodus inaktiv
+	ldi Nachtmodus, 0x00						; Nachtmodus an
+
 	sbis PINA,6
-	sts Nachtmodus, R16							; Nachtmodus aus
+	ldi Nachtmodus, 0x01						; Nachtmodus aus
 	
 	sbis PINA,7
 	call BereitschaftPruefen					; Bereitschaft an
 	
+	pop R16
+	out SEG,R16
 	pop r16										; Register wiederherstellen
 	reti										; Return from Interrupt;
 
 BereitschaftPruefen:
-	push R16
 	push R17
 	push R18
 
-	lds R16, Zustand
 	ldi R17, 0x05
 	ldi R18, 0x01
 
-	cp R18,R16									; Prüfen ob wir <= Zustand 1 sind
+	cp R18,Zustand								; Prüfen ob wir <= Zustand 1 sind
 	brge BereitschaftAn
-	cp R16,R17									; Prüfen ob wir >= Zustand 5 sind
+	cp Zustand,R17								; Prüfen ob wir >= Zustand 5 sind
 	brge BereitschaftAn
 
 	pop R18
 	pop R17
-	pop R16
 	ret
 
 BereitschaftAn:
-	ldi R16,0x01
-	sts Bereitschaft, R16 ; 1 bedeutet Bereitschaft ist an
+	ldi Bereitschaft,0x01						; 0 bedeutet Bereitschaft ist an
 
 	pop R18
 	pop R17
-	pop R16
 	ret
 	
 
@@ -184,8 +184,8 @@ Main:
 	ldi r16, LOW(RAMEND)					; low-Byte von RAMEND nach r16
 	out SPL, r16							; in low-byte des SP ausgeben
 											; der SP liegt im IO-Space 
-    	ldi r16, HIGH(RAMEND)				; high-Byte von RAMEND nach r16
-    	out SPH, r16						; in high-byte des SP ausgeben
+    ldi r16, HIGH(RAMEND)					; high-Byte von RAMEND nach r16
+    out SPH, r16							; in high-byte des SP ausgeben
     
 	; ab hier kann der Stack verwendet werden 
 
@@ -193,8 +193,8 @@ Main:
 	call InitTimer1							; Timer1 initialisieren
 	sei										; global Interrupt enable
 	
-	ldi R16,0x01							; Wir beginnen mit Nachtmodus aus
-	sts Nachtmodus, R16		
+	ldi Nachtmodus,0x01						; Wir beginnen mit Nachtmodus aus
+	ldi Bereitschaft, 0x01					; Bereitschaft ist auch aus
 	
 	ldi R16, 0x1F
 	out DDRA,R16							; Vorbereiten der Ausgänge
@@ -204,92 +204,81 @@ Main:
 	nop										; Bitte die PINA 5,6,7 aktivieren für PULL up Hinweis aus dem Mikrocontroller.net Forum
  
 Start:
-	ldi R17,0x00
-	lds R18,Nachtmodus	
-	cp R18,R17
+	ldi Zustand,0x00
+	cp Nachtmodus,R17
 	brne Zustand1
 
 Zustand0:
 	ldi R18, A_F_aus
 	out PORTA, R18							; Alle aus
 	
-	ldi R17,0x00
-	sts Zustand,R17							; Zustand setzen auf Zustand0
+	ldi Zustand,0x00						; Zustand setzen auf Zustand0
 	
-	lds R18,Bereitschaft	
-	cp R17, R18								; Prüfen auf 1, ob Bereitschaft gedrückt wurde 
-	brlo Zustand1							; Wenn ja gehe zu  Zustand1
+		
+	cp Zustand, Bereitschaft				; Prüfen auf 0, ob Bereitschaft gedrückt wurde 
+	breq Zustand1							; Wenn ja gehe zu  Zustand1
 	jmp Start
 
 Zustand1:
 	ldi R18, A_gruen_F_rot	
 	out PORTA,  R18
 	
-	ldi R17,0x01
-	sts Zustand,R17							; Zustand setzen auf Zustand1
+	inc Zustand								; Zustand setzen auf Zustand1
 	
-	lds R18,Bereitschaft
-	cp R18,R17								; Prüfen (auf 1), ob Bereitschaft gedrückt wurde
-	breq Zustand2							; Wenn ja, gehe zu  Zustand2
+	cp Bereitschaft,Zustand					; Prüfen (auf 0), ob Bereitschaft gedrückt wurde
+	brlo Zustand2							; Wenn ja, gehe zu  Zustand2
 	jmp Start								; Ansonsten erneut prüfen
 
 Zustand2:
 	call Wait
-	ldi R16,0x00
-	sts Bereitschaft,R16
 	
+	inc Bereitschaft
+
 	ldi R18, A_gelb_F_rot
 	out PORTA, R18
 
-	inc R17
-	sts Zustand,R17
+	inc Zustand
 
 Zustand3:
 	call Wait
 	ldi R18, A_rot_F_rot
 	out PORTA, R18
 	
-	inc R17
-	sts Zustand,R17
+	inc Zustand
 
 Zustand4:
 	call Wait
 	ldi R18, A_rot_F_gruen
 	out PORTA, R18
 
-	inc R17
-	sts Zustand,R17
+	inc Zustand
 
 Zustand5:
 	call Wait
 	ldi R18, A_rot_F_rot
 	out PORTA, R18
 
-	inc R17
-	sts Zustand,R17
+	inc Zustand
 
 Zustand6:
 	call Wait
 	ldi R18, A_rotgelb_F_rot
 	out PORTA, R18
 	
-	inc R17
-	sts Zustand,R17
+	inc Zustand
 
 Zustand7:
 	call Wait
 	ldi R18, A_gruen_F_rot
 	out PORTA, R18
 	
-	inc R17
-	sts Zustand, R17
+	inc Zustand
 
 Zustand8:
 	call Wait
 	ldi R18, A_gruen_F_rot
 	out PORTA, R18
 
-	inc R17
-	sts Zustand, R17
+	inc Zustand
 	call Wait
 	jmp Start
